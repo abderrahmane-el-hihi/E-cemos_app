@@ -1,0 +1,237 @@
+import 'package:cemos_app/LoginPage.dart';
+import 'package:cemos_app/SettingsPage.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import 'MonProfil.dart';
+import 'models/service.dart';
+import 'models/users.dart';
+
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey.shade100,
+      body: WillPopScope(
+        onWillPop: () async {
+          SystemNavigator.pop();
+          return false;
+        },
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+              FutureBuilder(
+                  future: RemoteService().GetApiData(),
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      List<Users>? users = snapshot.data;
+                      print(users![2].name);
+                      return Column(
+                        children: [
+                          Icon(
+                            Icons.account_circle,
+                            color: Colors.grey.shade400,
+                            size: 128,
+                          ),
+                          Text(
+                            users[2].name,
+                            style: const TextStyle(
+                                fontFamily: 'Poppins', fontSize: 22),
+                          ),
+                          Text(
+                            users[2].company.name,
+                            style: const TextStyle(fontFamily: 'Poppins'),
+                          ),
+                        ],
+                      );
+                    }
+                    return Column(
+                      children: [
+                        Icon(
+                          Icons.account_circle,
+                          color: Colors.grey.shade400,
+                          size: 128,
+                        ),
+                        const Text(
+                          'Nom Prenom',
+                          style: TextStyle(fontFamily: 'Poppins', fontSize: 22),
+                        ),
+                        const Text(
+                          'Agent Commercial',
+                          style: TextStyle(fontFamily: 'Poppins'),
+                        ),
+                      ],
+                    );
+                  }),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 52),
+              //   child: InkWell(
+              //     splashColor: const Color.fromARGB(24, 102, 187, 106),
+              //     borderRadius: BorderRadius.circular(15),
+              //     onTap: () {},
+              //     child: Container(
+              //       height: MediaQuery.of(context).size.height * 0.08,
+              //       decoration: BoxDecoration(
+              //         color: const Color.fromARGB(24, 102, 187, 106),
+              //         border: Border.all(
+              //             color: Colors.green.shade400, width: 1.5),
+              //         borderRadius: BorderRadius.circular(15),
+              //       ),
+              //       child: Center(
+              //         child: Row(
+              //           mainAxisAlignment: MainAxisAlignment.center,
+              //           children: [
+              //             Text(
+              //               'Mofier profil',
+              //               style: TextStyle(
+              //                   color: Colors.green.shade400,
+              //                   fontSize: 16,
+              //                   fontFamily: "Poppins"),
+              //             ),
+              //           ],
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.1),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MonProfil()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromARGB(24, 102, 187, 106)),
+                      child: const Icon(CupertinoIcons.person),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Mon profil',
+                            style: TextStyle(fontFamily: 'Poppins'),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32),
+                child: Divider(
+                  color: Colors.grey,
+                  thickness: 0.5,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const SettingsPage()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromARGB(24, 102, 187, 106)),
+                      child: const Icon(CupertinoIcons.gear),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Paramètres',
+                            style: TextStyle(fontFamily: 'Poppins'),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 32),
+                child: Divider(
+                  color: Colors.grey,
+                  thickness: 0.5,
+                ),
+              ),
+              SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color.fromARGB(24, 239, 83, 80)),
+                      child: const Icon(CupertinoIcons.square_arrow_left),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Se déconnecter',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                color: Colors.red.shade400),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'LoginPage.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'components/button.dart';
+import 'models/UserDataProvider.dart';
 
 void main() {
-  runApp(const MyApp());
+  initializeDateFormatting().then(
+    (_) => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (_) => ButtonStateModel(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => UserDataProvider(),
+          ),
+        ],
+        child: const MyApp(),
+      ),
+    ),
+  );
+  // runApp(const MyApp());
+}
+
+Future<void> loadFont() async {
+  await rootBundle.load('assets/fonts/Poppins-Medium.ttf');
 }
 
 class MyApp extends StatelessWidget {
@@ -14,10 +38,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorSchemeSeed: Color.fromRGBO(131, 172, 64, 1),
+        // colorSchemeSeed: Color.fromRGBO(131, 172, 64, 1),
+        colorSchemeSeed: Colors.green.shade400,
         useMaterial3: true,
       ),
       home: AnimatedSplashScreen(
+        splashIconSize: 128,
         splash: 'assets/Logo3.png',
         nextScreen: const LoginPage(),
       ),
