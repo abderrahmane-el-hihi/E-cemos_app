@@ -29,6 +29,17 @@ class RemoteService {
     }
   }
 
+  // previous days data for
+  Future GetPreviousEntryData() async {
+    String url = 'https://jsonplaceholder.typicode.com/users'; //api
+    var response = await http.Client().get(Uri.parse(url));
+    if (response.statusCode == 200) {
+      var jsonData = response.body;
+      return UsersFromJson(
+          jsonData); //create a class based on json data comming rom api  in quicktype.app to work with the class created
+    }
+  }
+
   //methode to check mail/pass
   // Future<bool> checkCredentials(String email, String password) async {
   //   final String apiUrl = 'api url'; // Replace with your API URL.

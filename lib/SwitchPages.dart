@@ -29,7 +29,7 @@ class GNavBar extends StatelessWidget {
       iconSize: 24,
       tabMargin: const EdgeInsets.all(8),
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-      duration: const Duration(milliseconds: 1000),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeInOut,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       onTabChange: (value) => onTabChange!(value),
