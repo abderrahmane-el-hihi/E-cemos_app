@@ -126,669 +126,670 @@ class _PageState extends State<CalendarPage> {
                     ),
                     SizedBox(
                         height: MediaQuery.of(context).size.height * 0.022),
-                    // FutureBuilder(
-                    //     future: RemoteService().GetApiData(),
-                    //     builder:
-                    //         (BuildContext context, AsyncSnapshot snapshot) {
-                    //       if (snapshot.connectionState ==
-                    //           ConnectionState.waiting) {
-                    //         return Column(
-                    //           children: [
-                    //             Padding(
-                    //               padding: const EdgeInsets.symmetric(
-                    //                   horizontal: 16),
-                    //               child: Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceBetween,
-                    //                 children: [
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 66, 164, 245),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.blue.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             const Text('Droit annuel',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             CircularProgressIndicator(
-                    //                                 color:
-                    //                                     Colors.blue.shade400),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 102, 187, 106),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.green.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             const Text(
-                    //                                 'Reste anneé \ndernière',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             CircularProgressIndicator(
-                    //                               color: Colors.green.shade400,
-                    //                             ),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //             SizedBox(
-                    //                 height: MediaQuery.of(context).size.height *
-                    //                     0.022),
-                    //             Padding(
-                    //               padding: const EdgeInsets.symmetric(
-                    //                   horizontal: 16),
-                    //               child: Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceBetween,
-                    //                 children: [
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 38, 197, 218),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.cyan.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             const Text(
-                    //                                 'Consommation \ncette anneé',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             CircularProgressIndicator(
-                    //                               color: Colors.cyan.shade400,
-                    //                             ),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 239, 83, 80),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.red.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             SizedBox(
-                    //                                 height:
-                    //                                     MediaQuery.of(context)
-                    //                                             .size
-                    //                                             .height *
-                    //                                         0.012),
-                    //                             const Text('Reste',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             CircularProgressIndicator(
-                    //                               color: Colors.red.shade400,
-                    //                             ),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         );
-                    //       } else if (snapshot.hasData) {
-                    //         List<Users>? users = snapshot.data;
+                    FutureBuilder(
+                        future: RemoteService().GetApiData(),
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 66, 164, 245),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.blue.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text('Droit annuel',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                CircularProgressIndicator(
+                                                    color:
+                                                        Colors.blue.shade400),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 102, 187, 106),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.green.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text(
+                                                    'Reste anneé \ndernière',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                CircularProgressIndicator(
+                                                  color: Colors.green.shade400,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.022),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 38, 197, 218),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.cyan.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text(
+                                                    'Consommation \ncette anneé',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                CircularProgressIndicator(
+                                                  color: Colors.cyan.shade400,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 239, 83, 80),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.red.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                SizedBox(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.012),
+                                                const Text('Reste',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                CircularProgressIndicator(
+                                                  color: Colors.red.shade400,
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else if (snapshot.hasData) {
+                            List<Users>? users = snapshot.data;
 
-                    //         return Column(
-                    //           children: [
-                    //             Padding(
-                    //               padding: const EdgeInsets.symmetric(
-                    //                   horizontal: 16),
-                    //               child: Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceBetween,
-                    //                 children: [
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 66, 164, 245),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.blue.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             const Text('Droit annuel',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             Text(
-                    //                                 users![3]
-                    //                                     .phone
-                    //                                     .substring(0, 10),
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontFamily: 'Poppins',
-                    //                                     fontSize: 16,
-                    //                                     color: Colors
-                    //                                         .blue.shade400)),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 102, 187, 106),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.green.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             const Text(
-                    //                                 'Reste anneé \ndernière',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             Text(
-                    //                                 users[1]
-                    //                                     .phone
-                    //                                     .substring(0, 10),
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontFamily: 'Poppins',
-                    //                                     fontSize: 16,
-                    //                                     color: Colors
-                    //                                         .green.shade400)),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //             SizedBox(
-                    //                 height: MediaQuery.of(context).size.height *
-                    //                     0.022),
-                    //             Padding(
-                    //               padding: const EdgeInsets.symmetric(
-                    //                   horizontal: 16),
-                    //               child: Row(
-                    //                 mainAxisAlignment:
-                    //                     MainAxisAlignment.spaceBetween,
-                    //                 children: [
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 38, 197, 218),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.cyan.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             const Text(
-                    //                                 'Consommation \ncette anneé',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             Text(
-                    //                                 users[0]
-                    //                                     .phone
-                    //                                     .substring(0, 10),
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontFamily: 'Poppins',
-                    //                                     fontSize: 16,
-                    //                                     color: Colors
-                    //                                         .cyan.shade400)),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                   Container(
-                    //                     width:
-                    //                         MediaQuery.of(context).size.width *
-                    //                             0.43,
-                    //                     height:
-                    //                         MediaQuery.of(context).size.height *
-                    //                             0.135,
-                    //                     decoration: BoxDecoration(
-                    //                         color: const Color.fromARGB(
-                    //                             24, 239, 83, 80),
-                    //                         borderRadius:
-                    //                             BorderRadius.circular(15),
-                    //                         border: Border.all(
-                    //                           width: 1,
-                    //                           color: Colors.red.shade400,
-                    //                         )),
-                    //                     child: Row(
-                    //                       mainAxisAlignment:
-                    //                           MainAxisAlignment.start,
-                    //                       children: [
-                    //                         SizedBox(
-                    //                             width: MediaQuery.of(context)
-                    //                                     .size
-                    //                                     .width *
-                    //                                 0.022),
-                    //                         Column(
-                    //                           crossAxisAlignment:
-                    //                               CrossAxisAlignment.start,
-                    //                           mainAxisAlignment:
-                    //                               MainAxisAlignment.spaceAround,
-                    //                           children: [
-                    //                             const Text('Reste',
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontSize: 14,
-                    //                                     fontFamily: 'Poppins')),
-                    //                             Text(
-                    //                                 users[4]
-                    //                                     .phone
-                    //                                     .substring(0, 10),
-                    //                                 style: TextStyle(
-                    //                                     fontWeight:
-                    //                                         FontWeight.w500,
-                    //                                     fontFamily: 'Poppins',
-                    //                                     fontSize: 16,
-                    //                                     color: Colors
-                    //                                         .red.shade400)),
-                    //                           ],
-                    //                         ),
-                    //                       ],
-                    //                     ),
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         );
-                    //       }
-                    //       return Column(
-                    //         children: [
-                    //           Padding(
-                    //             padding:
-                    //                 const EdgeInsets.symmetric(horizontal: 16),
-                    //             child: Row(
-                    //               mainAxisAlignment:
-                    //                   MainAxisAlignment.spaceBetween,
-                    //               children: [
-                    //                 Container(
-                    //                   width: MediaQuery.of(context).size.width *
-                    //                       0.43,
-                    //                   height:
-                    //                       MediaQuery.of(context).size.height *
-                    //                           0.135,
-                    //                   decoration: BoxDecoration(
-                    //                       color: const Color.fromARGB(
-                    //                           24, 66, 164, 245),
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(15),
-                    //                       border: Border.all(
-                    //                         width: 1,
-                    //                         color: Colors.blue.shade400,
-                    //                       )),
-                    //                   child: Row(
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.start,
-                    //                     children: [
-                    //                       SizedBox(
-                    //                           width: MediaQuery.of(context)
-                    //                                   .size
-                    //                                   .width *
-                    //                               0.022),
-                    //                       const Column(
-                    //                         crossAxisAlignment:
-                    //                             CrossAxisAlignment.start,
-                    //                         mainAxisAlignment:
-                    //                             MainAxisAlignment.spaceAround,
-                    //                         children: [
-                    //                           Text('Droit annuel',
-                    //                               style: TextStyle(
-                    //                                   fontWeight:
-                    //                                       FontWeight.w500,
-                    //                                   fontSize: 14,
-                    //                                   fontFamily: 'Poppins')),
-                    //                         ],
-                    //                       ),
-                    //                     ],
-                    //                   ),
-                    //                 ),
-                    //                 Container(
-                    //                   width: MediaQuery.of(context).size.width *
-                    //                       0.43,
-                    //                   height:
-                    //                       MediaQuery.of(context).size.height *
-                    //                           0.135,
-                    //                   decoration: BoxDecoration(
-                    //                       color: const Color.fromARGB(
-                    //                           24, 102, 187, 106),
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(15),
-                    //                       border: Border.all(
-                    //                         width: 1,
-                    //                         color: Colors.green.shade400,
-                    //                       )),
-                    //                   child: Row(
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.start,
-                    //                     children: [
-                    //                       SizedBox(
-                    //                           width: MediaQuery.of(context)
-                    //                                   .size
-                    //                                   .width *
-                    //                               0.022),
-                    //                       const Column(
-                    //                         crossAxisAlignment:
-                    //                             CrossAxisAlignment.start,
-                    //                         mainAxisAlignment:
-                    //                             MainAxisAlignment.spaceAround,
-                    //                         children: [
-                    //                           Text('Reste anneé \ndernière',
-                    //                               style: TextStyle(
-                    //                                   fontWeight:
-                    //                                       FontWeight.w500,
-                    //                                   fontSize: 14,
-                    //                                   fontFamily: 'Poppins')),
-                    //                         ],
-                    //                       ),
-                    //                     ],
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //           SizedBox(
-                    //               height: MediaQuery.of(context).size.height *
-                    //                   0.022),
-                    //           Padding(
-                    //             padding:
-                    //                 const EdgeInsets.symmetric(horizontal: 16),
-                    //             child: Row(
-                    //               mainAxisAlignment:
-                    //                   MainAxisAlignment.spaceBetween,
-                    //               children: [
-                    //                 Container(
-                    //                   width: MediaQuery.of(context).size.width *
-                    //                       0.43,
-                    //                   height:
-                    //                       MediaQuery.of(context).size.height *
-                    //                           0.135,
-                    //                   decoration: BoxDecoration(
-                    //                       color: const Color.fromARGB(
-                    //                           24, 38, 197, 218),
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(15),
-                    //                       border: Border.all(
-                    //                         width: 1,
-                    //                         color: Colors.cyan.shade400,
-                    //                       )),
-                    //                   child: Row(
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.start,
-                    //                     children: [
-                    //                       SizedBox(
-                    //                           width: MediaQuery.of(context)
-                    //                                   .size
-                    //                                   .width *
-                    //                               0.022),
-                    //                       const Column(
-                    //                         crossAxisAlignment:
-                    //                             CrossAxisAlignment.start,
-                    //                         mainAxisAlignment:
-                    //                             MainAxisAlignment.spaceAround,
-                    //                         children: [
-                    //                           Text('Consommation \ncette anneé',
-                    //                               style: TextStyle(
-                    //                                   fontWeight:
-                    //                                       FontWeight.w500,
-                    //                                   fontSize: 14,
-                    //                                   fontFamily: 'Poppins')),
-                    //                         ],
-                    //                       ),
-                    //                     ],
-                    //                   ),
-                    //                 ),
-                    //                 Container(
-                    //                   width: MediaQuery.of(context).size.width *
-                    //                       0.43,
-                    //                   height:
-                    //                       MediaQuery.of(context).size.height *
-                    //                           0.135,
-                    //                   decoration: BoxDecoration(
-                    //                       color: const Color.fromARGB(
-                    //                           24, 239, 83, 80),
-                    //                       borderRadius:
-                    //                           BorderRadius.circular(15),
-                    //                       border: Border.all(
-                    //                         width: 1,
-                    //                         color: Colors.red.shade400,
-                    //                       )),
-                    //                   child: Row(
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.start,
-                    //                     children: [
-                    //                       SizedBox(
-                    //                           width: MediaQuery.of(context)
-                    //                                   .size
-                    //                                   .width *
-                    //                               0.022),
-                    //                       Column(
-                    //                         crossAxisAlignment:
-                    //                             CrossAxisAlignment.start,
-                    //                         mainAxisAlignment:
-                    //                             MainAxisAlignment.spaceAround,
-                    //                         children: [
-                    //                           SizedBox(
-                    //                               height: MediaQuery.of(context)
-                    //                                       .size
-                    //                                       .height *
-                    //                                   0.012),
-                    //                           const Text('Reste',
-                    //                               style: TextStyle(
-                    //                                   fontWeight:
-                    //                                       FontWeight.w500,
-                    //                                   fontSize: 14,
-                    //                                   fontFamily: 'Poppins')),
-                    //                         ],
-                    //                       ),
-                    //                     ],
-                    //                   ),
-                    //                 ),
-                    //               ],
-                    //             ),
-                    //           ),
-                    //         ],
-                    //       );
-                    //     }),
+                            return Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 66, 164, 245),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.blue.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text('Droit annuel',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                Text(
+                                                    users![3]
+                                                        .phone
+                                                        .substring(0, 10),
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 16,
+                                                        color: Colors
+                                                            .blue.shade400)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 102, 187, 106),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.green.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text(
+                                                    'Reste anneé \ndernière',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                Text(
+                                                    users[1]
+                                                        .phone
+                                                        .substring(0, 10),
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 16,
+                                                        color: Colors
+                                                            .green.shade400)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.022),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 38, 197, 218),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.cyan.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text(
+                                                    'Consommation \ncette anneé',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                Text(
+                                                    users[0]
+                                                        .phone
+                                                        .substring(0, 10),
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 16,
+                                                        color: Colors
+                                                            .cyan.shade400)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.43,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.135,
+                                        decoration: BoxDecoration(
+                                            color: const Color.fromARGB(
+                                                24, 239, 83, 80),
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            border: Border.all(
+                                              width: 1,
+                                              color: Colors.red.shade400,
+                                            )),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.022),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              children: [
+                                                const Text('Reste',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontSize: 14,
+                                                        fontFamily: 'Poppins')),
+                                                Text(
+                                                    users[4]
+                                                        .phone
+                                                        .substring(0, 10),
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily: 'Poppins',
+                                                        fontSize: 16,
+                                                        color: Colors
+                                                            .red.shade400)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                          return Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.43,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.135,
+                                      decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              24, 66, 164, 245),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          border: Border.all(
+                                            width: 1,
+                                            color: Colors.blue.shade400,
+                                          )),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.022),
+                                          const Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text('Droit annuel',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Poppins')),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.43,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.135,
+                                      decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              24, 102, 187, 106),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          border: Border.all(
+                                            width: 1,
+                                            color: Colors.green.shade400,
+                                          )),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.022),
+                                          const Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text('Reste anneé \ndernière',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Poppins')),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.022),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.43,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.135,
+                                      decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              24, 38, 197, 218),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          border: Border.all(
+                                            width: 1,
+                                            color: Colors.cyan.shade400,
+                                          )),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.022),
+                                          const Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text('Consommation \ncette anneé',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Poppins')),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.43,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.135,
+                                      decoration: BoxDecoration(
+                                          color: const Color.fromARGB(
+                                              24, 239, 83, 80),
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          border: Border.all(
+                                            width: 1,
+                                            color: Colors.red.shade400,
+                                          )),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.022),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              SizedBox(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.012),
+                                              const Text('Reste',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                      fontFamily: 'Poppins')),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
+                    //////////////////// using provider to provide data across the app
                     Consumer<UserDataProvider>(
                         builder: (context, userdata, child) {
                       return Column(
@@ -830,7 +831,7 @@ class _PageState extends State<CalendarPage> {
                                                   fontWeight: FontWeight.w500,
                                                   fontSize: 14,
                                                   fontFamily: 'Poppins')),
-                                          Text(userdata.userdata!.name),
+                                          Text(userdata.userdata!.name ?? ''),
                                         ],
                                       ),
                                     ],
