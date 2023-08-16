@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'CemosUsers.dart';
+import 'DemandeAbscence.dart';
 import 'users.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,6 +38,32 @@ class RemoteService {
       var jsonData = response.body;
       return UsersFromJson(
           jsonData); //create a class based on json data comming rom api  in quicktype.app to work with the class created
+    }
+  }
+
+  //get demande abscense data from api
+  // Future<List<DemandeAbscence>?> GetDemandeAbscence() async {
+  //   var client = http.Client();
+  //   var uri = Uri.parse('localhost:8800/api/CemosRH/DemanceAbsence');
+  //   var response = await client.get(uri);
+  //   if (response.statusCode == 200) {
+  //     var json = response.body;
+  //     print(demandeAbscenceFromJson(json));
+  //     return demandeAbscenceFromJson(json);
+  //   }
+  // }
+  Future<List<DemandeAbscence>?> getDemandeList() async {
+    const apiUrl = 'http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/';
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        return demandeAbscenceFromJson(data);
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      print('Error: $e');
     }
   }
 

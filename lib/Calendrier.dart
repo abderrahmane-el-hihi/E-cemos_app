@@ -11,6 +11,7 @@ import 'LeaveDetailsPage.dart';
 import 'components/button.dart';
 import 'package:http/http.dart' as http;
 
+import 'models/DemandeAbscence.dart';
 import 'models/service.dart';
 import 'models/users.dart';
 
@@ -78,6 +79,31 @@ class _PageState extends State<CalendarPage> {
       // Catch any errors that occur during the request
       print('Error: $e');
     }
+  }
+
+  // List<DemandeAbscence>? DemandesData = [];
+  @override
+  void initState() async {
+    super.initState();
+    // LoadData();
+    List<DemandeAbscence>? fetchedData = await RemoteService().getDemandeList();
+  }
+
+  Future<void> LoadData() async {
+    // try {
+    //   List<DemandeAbscence>? fetchedData =
+    //       await RemoteService().getDemandeList();
+    //   if (fetchedData != null && fetchedData.isNotEmpty) {
+    //     setState(() {
+    //       DemandesData = fetchedData;
+    //       print(DemandesData![0].dateDebut);
+    //     });
+    //   } else {
+    //     print("No data fetched or data is empty.");
+    //   }
+    // } catch (error) {
+    //   print("Error fetching data: $error");
+    // }
   }
 
   @override
@@ -790,190 +816,190 @@ class _PageState extends State<CalendarPage> {
                           );
                         }),
                     //////////////////// using provider to provide data across the app
-                    Consumer<UserDataProvider>(
-                        builder: (context, userdata, child) {
-                      return Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.43,
-                                  height: MediaQuery.of(context).size.height *
-                                      0.135,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          24, 66, 164, 245),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: Colors.blue.shade400,
-                                      )),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.022),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          const Text('Droit annuel',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 14,
-                                                  fontFamily: 'Poppins')),
-                                          Text(userdata.userdata!.name ?? ''),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.43,
-                                  height: MediaQuery.of(context).size.height *
-                                      0.135,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          24, 102, 187, 106),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: Colors.green.shade400,
-                                      )),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.022),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          const Text('Reste anneé \ndernière',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 14,
-                                                  fontFamily: 'Poppins')),
-                                          Text(userdata.userdata!.name),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.022),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.43,
-                                  height: MediaQuery.of(context).size.height *
-                                      0.135,
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          24, 38, 197, 218),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: Colors.cyan.shade400,
-                                      )),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.022),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          const Text(
-                                              'Consommation \ncette anneé',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 14,
-                                                  fontFamily: 'Poppins')),
-                                          Text(userdata.userdata!.name),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.43,
-                                  height: MediaQuery.of(context).size.height *
-                                      0.135,
-                                  decoration: BoxDecoration(
-                                      color:
-                                          const Color.fromARGB(24, 239, 83, 80),
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: Colors.red.shade400,
-                                      )),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.022),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
-                                        children: [
-                                          SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.012),
-                                          const Text('Reste',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 14,
-                                                  fontFamily: 'Poppins')),
-                                          Text(userdata.userdata!.name),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    }),
+                    // Consumer<UserDataProvider>(
+                    //     builder: (context, userdata, child) {
+                    //   return Column(
+                    //     children: [
+                    //       Padding(
+                    //         padding: const EdgeInsets.symmetric(horizontal: 16),
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: [
+                    //             Container(
+                    //               width:
+                    //                   MediaQuery.of(context).size.width * 0.43,
+                    //               height: MediaQuery.of(context).size.height *
+                    //                   0.135,
+                    //               decoration: BoxDecoration(
+                    //                   color: const Color.fromARGB(
+                    //                       24, 66, 164, 245),
+                    //                   borderRadius: BorderRadius.circular(15),
+                    //                   border: Border.all(
+                    //                     width: 1,
+                    //                     color: Colors.blue.shade400,
+                    //                   )),
+                    //               child: Row(
+                    //                 mainAxisAlignment: MainAxisAlignment.start,
+                    //                 children: [
+                    //                   SizedBox(
+                    //                       width: MediaQuery.of(context)
+                    //                               .size
+                    //                               .width *
+                    //                           0.022),
+                    //                   Column(
+                    //                     crossAxisAlignment:
+                    //                         CrossAxisAlignment.start,
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceAround,
+                    //                     children: [
+                    //                       const Text('Droit annuel',
+                    //                           style: TextStyle(
+                    //                               fontWeight: FontWeight.w500,
+                    //                               fontSize: 14,
+                    //                               fontFamily: 'Poppins')),
+                    //                       Text(userdata.userdata!.name),
+                    //                     ],
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //             Container(
+                    //               width:
+                    //                   MediaQuery.of(context).size.width * 0.43,
+                    //               height: MediaQuery.of(context).size.height *
+                    //                   0.135,
+                    //               decoration: BoxDecoration(
+                    //                   color: const Color.fromARGB(
+                    //                       24, 102, 187, 106),
+                    //                   borderRadius: BorderRadius.circular(15),
+                    //                   border: Border.all(
+                    //                     width: 1,
+                    //                     color: Colors.green.shade400,
+                    //                   )),
+                    //               child: Row(
+                    //                 mainAxisAlignment: MainAxisAlignment.start,
+                    //                 children: [
+                    //                   SizedBox(
+                    //                       width: MediaQuery.of(context)
+                    //                               .size
+                    //                               .width *
+                    //                           0.022),
+                    //                   Column(
+                    //                     crossAxisAlignment:
+                    //                         CrossAxisAlignment.start,
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceAround,
+                    //                     children: [
+                    //                       const Text('Reste anneé \ndernière',
+                    //                           style: TextStyle(
+                    //                               fontWeight: FontWeight.w500,
+                    //                               fontSize: 14,
+                    //                               fontFamily: 'Poppins')),
+                    //                       Text(userdata.userdata!.name),
+                    //                     ],
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //       SizedBox(
+                    //           height:
+                    //               MediaQuery.of(context).size.height * 0.022),
+                    //       Padding(
+                    //         padding: const EdgeInsets.symmetric(horizontal: 16),
+                    //         child: Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: [
+                    //             Container(
+                    //               width:
+                    //                   MediaQuery.of(context).size.width * 0.43,
+                    //               height: MediaQuery.of(context).size.height *
+                    //                   0.135,
+                    //               decoration: BoxDecoration(
+                    //                   color: const Color.fromARGB(
+                    //                       24, 38, 197, 218),
+                    //                   borderRadius: BorderRadius.circular(15),
+                    //                   border: Border.all(
+                    //                     width: 1,
+                    //                     color: Colors.cyan.shade400,
+                    //                   )),
+                    //               child: Row(
+                    //                 mainAxisAlignment: MainAxisAlignment.start,
+                    //                 children: [
+                    //                   SizedBox(
+                    //                       width: MediaQuery.of(context)
+                    //                               .size
+                    //                               .width *
+                    //                           0.022),
+                    //                   Column(
+                    //                     crossAxisAlignment:
+                    //                         CrossAxisAlignment.start,
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceAround,
+                    //                     children: [
+                    //                       const Text(
+                    //                           'Consommation \ncette anneé',
+                    //                           style: TextStyle(
+                    //                               fontWeight: FontWeight.w500,
+                    //                               fontSize: 14,
+                    //                               fontFamily: 'Poppins')),
+                    //                       Text(userdata.userdata!.name),
+                    //                     ],
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //             Container(
+                    //               width:
+                    //                   MediaQuery.of(context).size.width * 0.43,
+                    //               height: MediaQuery.of(context).size.height *
+                    //                   0.135,
+                    //               decoration: BoxDecoration(
+                    //                   color:
+                    //                       const Color.fromARGB(24, 239, 83, 80),
+                    //                   borderRadius: BorderRadius.circular(15),
+                    //                   border: Border.all(
+                    //                     width: 1,
+                    //                     color: Colors.red.shade400,
+                    //                   )),
+                    //               child: Row(
+                    //                 mainAxisAlignment: MainAxisAlignment.start,
+                    //                 children: [
+                    //                   SizedBox(
+                    //                       width: MediaQuery.of(context)
+                    //                               .size
+                    //                               .width *
+                    //                           0.022),
+                    //                   Column(
+                    //                     crossAxisAlignment:
+                    //                         CrossAxisAlignment.start,
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceAround,
+                    //                     children: [
+                    //                       SizedBox(
+                    //                           height: MediaQuery.of(context)
+                    //                                   .size
+                    //                                   .height *
+                    //                               0.012),
+                    //                       const Text('Reste',
+                    //                           style: TextStyle(
+                    //                               fontWeight: FontWeight.w500,
+                    //                               fontSize: 14,
+                    //                               fontFamily: 'Poppins')),
+                    //                       Text(userdata.userdata!.name),
+                    //                     ],
+                    //                   ),
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //           ],
+                    //         ),
+                    //       ),
+                    //     ],
+                    //   );
+                    // }),
                     SizedBox(
                         height: MediaQuery.of(context).size.height * 0.022),
                     // Padding(
@@ -1134,6 +1160,7 @@ class _PageState extends State<CalendarPage> {
                                                       ),
                                                       Text(
                                                         '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
+                                                        // '${fetchedData![1].dateDebut} - ${fetchedData![1].dateFin}',
                                                         style: const TextStyle(
                                                             fontWeight:
                                                                 FontWeight.w500,

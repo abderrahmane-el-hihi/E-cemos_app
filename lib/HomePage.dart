@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     currentMonthList = date_util.DateUtils.daysInMonth(currentDateTime);
     // currentMonthList.sort((a, b) => a.day.compareTo(b.day));
     currentMonthList = currentMonthList.toSet().toList();
-    final agent = Provider.of<UserDataProvider>(context);
+    // final agent = Provider.of<UserDataProvider>(context);
     super.initState();
   }
 
@@ -49,143 +49,143 @@ class _HomePageState extends State<HomePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      FutureBuilder(
-                        future: RemoteService().GetApiData(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData) {
-                            List<Users?> users = snapshot.data;
-                            return Row(
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const MonProfil()));
-                                  },
-                                  child: Icon(
-                                    Icons.account_circle,
-                                    color: Colors.grey.shade400,
-                                    size: 64,
-                                  ),
-                                ),
-                                SizedBox(
-                                    width: MediaQuery.of(context).size.width *
-                                        0.012),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      users[2]!.name,
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: 'Poppins'),
-                                    ),
-                                    Text(
-                                      users[2]!.company.name,
-                                      style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: 'Poppins'),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            );
-                          }
-                          return Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const MonProfil()));
-                                },
-                                child: Icon(
-                                  Icons.account_circle,
-                                  color: Colors.grey.shade400,
-                                  size: 64,
-                                ),
-                              ),
-                              SizedBox(
-                                  width: MediaQuery.of(context).size.width *
-                                      0.012),
-                              const Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        'Nom Prenom',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins'),
-                                      ),
-                                    ],
-                                  ),
-                                  Text(
-                                    'Agent Comercial',
-                                    style: TextStyle(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: 'Poppins'),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
-                        },
-                      ),
-                      //using provider to throw data
-                      // Row(
-                      //   children: [
-                      //     GestureDetector(
-                      //       onTap: () {
-                      //         Navigator.push(
-                      //             context,
-                      //             MaterialPageRoute(
-                      //                 builder: (context) => const MonProfil()));
-                      //       },
-                      //       child: Icon(
-                      //         Icons.account_circle,
-                      //         color: Colors.grey.shade400,
-                      //         size: 64,
-                      //       ),
-                      //     ),
-                      //     SizedBox(
-                      //         width: MediaQuery.of(context).size.width * 0.012),
-                      //     Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      // FutureBuilder(
+                      //   future: RemoteService().GetApiData(),
+                      //   builder:
+                      //       (BuildContext context, AsyncSnapshot snapshot) {
+                      //     if (snapshot.hasData) {
+                      //       List<Users?> users = snapshot.data;
+                      //       return Row(
+                      //         children: [
+                      //           GestureDetector(
+                      //             onTap: () {
+                      //               Navigator.push(
+                      //                   context,
+                      //                   MaterialPageRoute(
+                      //                       builder: (context) =>
+                      //                           const MonProfil()));
+                      //             },
+                      //             child: Icon(
+                      //               Icons.account_circle,
+                      //               color: Colors.grey.shade400,
+                      //               size: 64,
+                      //             ),
+                      //           ),
+                      //           SizedBox(
+                      //               width: MediaQuery.of(context).size.width *
+                      //                   0.012),
+                      //           Column(
+                      //             crossAxisAlignment: CrossAxisAlignment.start,
+                      //             children: [
+                      //               Text(
+                      //                 users[2]!.name,
+                      //                 style: const TextStyle(
+                      //                     fontSize: 18,
+                      //                     fontWeight: FontWeight.w500,
+                      //                     fontFamily: 'Poppins'),
+                      //               ),
+                      //               Text(
+                      //                 users[2]!.company.name,
+                      //                 style: const TextStyle(
+                      //                     fontSize: 14,
+                      //                     fontWeight: FontWeight.w400,
+                      //                     fontFamily: 'Poppins'),
+                      //               ),
+                      //             ],
+                      //           ),
+                      //         ],
+                      //       );
+                      //     }
+                      //     return Row(
                       //       children: [
-                      //         Row(
-                      //           mainAxisAlignment: MainAxisAlignment.start,
+                      //         GestureDetector(
+                      //           onTap: () {
+                      //             Navigator.push(
+                      //                 context,
+                      //                 MaterialPageRoute(
+                      //                     builder: (context) =>
+                      //                         const MonProfil()));
+                      //           },
+                      //           child: Icon(
+                      //             Icons.account_circle,
+                      //             color: Colors.grey.shade400,
+                      //             size: 64,
+                      //           ),
+                      //         ),
+                      //         SizedBox(
+                      //             width: MediaQuery.of(context).size.width *
+                      //                 0.012),
+                      //         const Column(
                       //           children: [
+                      //             Row(
+                      //               mainAxisAlignment: MainAxisAlignment.start,
+                      //               children: [
+                      //                 Text(
+                      //                   'Nom Prenom',
+                      //                   style: TextStyle(
+                      //                       fontSize: 18,
+                      //                       fontWeight: FontWeight.w500,
+                      //                       fontFamily: 'Poppins'),
+                      //                 ),
+                      //               ],
+                      //             ),
                       //             Text(
-                      //               agent.userdata!.name ,
-                      //               style: const TextStyle(
-                      //                   fontSize: 18,
-                      //                   fontWeight: FontWeight.w500,
+                      //               'Agent Comercial',
+                      //               style: TextStyle(
+                      //                   fontSize: 14,
+                      //                   fontWeight: FontWeight.w400,
                       //                   fontFamily: 'Poppins'),
                       //             ),
                       //           ],
                       //         ),
-                      //         Text(
-                      //           'Agent Comercial',
-                      //           style: TextStyle(
-                      //               fontSize: 14,
-                      //               fontWeight: FontWeight.w400,
-                      //               fontFamily: 'Poppins'),
-                      //         ),
                       //       ],
-                      //     ),
-                      //   ],
+                      //     );
+                      //   },
                       // ),
+
+                      Row(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const MonProfil()));
+                            },
+                            child: Icon(
+                              Icons.account_circle,
+                              color: Colors.grey.shade400,
+                              size: 64,
+                            ),
+                          ),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.012),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Nom Prenom',
+                                    style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: 'Poppins'),
+                                  ),
+                                ],
+                              ),
+                              Text(
+                                'Agent Comercial',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Poppins'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                       InkWell(
                         onTap: () {
                           Navigator.push(

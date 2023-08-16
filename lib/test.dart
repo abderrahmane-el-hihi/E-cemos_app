@@ -1,9 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'models/DemandeAbscence.dart';
 import 'models/service.dart';
 import 'models/users.dart';
 
@@ -21,6 +23,8 @@ class _twidgetState extends State<twidget> {
   @override
   void initState() {
     super.initState();
+    // DemandesData =(RemoteService().GetDemandeAbscence) as List<DemandeAbscence>?;
+    LoadData();
     getData();
   }
 
@@ -77,6 +81,45 @@ class _twidgetState extends State<twidget> {
     }
   }
 
+  ///api fetching sectiion
+  Future fetchData() async {
+    const apiUrl = 'http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/';
+    try {
+      final response = await http.get(Uri.parse(apiUrl));
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        print(data);
+        DemandesData = demandeAbscenceFromJson(data);
+        return DemandesData;
+      } else {
+        throw Exception('Failed to load data');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
+  List<DemandeAbscence>? DemandesData = [];
+
+  Future<void> LoadData() async {
+    try {
+      List<DemandeAbscence>? fetchedData =
+          // await RemoteService().GetDemandeAbscence();
+          await RemoteService().getDemandeList();
+
+      if (fetchedData != null && fetchedData.isNotEmpty) {
+        setState(() {
+          DemandesData = fetchedData;
+          print(DemandesData.toString());
+        });
+      } else {
+        print("No data fetched or data is empty.");
+      }
+    } catch (error) {
+      print("Error fetching data: $error");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,25 +127,13 @@ class _twidgetState extends State<twidget> {
           child: Center(
         child: Column(
           children: [
-            // Visibility(
-            //   visible: isLoaded,
-            //   child: ListView.builder(
-            //     itemCount: users?.length,
-            //     itemBuilder: ((context, index) {
-            //       return Container(
-            //         child: Text(users![index].name),
-            //       );
-            //     }),
-            //   ),
-            //   replacement: Center(
-            //     child: CircularProgressIndicator(),
-            //   ),
-            // ),
             ElevatedButton(
                 onPressed: () {
-                  GetIpandname();
-                  printIps();
-                  getPublicIP();
+                  // GetIpandname();
+                  // printIps();
+                  // getPublicIP();
+                  // LoadData();
+                  fetchData();
                 },
                 child: Text('click')),
           ],
