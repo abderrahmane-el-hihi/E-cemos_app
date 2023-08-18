@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'models/DemandeAbscence.dart';
+import 'models/Personnel.dart';
 import 'models/service.dart';
 import 'models/users.dart';
 
@@ -23,8 +24,6 @@ class _twidgetState extends State<twidget> {
   @override
   void initState() {
     super.initState();
-    // DemandesData =(RemoteService().GetDemandeAbscence) as List<DemandeAbscence>?;
-    LoadData();
     getData();
   }
 
@@ -82,41 +81,36 @@ class _twidgetState extends State<twidget> {
   }
 
   ///api fetching sectiion
-  Future fetchData() async {
-    const apiUrl = 'http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/';
+  Future getDemandeList() async {
+    const apiUrl = 'http://192.168.11.157:8800/api/CemosRH/Personnelles/1';
+
     try {
-      final response = await http.get(Uri.parse(apiUrl));
+      var response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+        // var data = json.decode(response.body);
+        var data = response.body;
+
         print(data);
-        DemandesData = demandeAbscenceFromJson(data);
-        return DemandesData;
+        print("=============================");
+        print(demandeAbscenceFromJson(data));
+        return demandeAbscenceFromJson(data);
       } else {
         throw Exception('Failed to load data');
       }
     } catch (e) {
       print('Error: $e');
     }
+    return null;
   }
 
-  List<DemandeAbscence>? DemandesData = [];
-
-  Future<void> LoadData() async {
-    try {
-      List<DemandeAbscence>? fetchedData =
-          // await RemoteService().GetDemandeAbscence();
-          await RemoteService().getDemandeList();
-
-      if (fetchedData != null && fetchedData.isNotEmpty) {
-        setState(() {
-          DemandesData = fetchedData;
-          print(DemandesData.toString());
-        });
-      } else {
-        print("No data fetched or data is empty.");
-      }
-    } catch (error) {
-      print("Error fetching data: $error");
+  Future GetApiData() async {
+    var client = http.Client();
+    var uri =
+        Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/1');
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return personnelFromJson(json);
     }
   }
 
@@ -133,9 +127,17 @@ class _twidgetState extends State<twidget> {
                   // printIps();
                   // getPublicIP();
                   // LoadData();
-                  fetchData();
+                  GetApiData();
                 },
                 child: Text('click')),
+            FutureBuilder(
+                future: RemoteService().getPersonnel(),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    Personnel p = snapshot.data;
+                  }
+                  return Center();
+                }),
           ],
         ),
       )),
@@ -143,10 +145,10 @@ class _twidgetState extends State<twidget> {
   }
 }
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: twidget(),
-    ),
-  );
-}
+// void main() {
+//   runApp(
+//     MaterialApp(
+//       home: twidget(),
+//     ),
+//   );
+// }

@@ -1,3 +1,4 @@
+import 'package:cemos_app/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +48,7 @@ class MyApp extends StatelessWidget {
         splash: 'assets/Logo3.png',
         nextScreen: const LoginPage(),
       ),
+      // home: twidget(),
     );
   }
 }

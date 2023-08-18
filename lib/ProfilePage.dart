@@ -1,5 +1,6 @@
 import 'package:cemos_app/LoginPage.dart';
 import 'package:cemos_app/SettingsPage.dart';
+import 'package:cemos_app/models/Personnel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,11 +31,10 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               FutureBuilder(
-                  future: RemoteService().GetApiData(),
+                  future: RemoteService().getPersonnel(),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
-                      List<Users>? users = snapshot.data;
-                      print(users![2].name);
+                      Personnel p = snapshot.data;
                       return Column(
                         children: [
                           Icon(
@@ -43,12 +43,12 @@ class _ProfilePageState extends State<ProfilePage> {
                             size: 128,
                           ),
                           Text(
-                            users[2].name,
+                            p.nom + ' ' + p.prenom,
                             style: const TextStyle(
                                 fontFamily: 'Poppins', fontSize: 22),
                           ),
                           Text(
-                            users[2].company.name,
+                            'Service IT',
                             style: const TextStyle(fontFamily: 'Poppins'),
                           ),
                         ],
@@ -66,44 +66,13 @@ class _ProfilePageState extends State<ProfilePage> {
                           style: TextStyle(fontFamily: 'Poppins', fontSize: 22),
                         ),
                         const Text(
-                          'Agent Commercial',
+                          'Service',
                           style: TextStyle(fontFamily: 'Poppins'),
                         ),
                       ],
                     );
                   }),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 52),
-              //   child: InkWell(
-              //     splashColor: const Color.fromARGB(24, 102, 187, 106),
-              //     borderRadius: BorderRadius.circular(15),
-              //     onTap: () {},
-              //     child: Container(
-              //       height: MediaQuery.of(context).size.height * 0.08,
-              //       decoration: BoxDecoration(
-              //         color: const Color.fromARGB(24, 102, 187, 106),
-              //         border: Border.all(
-              //             color: Colors.green.shade400, width: 1.5),
-              //         borderRadius: BorderRadius.circular(15),
-              //       ),
-              //       child: Center(
-              //         child: Row(
-              //           mainAxisAlignment: MainAxisAlignment.center,
-              //           children: [
-              //             Text(
-              //               'Mofier profil',
-              //               style: TextStyle(
-              //                   color: Colors.green.shade400,
-              //                   fontSize: 16,
-              //                   fontFamily: "Poppins"),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
               SizedBox(height: MediaQuery.of(context).size.width * 0.1),
               GestureDetector(
                 onTap: () {

@@ -1,5 +1,8 @@
+import 'package:cemos_app/models/Personnel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'models/service.dart';
 
 class MonProfil extends StatefulWidget {
   const MonProfil({super.key});
@@ -9,11 +12,11 @@ class MonProfil extends StatefulWidget {
 }
 
 class _MonProfilState extends State<MonProfil> {
-  List<bool> isSelected = [true, false];
-  List<String> OptionsList = [
-    'Personnel',
-    'Professionnel',
-  ];
+  // List<bool> isSelected = [true, false];
+  // List<String> OptionsList = [
+  //   'Personnel',
+  //   'Professionnel',
+  // ];
   // int _selectedButtonIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -56,105 +59,141 @@ class _MonProfilState extends State<MonProfil> {
                 ),
                 SizedBox(height: MediaQuery.of(context).size.width * 0.04),
                 SizedBox(height: MediaQuery.of(context).size.width * 0.04),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Nom Prenom',
-                        style: TextStyle(
-                            fontFamily: 'Poppins', color: Colors.grey.shade400),
-                      ),
-                      const Text(
-                        'Nom Prenom',
-                        style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: Divider(
-                    color: Colors.grey,
-                    thickness: 0.5,
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Email',
-                        style: TextStyle(
-                            fontFamily: 'Poppins', color: Colors.grey.shade400),
-                      ),
-                      const Text(
-                        'exemple@gmail.com',
-                        style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: Divider(
-                    color: Colors.grey,
-                    thickness: 0.5,
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Telephone',
-                        style: TextStyle(
-                            fontFamily: 'Poppins', color: Colors.grey.shade400),
-                      ),
-                      const Text(
-                        '0666666666',
-                        style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 32),
-                  child: Divider(
-                    color: Colors.grey,
-                    thickness: 0.5,
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Adresse',
-                        style: TextStyle(
-                            fontFamily: 'Poppins', color: Colors.grey.shade400),
-                      ),
-                      const Text(
-                        'Laayoune',
-                        style: TextStyle(fontFamily: 'Poppins', fontSize: 18),
-                      ),
-                    ],
-                  ),
-                ),
+                FutureBuilder(
+                    future: RemoteService().getPersonnel(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        Personnel p = snapshot.data;
+                        return Column(
+                          children: [
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Nom Prenom',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.grey.shade400),
+                                  ),
+                                  Text(
+                                    '${p.nom} ${p.prenom}',
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins', fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 32),
+                              child: Divider(
+                                color: Colors.grey,
+                                thickness: 0.5,
+                              ),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Email',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.grey.shade400),
+                                  ),
+                                  Text(
+                                    p.email,
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins', fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 32),
+                              child: Divider(
+                                color: Colors.grey,
+                                thickness: 0.5,
+                              ),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Telephone',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.grey.shade400),
+                                  ),
+                                  Text(
+                                    p.telephonePersonnel,
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins', fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 32),
+                              child: Divider(
+                                color: Colors.grey,
+                                thickness: 0.5,
+                              ),
+                            ),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.02),
+                            Container(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 32),
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Adresse',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.grey.shade400),
+                                  ),
+                                  Text(
+                                    'address',
+                                    style: const TextStyle(
+                                        fontFamily: 'Poppins', fontSize: 18),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        );
+                      }
+                      return Center();
+                    }),
               ],
             ),
           ),

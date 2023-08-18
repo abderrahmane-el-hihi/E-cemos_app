@@ -81,14 +81,6 @@ class _PageState extends State<CalendarPage> {
     }
   }
 
-  // List<DemandeAbscence>? DemandesData = [];
-  @override
-  void initState() async {
-    super.initState();
-    // LoadData();
-    List<DemandeAbscence>? fetchedData = await RemoteService().getDemandeList();
-  }
-
   Future<void> LoadData() async {
     // try {
     //   List<DemandeAbscence>? fetchedData =
@@ -1112,197 +1104,234 @@ class _PageState extends State<CalendarPage> {
                         itemBuilder: (BuildContext context, int index) {
                           switch (_selectedButtonIndex) {
                             case 0:
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //       builder: (context) => Popup()),
-                                      // );
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        color: const Color.fromARGB(
-                                            200, 255, 255, 255),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: SizedBox(
-                                        child: ListTile(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: ((context) =>
-                                                        const Demandedetails())));
-                                          },
-                                          title: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        'Demande',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
-                                                        // '${fetchedData![1].dateDebut} - ${fetchedData![1].dateFin}',
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                "Poppins",
-                                                            fontSize: 12),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            24, 255, 168, 38),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    padding:
-                                                        const EdgeInsets.all(4),
-                                                    child: Text(
-                                                      'En cours',
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors
-                                                              .orange.shade400,
-                                                          fontFamily:
-                                                              "Poppins"),
-                                                    ),
-                                                  ),
-                                                ],
+                              return FutureBuilder(
+                                  future: RemoteService().getDemandeList(),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot snapshot) {
+                                    if (snapshot.hasData) {
+                                      List<DemandeAbscence>? demandes =
+                                          snapshot.data;
+                                      // List<Users>? demandes = snapshot.data;
+                                      return Column(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              // Navigator.push(
+                                              //   context,
+                                              //   MaterialPageRoute(
+                                              //       builder: (context) => Popup()),
+                                              // );
+                                            },
+                                            child: Container(
+                                              margin:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 10),
+                                              decoration: BoxDecoration(
+                                                color: const Color.fromARGB(
+                                                    200, 255, 255, 255),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
                                               ),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.012),
-                                              Divider(
-                                                color: Colors.grey.shade300,
-                                                thickness: 1,
+                                              child: SizedBox(
+                                                child: ListTile(
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: ((context) =>
+                                                                const Demandedetails())));
+                                                  },
+                                                  title: Column(
+                                                    children: [
+                                                      Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              const Text(
+                                                                'Demande',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontFamily:
+                                                                        "Poppins"),
+                                                              ),
+                                                              Text(
+                                                                // '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
+                                                                '${demandes![1].dateDebut} - ${demandes[1].dateFin}',
+                                                                // '${demandes![1].address}',
+                                                                style: const TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontFamily:
+                                                                        "Poppins",
+                                                                    fontSize:
+                                                                        12),
+                                                              )
+                                                            ],
+                                                          ),
+                                                          Container(
+                                                            decoration: BoxDecoration(
+                                                                color: const Color
+                                                                        .fromARGB(
+                                                                    24,
+                                                                    255,
+                                                                    168,
+                                                                    38),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            5)),
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(4),
+                                                            child: Text(
+                                                              'En cours',
+                                                              style: TextStyle(
+                                                                  fontSize: 12,
+                                                                  color: Colors
+                                                                      .orange
+                                                                      .shade400,
+                                                                  fontFamily:
+                                                                      "Poppins"),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.012),
+                                                      Divider(
+                                                        color: Colors
+                                                            .grey.shade300,
+                                                        thickness: 1,
+                                                      ),
+                                                      SizedBox(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.012),
+                                                      const Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceAround,
+                                                        children: [
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                'Jours d\'application',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    fontFamily:
+                                                                        "Poppins"),
+                                                              ),
+                                                              Text(
+                                                                '17 Jours',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        "Poppins"),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                'Solde de congé',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    fontFamily:
+                                                                        "Poppins"),
+                                                              ),
+                                                              Text(
+                                                                '4',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        "Poppins"),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                            children: [
+                                                              Text(
+                                                                'Approuvé par',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        10,
+                                                                    fontFamily:
+                                                                        "Poppins"),
+                                                              ),
+                                                              Text(
+                                                                'RH',
+                                                                style: TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    fontSize:
+                                                                        14,
+                                                                    fontFamily:
+                                                                        "Poppins"),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
                                               ),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.012),
-                                              const Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        'Jours d\'application',
-                                                        style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        '17 Jours',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        'Solde de congé',
-                                                        style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        '4',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        'Approuvé par',
-                                                        style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        'RH',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
+                                            ),
                                           ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.012,
-                                  ),
-                                ],
-                              );
+                                          SizedBox(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.012,
+                                          ),
+                                        ],
+                                      );
+                                    }
+                                    return Text('no data');
+                                  });
                             case 1:
                               return Column(
                                 children: [

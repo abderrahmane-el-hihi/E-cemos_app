@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'CemosUsers.dart';
 import 'DemandeAbscence.dart';
+import 'Personnel.dart';
 import 'users.dart';
 import 'package:http/http.dart' as http;
 
@@ -57,13 +58,25 @@ class RemoteService {
     try {
       final response = await http.get(Uri.parse(apiUrl));
       if (response.statusCode == 200) {
-        final data = json.decode(response.body);
+        final data = response.body;
         return demandeAbscenceFromJson(data);
       } else {
         throw Exception('Failed to load data');
       }
     } catch (e) {
       print('Error: $e');
+    }
+    return null;
+  }
+
+  Future getPersonnel() async {
+    var client = http.Client();
+    var uri =
+        Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/1');
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return personnelFromJson(json);
     }
   }
 

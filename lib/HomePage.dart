@@ -298,8 +298,7 @@ class _HomePageState extends State<HomePage> {
                       Text(
                         'Présence d\'aujourd\'hui',
                         style: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.green.shade400),
+                            fontFamily: 'Poppins', color: Color(0xFF66BB6A)),
                       ),
                     ],
                   ),
