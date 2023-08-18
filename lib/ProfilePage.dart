@@ -4,10 +4,8 @@ import 'package:cemos_app/models/Personnel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'MonProfil.dart';
 import 'models/service.dart';
-import 'models/users.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -31,7 +29,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               SizedBox(height: MediaQuery.of(context).size.height * 0.05),
               FutureBuilder(
-                  future: RemoteService().getPersonnel(),
+                  future: RemoteService().getPersonnel(1),
                   builder: (BuildContext context, AsyncSnapshot snapshot) {
                     if (snapshot.hasData) {
                       Personnel p = snapshot.data;
@@ -72,6 +70,27 @@ class _ProfilePageState extends State<ProfilePage> {
                       ],
                     );
                   }),
+              // Consumer<personnelDataProvider>(
+              //     builder: (context, personneldata, child) {
+              //   return Column(
+              //     children: [
+              //       Icon(
+              //         Icons.account_circle,
+              //         color: Colors.grey.shade400,
+              //         size: 128,
+              //       ),
+              //       Text(
+              //         personneldata.personneldata!.nom,
+              //         style:
+              //             const TextStyle(fontFamily: 'Poppins', fontSize: 22),
+              //       ),
+              //       Text(
+              //         'Service IT',
+              //         style: const TextStyle(fontFamily: 'Poppins'),
+              //       ),
+              //     ],
+              //   );
+              // }),
               SizedBox(height: MediaQuery.of(context).size.height * 0.02),
               SizedBox(height: MediaQuery.of(context).size.width * 0.1),
               GestureDetector(

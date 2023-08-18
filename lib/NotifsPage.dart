@@ -4,8 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'LeaveDetailsPage.dart';
 import 'components/button.dart';
+import 'models/Personnel.dart';
+
 import 'models/service.dart';
-import 'models/users.dart';
 
 class NotifsPage extends StatefulWidget {
   const NotifsPage({super.key});
@@ -17,7 +18,8 @@ class NotifsPage extends StatefulWidget {
 bool isDemande = true;
 
 class _NotifsPageState extends State<NotifsPage> {
-  List<Users>? users;
+  // List<Personnel>? Personnel;
+  var Personnel;
   @override
   void initState() {
     super.initState();
@@ -25,7 +27,7 @@ class _NotifsPageState extends State<NotifsPage> {
   }
 
   getData() async {
-    users = await RemoteService().GetApiData();
+    Personnel = await RemoteService().GetApiData();
   }
 
   // list to store clicked listtiles

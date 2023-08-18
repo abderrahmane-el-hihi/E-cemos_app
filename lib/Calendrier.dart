@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:cemos_app/models/UserDataProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,6 @@ import 'package:http/http.dart' as http;
 
 import 'models/DemandeAbscence.dart';
 import 'models/service.dart';
-import 'models/users.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -366,8 +364,6 @@ class _PageState extends State<CalendarPage> {
                               ],
                             );
                           } else if (snapshot.hasData) {
-                            List<Users>? users = snapshot.data;
-
                             return Column(
                               children: [
                                 Padding(
@@ -414,10 +410,7 @@ class _PageState extends State<CalendarPage> {
                                                             FontWeight.w500,
                                                         fontSize: 14,
                                                         fontFamily: 'Poppins')),
-                                                Text(
-                                                    users![3]
-                                                        .phone
-                                                        .substring(0, 10),
+                                                Text('10',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -468,10 +461,7 @@ class _PageState extends State<CalendarPage> {
                                                             FontWeight.w500,
                                                         fontSize: 14,
                                                         fontFamily: 'Poppins')),
-                                                Text(
-                                                    users[1]
-                                                        .phone
-                                                        .substring(0, 10),
+                                                Text('10',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -535,10 +525,7 @@ class _PageState extends State<CalendarPage> {
                                                             FontWeight.w500,
                                                         fontSize: 14,
                                                         fontFamily: 'Poppins')),
-                                                Text(
-                                                    users[0]
-                                                        .phone
-                                                        .substring(0, 10),
+                                                Text('10',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -588,10 +575,7 @@ class _PageState extends State<CalendarPage> {
                                                             FontWeight.w500,
                                                         fontSize: 14,
                                                         fontFamily: 'Poppins')),
-                                                Text(
-                                                    users[4]
-                                                        .phone
-                                                        .substring(0, 10),
+                                                Text('10',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -1111,7 +1095,6 @@ class _PageState extends State<CalendarPage> {
                                     if (snapshot.hasData) {
                                       List<DemandeAbscence>? demandes =
                                           snapshot.data;
-                                      // List<Users>? demandes = snapshot.data;
                                       return Column(
                                         children: [
                                           GestureDetector(
@@ -1153,9 +1136,9 @@ class _PageState extends State<CalendarPage> {
                                                                 CrossAxisAlignment
                                                                     .start,
                                                             children: [
-                                                              const Text(
-                                                                'Demande',
-                                                                style: TextStyle(
+                                                              Text(
+                                                                '${demandes![1].motifAbsence}',
+                                                                style: const TextStyle(
                                                                     color: Colors
                                                                         .black,
                                                                     fontFamily:
@@ -1201,7 +1184,7 @@ class _PageState extends State<CalendarPage> {
                                                                   fontFamily:
                                                                       "Poppins"),
                                                             ),
-                                                          ),
+                                                          )
                                                         ],
                                                       ),
                                                       SizedBox(
@@ -1221,7 +1204,7 @@ class _PageState extends State<CalendarPage> {
                                                                   .size
                                                                   .height *
                                                               0.012),
-                                                      const Row(
+                                                      Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .spaceAround,
@@ -1234,8 +1217,8 @@ class _PageState extends State<CalendarPage> {
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
                                                             children: [
-                                                              Text(
-                                                                'Jours d\'application',
+                                                              const Text(
+                                                                'Durée d\'abscence',
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         10,
@@ -1243,8 +1226,8 @@ class _PageState extends State<CalendarPage> {
                                                                         "Poppins"),
                                                               ),
                                                               Text(
-                                                                '17 Jours',
-                                                                style: TextStyle(
+                                                                '${demandes[1].dureAbsence?.toInt()} Jours',
+                                                                style: const TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500,
@@ -1263,8 +1246,8 @@ class _PageState extends State<CalendarPage> {
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
                                                             children: [
-                                                              Text(
-                                                                'Solde de congé',
+                                                              const Text(
+                                                                'téléphone',
                                                                 style: TextStyle(
                                                                     fontSize:
                                                                         10,
@@ -1272,8 +1255,8 @@ class _PageState extends State<CalendarPage> {
                                                                         "Poppins"),
                                                               ),
                                                               Text(
-                                                                '4',
-                                                                style: TextStyle(
+                                                                '${demandes[1].telAbsence}',
+                                                                style: const TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500,
@@ -1292,7 +1275,7 @@ class _PageState extends State<CalendarPage> {
                                                                 MainAxisAlignment
                                                                     .spaceBetween,
                                                             children: [
-                                                              Text(
+                                                              const Text(
                                                                 'Approuvé par',
                                                                 style: TextStyle(
                                                                     fontSize:
@@ -1302,7 +1285,7 @@ class _PageState extends State<CalendarPage> {
                                                               ),
                                                               Text(
                                                                 'RH',
-                                                                style: TextStyle(
+                                                                style: const TextStyle(
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w500,
@@ -1330,7 +1313,7 @@ class _PageState extends State<CalendarPage> {
                                         ],
                                       );
                                     }
-                                    return Text('no data');
+                                    return Center();
                                   });
                             case 1:
                               return Column(

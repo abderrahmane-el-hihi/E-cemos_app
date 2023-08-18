@@ -1,124 +1,7 @@
-// import 'dart:ffi';
-
-// class Personnel {
-//   int IdPersonnel;
-//   String? Matricule;
-//   String? Cin;
-//   String? Nom;
-//   String? Prenom;
-//   String? TelephonePersonnel;
-//   String? TelephoneProfessionel;
-//   String? EmailPersonnel;
-//   String? Genre;
-//   DateTime? DateNaissance;
-//   String? LieuNaissance;
-//   int? NbrEnfant;
-//   String? Photo;
-//   String? Email;
-//   String? MotDePasse;
-//   DateTime? DateAffiliation;
-//   DateTime? DateDepart;
-//   double? SoldeConge;
-//   double? SalaireMensuel;
-//   double? SalaireHoraire;
-//   int? IdFromPointeurse;
-//   int? CardNumber;
-//   String? Statut;
-//   int IdSociete;
-//   int IdPoste;
-//   int IdRole;
-
-//   Personnel({
-//     required this.IdPersonnel,
-//     required this.Matricule,
-//     required this.Cin,
-//     required this.Nom,
-//     required this.Prenom,
-//     required this.TelephonePersonnel,
-//     required this.TelephoneProfessionel,
-//     required this.EmailPersonnel,
-//     required this.Genre,
-//     required this.DateNaissance,
-//     required this.LieuNaissance,
-//     required this.NbrEnfant,
-//     required this.Photo,
-//     required this.Email,
-//     required this.MotDePasse,
-//     required this.DateAffiliation,
-//     required this.DateDepart,
-//     required this.SoldeConge,
-//     required this.SalaireMensuel,
-//     required this.SalaireHoraire,
-//     required this.IdFromPointeurse,
-//     required this.CardNumber,
-//     required this.Statut,
-//     required this.IdSociete,
-//     required this.IdPoste,
-//     required this.IdRole,
-//   });
-
-//   factory Personnel.fromJson(Map<String, dynamic> json) {
-//     return Personnel(
-//       IdPersonnel: json["IdPersonnel"],
-//       Matricule: json["Matricule"],
-//       Cin: json["Cin"],
-//       Nom: json["Nom"],
-//       Prenom: json["Prenom"],
-//       TelephonePersonnel: json["TelephonePersonnel"],
-//       TelephoneProfessionel: json["TelephoneProfessionel"],
-//       EmailPersonnel: json["EmailPersonnel"],
-//       Genre: json["Genre"],
-//       DateNaissance: json["DateNaissance"],
-//       LieuNaissance: json["LieuNaissance"],
-//       NbrEnfant: json["NbrEnfant"],
-//       Photo: json["Photo"],
-//       Email: json["Email"],
-//       MotDePasse: json["MotDePasse"],
-//       DateAffiliation: json["DateAffiliation"],
-//       DateDepart: json["DateDepart"],
-//       SoldeConge: json["SoldeConge"],
-//       SalaireMensuel: json["SalaireMensuel"],
-//       SalaireHoraire: json["SalaireHoraire"],
-//       IdFromPointeurse: json["IdFromPointeurse"],
-//       CardNumber: json["CardNumber"],
-//       Statut: json["Statut"],
-//       IdSociete: json["IdSociete"],
-//       IdPoste: json["IdPoste"],
-//       IdRole: json["IdRole"],
-//     );
-//   }
-// }
-
-//   // Map<String, dynamic> personnelToJson() => {
-//   //       "IdPersonnel": this.IdPersonnel,
-//   //       "Matricule": this.Matricule,
-//   //       "Cin": this.Cin,
-//   //       "Nom": this.Nom,
-//   //       "Prenom": this.Prenom,
-//   //       "TelephonePersonnel": this.TelephonePersonnel,
-//   //       "TelephoneProfessionel": this.TelephoneProfessionel,
-//   //       "EmailPersonnel": this.EmailPersonnel,
-//   //       "Genre": this.Genre,
-//   //       "DateNaissance": this.DateNaissance,
-//   //       "LieuNaissance": this.LieuNaissance,
-//   //       "NbrEnfant": this.NbrEnfant,
-//   //       "Photo": this.Photo,
-//   //       "Email": this.Email,
-//   //       "MotDePasse": this.MotDePasse,
-//   //       "DateAffiliation": this.DateAffiliation,
-//   //       "DateDepart": this.DateDepart,
-//   //       "SoldeConge": this.SoldeConge,
-//   //       "SalaireMensuel": this.SalaireMensuel,
-//   //       "SalaireHoraire": this.SalaireHoraire,
-//   //       "IdFromPointeurse": this.IdFromPointeurse,
-//   //       "CardNumber": this.CardNumber,
-//   //       "Statut": this.Statut,
-//   //       "IdSociete": this.IdSociete,
-//   //       "IdPoste": this.IdPoste,
-//   //       "IdRole": this.IdRole,
-//   //     };
-
 import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 
 Personnel personnelFromJson(String str) => Personnel.fromJson(json.decode(str));
 
@@ -240,4 +123,30 @@ class Personnel {
         "telephonePersonnel": telephonePersonnel,
         "telephoneProfessionel": telephoneProfessionel,
       };
+}
+
+class personnelDataProvider extends ChangeNotifier {
+  Personnel? _Personnel;
+  Personnel? get personneldata => _Personnel;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  Future<void> fetchData() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final response = await http.get(
+          Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/1'));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        _Personnel = personnelFromJson(jsonData);
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
 }

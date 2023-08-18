@@ -6,7 +6,7 @@ import 'LoginPage.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'components/button.dart';
-import 'models/UserDataProvider.dart';
+import 'models/Personnel.dart';
 
 void main() {
   initializeDateFormatting().then(
@@ -17,7 +17,7 @@ void main() {
             create: (_) => ButtonStateModel(),
           ),
           ChangeNotifierProvider(
-            create: (_) => UserDataProvider(),
+            create: (_) => personnelDataProvider(),
           ),
         ],
         child: const MyApp(),

@@ -1,5 +1,8 @@
 import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
 
 List<DemandeAbscence> demandeAbscenceFromJson(var str) =>
     List<DemandeAbscence>.from(
@@ -15,21 +18,20 @@ List<DemandeAbscence> demandeAbscenceFromJson(var str) =>
 // String demandeAbscenceToJson(List<DemandeAbscence> data) =>
 //     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-@JsonSerializable()
 class DemandeAbscence {
   String? dateDebut;
-  String? dureAbsence;
+  double? dureAbsence;
   String? motifAbsence;
   String? dateFin;
   String? mailAbsence;
   String? validationChef1;
   String? validationChef2;
   String? telAbsence;
-  String? idPersonnel;
+  int? idPersonnel;
   String? validationRh;
-  String? idTypeAbsence;
+  int? idTypeAbsence;
   String? dateSaisi;
-  String? idDemandeAbsence;
+  int? idDemandeAbsence;
   String? dateDernierModification;
 
   DemandeAbscence({
@@ -91,4 +93,31 @@ class DemandeAbscence {
             // "${dateDernierModification.year.toString().padLeft(4, '0')}-${dateDernierModification.month.toString().padLeft(2, '0')}-${dateDernierModification.day.toString().padLeft(2, '0')}",
             dateDernierModification,
       };
+}
+
+class DemandeAbscenceDataProvider extends ChangeNotifier {
+  DemandeAbscence? _DemandeAbscence;
+  DemandeAbscence? get DemandeAbscencedata => _DemandeAbscence;
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+
+  Future<void> fetchData() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      final response =
+          await http.get(Uri.parse('http://192.168.11.157:8800/api/CemosRH/'));
+      if (response.statusCode == 200) {
+        final jsonData = json.decode(response.body);
+        _DemandeAbscence =
+            demandeAbscenceFromJson(jsonData) as DemandeAbscence?;
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+
+    _isLoading = false;
+    notifyListeners();
+  }
 }

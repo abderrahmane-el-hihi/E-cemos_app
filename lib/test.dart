@@ -8,7 +8,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'models/DemandeAbscence.dart';
 import 'models/Personnel.dart';
 import 'models/service.dart';
-import 'models/users.dart';
 
 class twidget extends StatefulWidget {
   const twidget({super.key});
@@ -18,22 +17,11 @@ class twidget extends StatefulWidget {
 }
 
 class _twidgetState extends State<twidget> {
-  List<Users>? users;
   var isLoaded = false;
 
   @override
   void initState() {
     super.initState();
-    getData();
-  }
-
-  getData() async {
-    users = await RemoteService().GetApiData();
-    if (users != null) {
-      setState(() {
-        isLoaded = true;
-      });
-    }
   }
 
   GetIpandname() async {
@@ -131,7 +119,7 @@ class _twidgetState extends State<twidget> {
                 },
                 child: Text('click')),
             FutureBuilder(
-                future: RemoteService().getPersonnel(),
+                future: RemoteService().getPersonnel(1),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     Personnel p = snapshot.data;

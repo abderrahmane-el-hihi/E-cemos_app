@@ -1,10 +1,12 @@
 import 'package:cemos_app/SwitchPages.dart';
+import 'package:cemos_app/models/DemandeAbscence.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import 'components/button.dart';
+import 'models/service.dart';
 
 class LeaveDetailsPage extends StatefulWidget {
   const LeaveDetailsPage({super.key});
@@ -426,172 +428,207 @@ class _DemandedetailsState extends State<Demandedetails> {
             ),
           ),
           SizedBox(height: MediaQuery.of(context).size.width * 0.04),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Date de conge',
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      color: Colors.grey.shade400),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                Text(
-                  'De: ${DateFormat('d MMM, yyyy').format(DateTime.now())} ,jusqu\'a: ${DateFormat('d MMM, yyyy').format(DateTime.now())}',
-                  style: const TextStyle(fontFamily: 'Poppins', fontSize: 16),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: Divider(
-              color: Colors.grey,
-              thickness: 0.5,
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Duree d\'application',
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      color: Colors.grey.shade400),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                const Text(
-                  '17 jours',
-                  style: TextStyle(fontFamily: 'Poppins', fontSize: 16),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: Divider(
-              color: Colors.grey,
-              thickness: 0.5,
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Solde de conge',
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: 16,
-                      color: Colors.grey.shade400),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                const Text(
-                  '4 jours',
-                  style: TextStyle(fontFamily: 'Poppins', fontSize: 16),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: Divider(
-              color: Colors.grey,
-              thickness: 0.5,
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'Validation',
-              style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 16,
-                  color: Colors.grey.shade400),
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Par chef: ',
-                  style: TextStyle(fontFamily: 'Poppins', fontSize: 16),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(24, 255, 168, 38),
-                      borderRadius: BorderRadius.circular(5)),
-                  padding: const EdgeInsets.all(4),
-                  child: Text(
-                    'En cours',
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.orange.shade400,
-                        fontFamily: "Poppins"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: MediaQuery.of(context).size.height * 0.02,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Par RH: ',
-                  style: TextStyle(fontFamily: 'Poppins', fontSize: 16),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: const Color.fromARGB(24, 255, 168, 38),
-                      borderRadius: BorderRadius.circular(5)),
-                  padding: const EdgeInsets.all(4),
-                  child: Text(
-                    'En cours',
-                    style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.orange.shade400,
-                        fontFamily: "Poppins"),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: Divider(
-              color: Colors.grey,
-              thickness: 0.5,
-            ),
-          ),
-          SizedBox(height: MediaQuery.of(context).size.width * 0.02),
+          FutureBuilder(
+              future: RemoteService().getDemandeList(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.hasData) {
+                  List<DemandeAbscence> demandes = snapshot.data;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Date de conge',
+                                style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16,
+                                    color: Colors.grey.shade400),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
+                              Text(
+                                'De: ${demandes[1].dateDebut} \njusqu\'a: ${demandes[1].dateFin}',
+                                style: const TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 32),
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 0.5,
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Duree d\'abscence',
+                                style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16,
+                                    color: Colors.grey.shade400),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
+                              Text(
+                                '${demandes[1].dureAbsence?.toInt()} jours',
+                                style: const TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 32),
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 0.5,
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Telephone',
+                                style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 16,
+                                    color: Colors.grey.shade400),
+                              ),
+                              SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.01,
+                              ),
+                              Text(
+                                '${demandes[1].telAbsence}',
+                                style: const TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 32),
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 0.5,
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text(
+                            'Validation',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontSize: 16,
+                                color: Colors.grey.shade400),
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Par chef: ',
+                                style: TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 16),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromARGB(24, 255, 168, 38),
+                                    borderRadius: BorderRadius.circular(5)),
+                                padding: const EdgeInsets.all(4),
+                                child: Text(
+                                  'En cours',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.orange.shade400,
+                                      fontFamily: "Poppins"),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Par RH: ',
+                                style: TextStyle(
+                                    fontFamily: 'Poppins', fontSize: 16),
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromARGB(24, 255, 168, 38),
+                                    borderRadius: BorderRadius.circular(5)),
+                                padding: const EdgeInsets.all(4),
+                                child: Text(
+                                  'En cours',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.orange.shade400,
+                                      fontFamily: "Poppins"),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 32),
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 0.5,
+                          ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.width * 0.02),
+                      ],
+                    ),
+                  );
+                }
+                return Center();
+              }),
         ],
       )),
     );

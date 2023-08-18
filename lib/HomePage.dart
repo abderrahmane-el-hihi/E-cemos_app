@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'NotifsPage.dart';
-import 'models/UserDataProvider.dart';
+import 'models/Personnel.dart';
+
 import 'models/service.dart';
-import 'models/users.dart';
+
 import 'utils/date_utils.dart' as date_util;
 import 'package:intl/intl.dart';
 
@@ -160,30 +161,41 @@ class _HomePageState extends State<HomePage> {
                           ),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.012),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Nom Prenom',
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: 'Poppins'),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                'Agent Comercial',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    fontFamily: 'Poppins'),
-                              ),
-                            ],
-                          ),
+                          FutureBuilder(
+                              future: RemoteService().getPersonnel(1),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (snapshot.hasData) {
+                                  Personnel p = snapshot.data;
+                                  return Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${p.nom} ${p.prenom}',
+                                            style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: 'Poppins'),
+                                          ),
+                                        ],
+                                      ),
+                                      Text(
+                                        'Service IT',
+                                        style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: 'Poppins'),
+                                      ),
+                                    ],
+                                  );
+                                }
+                                return Center();
+                              }),
                         ],
                       ),
                       InkWell(
@@ -240,9 +252,7 @@ class _HomePageState extends State<HomePage> {
 
                       return GestureDetector(
                         onTap: () {
-                          setState(() {
-                            RemoteService().GetPreviousEntryData();
-                          });
+                          setState(() {});
                         },
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -308,7 +318,6 @@ class _HomePageState extends State<HomePage> {
                     future: RemoteService().GetPreviousEntryData(),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
-                        List<Users>? users = snapshot.data;
                         return Column(
                           children: [
                             Padding(
@@ -365,7 +374,7 @@ class _HomePageState extends State<HomePage> {
                                                     fontFamily: 'Poppins')),
                                           ],
                                         ),
-                                        Text(users![0].phone.substring(0, 2),
+                                        Text('10:00',
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontFamily: 'Poppins',
@@ -430,7 +439,7 @@ class _HomePageState extends State<HomePage> {
                                                     fontFamily: 'Poppins')),
                                           ],
                                         ),
-                                        Text(users[0].phone.substring(0, 2),
+                                        Text('18:00',
                                             style: const TextStyle(
                                                 fontSize: 18,
                                                 fontFamily: 'Poppins',
@@ -500,7 +509,7 @@ class _HomePageState extends State<HomePage> {
                                                 fontFamily: 'Poppins')),
                                       ],
                                     ),
-                                    Text(users[0].phone.substring(0, 2),
+                                    Text('23',
                                         style: const TextStyle(
                                             fontSize: 18,
                                             fontFamily: 'Poppins',
