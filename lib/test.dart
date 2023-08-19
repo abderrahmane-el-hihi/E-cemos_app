@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'models/DemandeAbscence.dart';
+import 'models/DemandeCard.dart';
 import 'models/Personnel.dart';
 import 'models/service.dart';
 
@@ -119,10 +120,19 @@ class _twidgetState extends State<twidget> {
                 },
                 child: Text('click')),
             FutureBuilder(
-                future: RemoteService().getPersonnel(1),
+                future: RemoteService().getDemandeList(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    Personnel p = snapshot.data;
+                    List<DemandeAbscence>? demandes = snapshot.data;
+                    return DemandeCard(
+                      DemandeType: "${demandes![1].motifAbsence}",
+                      date: "${demandes[1].dateDebut} ${demandes[1].dateFin}",
+                      dureeabscence: demandes[1].dureAbsence?.toInt(),
+                      Telephone: "${demandes[1].telAbsence}",
+                      ValidationRH: "${demandes[1].validationRh}",
+                      ValidationChef1: "${demandes[1].validationChef1}",
+                      ValidationChef2: "${demandes[1].validationChef2}",
+                    );
                   }
                   return Center();
                 }),

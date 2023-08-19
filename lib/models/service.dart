@@ -29,11 +29,11 @@ class RemoteService {
   Future<List<DemandeAbscence>?> getDemandeList() async {
     var client = http.Client();
     var uri =
-        Uri.parse('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
+        Uri.parse('http://192.168.1.103:8800/api/CemosRH/DemanceAbsence/');
     final response = await client.get(uri);
     if (response.statusCode == 200) {
       final data = response.body;
-      // var file = await DefaultCacheManager().getSingleFile('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
+      // var file = await DefaultCacheManager().getSingleFile('http://192.168.1.103:8800/api/CemosRH/DemanceAbsence/');
       // print(file);
       return demandeAbscenceFromJson(data);
     }
@@ -43,7 +43,7 @@ class RemoteService {
   Future getPersonnel(int id) async {
     var client = http.Client();
     var uri =
-        Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/$id');
+        Uri.parse('http://192.168.1.103:8800/api/CemosRH/Personnelles/$id');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;

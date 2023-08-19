@@ -11,6 +11,7 @@ import 'components/button.dart';
 import 'package:http/http.dart' as http;
 
 import 'models/DemandeAbscence.dart';
+import 'models/DemandeCard.dart';
 import 'models/service.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -1095,223 +1096,238 @@ class _PageState extends State<CalendarPage> {
                                     if (snapshot.hasData) {
                                       List<DemandeAbscence>? demandes =
                                           snapshot.data;
-                                      return Column(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              // Navigator.push(
-                                              //   context,
-                                              //   MaterialPageRoute(
-                                              //       builder: (context) => Popup()),
-                                              // );
-                                            },
-                                            child: Container(
-                                              margin:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              decoration: BoxDecoration(
-                                                color: const Color.fromARGB(
-                                                    200, 255, 255, 255),
-                                                borderRadius:
-                                                    BorderRadius.circular(15),
-                                              ),
-                                              child: SizedBox(
-                                                child: ListTile(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: ((context) =>
-                                                                const Demandedetails())));
-                                                  },
-                                                  title: Column(
-                                                    children: [
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                '${demandes![1].motifAbsence}',
-                                                                style: const TextStyle(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontFamily:
-                                                                        "Poppins"),
-                                                              ),
-                                                              Text(
-                                                                // '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
-                                                                '${demandes![1].dateDebut} - ${demandes[1].dateFin}',
-                                                                // '${demandes![1].address}',
-                                                                style: const TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontFamily:
-                                                                        "Poppins",
-                                                                    fontSize:
-                                                                        12),
-                                                              )
-                                                            ],
-                                                          ),
-                                                          Container(
-                                                            decoration: BoxDecoration(
-                                                                color: const Color
-                                                                        .fromARGB(
-                                                                    24,
-                                                                    255,
-                                                                    168,
-                                                                    38),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            5)),
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(4),
-                                                            child: Text(
-                                                              'En cours',
-                                                              style: TextStyle(
-                                                                  fontSize: 12,
-                                                                  color: Colors
-                                                                      .orange
-                                                                      .shade400,
-                                                                  fontFamily:
-                                                                      "Poppins"),
-                                                            ),
-                                                          )
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.012),
-                                                      Divider(
-                                                        color: Colors
-                                                            .grey.shade300,
-                                                        thickness: 1,
-                                                      ),
-                                                      SizedBox(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.012),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceAround,
-                                                        children: [
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              const Text(
-                                                                'Durée d\'abscence',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        10,
-                                                                    fontFamily:
-                                                                        "Poppins"),
-                                                              ),
-                                                              Text(
-                                                                '${demandes[1].dureAbsence?.toInt()} Jours',
-                                                                style: const TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        "Poppins"),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              const Text(
-                                                                'téléphone',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        10,
-                                                                    fontFamily:
-                                                                        "Poppins"),
-                                                              ),
-                                                              Text(
-                                                                '${demandes[1].telAbsence}',
-                                                                style: const TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        "Poppins"),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceBetween,
-                                                            children: [
-                                                              const Text(
-                                                                'Approuvé par',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        10,
-                                                                    fontFamily:
-                                                                        "Poppins"),
-                                                              ),
-                                                              Text(
-                                                                'RH',
-                                                                style: const TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                    fontSize:
-                                                                        14,
-                                                                    fontFamily:
-                                                                        "Poppins"),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.012,
-                                          ),
-                                        ],
+                                      return DemandeCard(
+                                        DemandeType:
+                                            "${demandes![1].motifAbsence}",
+                                        date:
+                                            "${demandes[1].dateDebut} ${demandes[1].dateFin}",
+                                        dureeabscence:
+                                            demandes[1].dureAbsence?.toInt(),
+                                        Telephone: "${demandes[1].telAbsence}",
+                                        ValidationRH:
+                                            "${demandes[1].validationRh}",
+                                        ValidationChef1:
+                                            "${demandes[1].validationChef1}",
+                                        ValidationChef2:
+                                            "${demandes[1].validationChef2}",
                                       );
+                                      // return Column(
+                                      //   children: [
+                                      //     GestureDetector(
+                                      //       onTap: () {
+                                      //         // Navigator.push(
+                                      //         //   context,
+                                      //         //   MaterialPageRoute(
+                                      //         //       builder: (context) => Popup()),
+                                      //         // );
+                                      //       },
+                                      //       child: Container(
+                                      //         margin:
+                                      //             const EdgeInsets.symmetric(
+                                      //                 horizontal: 10),
+                                      //         decoration: BoxDecoration(
+                                      //           color: const Color.fromARGB(
+                                      //               200, 255, 255, 255),
+                                      //           borderRadius:
+                                      //               BorderRadius.circular(15),
+                                      //         ),
+                                      //         child: SizedBox(
+                                      //           child: ListTile(
+                                      //             onTap: () {
+                                      //               Navigator.push(
+                                      //                   context,
+                                      //                   MaterialPageRoute(
+                                      //                       builder: ((context) =>
+                                      //                           const Demandedetails())));
+                                      //             },
+                                      //             title: Column(
+                                      //               children: [
+                                      //                 Row(
+                                      //                   mainAxisAlignment:
+                                      //                       MainAxisAlignment
+                                      //                           .spaceBetween,
+                                      //                   children: [
+                                      //                     Column(
+                                      //                       crossAxisAlignment:
+                                      //                           CrossAxisAlignment
+                                      //                               .start,
+                                      //                       children: [
+                                      //                         Text(
+                                      //                           '${demandes![1].motifAbsence}',
+                                      //                           style: const TextStyle(
+                                      //                               color: Colors
+                                      //                                   .black,
+                                      //                               fontFamily:
+                                      //                                   "Poppins"),
+                                      //                         ),
+                                      //                         Text(
+                                      //                           // '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
+                                      //                           '${demandes![1].dateDebut} - ${demandes[1].dateFin}',
+                                      //                           // '${demandes![1].address}',
+                                      //                           style: const TextStyle(
+                                      //                               fontWeight:
+                                      //                                   FontWeight
+                                      //                                       .w500,
+                                      //                               fontFamily:
+                                      //                                   "Poppins",
+                                      //                               fontSize:
+                                      //                                   12),
+                                      //                         )
+                                      //                       ],
+                                      //                     ),
+                                      //                     Container(
+                                      //                       decoration: BoxDecoration(
+                                      //                           color: const Color
+                                      //                                   .fromARGB(
+                                      //                               24,
+                                      //                               255,
+                                      //                               168,
+                                      //                               38),
+                                      //                           borderRadius:
+                                      //                               BorderRadius
+                                      //                                   .circular(
+                                      //                                       5)),
+                                      //                       padding:
+                                      //                           const EdgeInsets
+                                      //                               .all(4),
+                                      //                       child: Text(
+                                      //                         'En cours',
+                                      //                         style: TextStyle(
+                                      //                             fontSize: 12,
+                                      //                             color: Colors
+                                      //                                 .orange
+                                      //                                 .shade400,
+                                      //                             fontFamily:
+                                      //                                 "Poppins"),
+                                      //                       ),
+                                      //                     )
+                                      //                   ],
+                                      //                 ),
+                                      //                 SizedBox(
+                                      //                     height: MediaQuery.of(
+                                      //                                 context)
+                                      //                             .size
+                                      //                             .height *
+                                      //                         0.012),
+                                      //                 Divider(
+                                      //                   color: Colors
+                                      //                       .grey.shade300,
+                                      //                   thickness: 1,
+                                      //                 ),
+                                      //                 SizedBox(
+                                      //                     height: MediaQuery.of(
+                                      //                                 context)
+                                      //                             .size
+                                      //                             .height *
+                                      //                         0.012),
+                                      //                 Row(
+                                      //                   mainAxisAlignment:
+                                      //                       MainAxisAlignment
+                                      //                           .spaceAround,
+                                      //                   children: [
+                                      //                     Column(
+                                      //                       crossAxisAlignment:
+                                      //                           CrossAxisAlignment
+                                      //                               .start,
+                                      //                       mainAxisAlignment:
+                                      //                           MainAxisAlignment
+                                      //                               .spaceBetween,
+                                      //                       children: [
+                                      //                         const Text(
+                                      //                           'Durée d\'abscence',
+                                      //                           style: TextStyle(
+                                      //                               fontSize:
+                                      //                                   10,
+                                      //                               fontFamily:
+                                      //                                   "Poppins"),
+                                      //                         ),
+                                      //                         Text(
+                                      //                           '${demandes[1].dureAbsence?.toInt()} Jours',
+                                      //                           style: const TextStyle(
+                                      //                               fontWeight:
+                                      //                                   FontWeight
+                                      //                                       .w500,
+                                      //                               fontSize:
+                                      //                                   14,
+                                      //                               fontFamily:
+                                      //                                   "Poppins"),
+                                      //                         ),
+                                      //                       ],
+                                      //                     ),
+                                      //                     Column(
+                                      //                       crossAxisAlignment:
+                                      //                           CrossAxisAlignment
+                                      //                               .start,
+                                      //                       mainAxisAlignment:
+                                      //                           MainAxisAlignment
+                                      //                               .spaceBetween,
+                                      //                       children: [
+                                      //                         const Text(
+                                      //                           'téléphone',
+                                      //                           style: TextStyle(
+                                      //                               fontSize:
+                                      //                                   10,
+                                      //                               fontFamily:
+                                      //                                   "Poppins"),
+                                      //                         ),
+                                      //                         Text(
+                                      //                           '${demandes[1].telAbsence}',
+                                      //                           style: const TextStyle(
+                                      //                               fontWeight:
+                                      //                                   FontWeight
+                                      //                                       .w500,
+                                      //                               fontSize:
+                                      //                                   14,
+                                      //                               fontFamily:
+                                      //                                   "Poppins"),
+                                      //                         ),
+                                      //                       ],
+                                      //                     ),
+                                      //                     Column(
+                                      //                       crossAxisAlignment:
+                                      //                           CrossAxisAlignment
+                                      //                               .start,
+                                      //                       mainAxisAlignment:
+                                      //                           MainAxisAlignment
+                                      //                               .spaceBetween,
+                                      //                       children: [
+                                      //                         const Text(
+                                      //                           'Approuvé par',
+                                      //                           style: TextStyle(
+                                      //                               fontSize:
+                                      //                                   10,
+                                      //                               fontFamily:
+                                      //                                   "Poppins"),
+                                      //                         ),
+                                      //                         Text(
+                                      //                           'RH',
+                                      //                           style: const TextStyle(
+                                      //                               fontWeight:
+                                      //                                   FontWeight
+                                      //                                       .w500,
+                                      //                               fontSize:
+                                      //                                   14,
+                                      //                               fontFamily:
+                                      //                                   "Poppins"),
+                                      //                         ),
+                                      //                       ],
+                                      //                     ),
+                                      //                   ],
+                                      //                 ),
+                                      //               ],
+                                      //             ),
+                                      //           ),
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //     SizedBox(
+                                      //       height: MediaQuery.of(context)
+                                      //               .size
+                                      //               .height *
+                                      //           0.012,
+                                      //     ),
+                                      //   ],
+                                      // );
                                     }
                                     return Center();
                                   });
