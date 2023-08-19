@@ -43,12 +43,12 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.green.shade400,
         useMaterial3: true,
       ),
-      // home: AnimatedSplashScreen(
-      //   splashIconSize: 128,
-      //   splash: 'assets/Logo3.png',
-      //   nextScreen: const LoginPage(),
-      // ),
-      home: twidget(),
+      home: AnimatedSplashScreen(
+        splashIconSize: 128,
+        splash: 'assets/Logo3.png',
+        nextScreen: const LoginPage(),
+      ),
+      // home: twidget(),
     );
   }
 }

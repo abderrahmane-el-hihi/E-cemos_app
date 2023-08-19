@@ -137,7 +137,7 @@ class personnelDataProvider extends ChangeNotifier {
 
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.1.103:8800/api/CemosRH/Personnelles/1'));
+          Uri.parse('http://192.168.1.102:8800/api/CemosRH/Personnelles/1'));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         _Personnel = personnelFromJson(jsonData);

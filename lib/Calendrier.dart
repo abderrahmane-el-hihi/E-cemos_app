@@ -1,17 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'Demande.dart';
-import 'LeaveDetailsPage.dart';
 import 'components/button.dart';
-import 'package:http/http.dart' as http;
-
 import 'models/DemandeAbscence.dart';
 import 'models/DemandeCard.dart';
+import 'models/Personnel.dart';
 import 'models/service.dart';
 
 class CalendarPage extends StatefulWidget {
@@ -29,73 +25,6 @@ class _PageState extends State<CalendarPage> {
     'Congé \nd\'équipe',
   ];
   int _selectedButtonIndex = 0;
-
-  // bool isFirstInkwellVisible = true;
-  // bool isSecondInkwellVisible = true;
-  // String Acceptbtn = 'Accepter';
-  // Color Acceptclr = const Color.fromARGB(220, 102, 187, 106);
-  // String Rejectbtn = 'Rejeter';
-  // Color Rejectclr = const Color.fromARGB(220, 239, 83, 80);
-  // void _onFirstInkwellTap() {
-  //   setState(() {
-  //     isFirstInkwellVisible = true;
-  //     isSecondInkwellVisible = false;
-  //     Rejectbtn = 'Rejeté';
-  //     Rejectclr = Colors.grey.shade400;
-  //   });
-  // }
-
-  // void _onSecondInkwellTap() {
-  //   setState(() {
-  //     isFirstInkwellVisible = false;
-  //     isSecondInkwellVisible = true;
-  //     Acceptbtn = 'Accepté';
-  //     Acceptclr = Colors.grey.shade400;
-  //   });
-  // }
-
-  ///api fetching sectiion
-  Future fetchData() async {
-    const apiUrl = '';
-
-    try {
-      // Make a GET request to the API
-      final response = await http.get(Uri.parse(apiUrl));
-
-      // Check if the request was successful
-      if (response.statusCode == 200) {
-        // Parse the response body (which is usually in JSON format)
-        final data = json.decode(response.body);
-
-        // Process the data as needed
-        print(data);
-        return data;
-      } else {
-        // If the request was not successful, throw an exception
-        throw Exception('Failed to load data');
-      }
-    } catch (e) {
-      // Catch any errors that occur during the request
-      print('Error: $e');
-    }
-  }
-
-  Future<void> LoadData() async {
-    // try {
-    //   List<DemandeAbscence>? fetchedData =
-    //       await RemoteService().getDemandeList();
-    //   if (fetchedData != null && fetchedData.isNotEmpty) {
-    //     setState(() {
-    //       DemandesData = fetchedData;
-    //       print(DemandesData![0].dateDebut);
-    //     });
-    //   } else {
-    //     print("No data fetched or data is empty.");
-    //   }
-    // } catch (error) {
-    //   print("Error fetching data: $error");
-    // }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -127,17 +56,42 @@ class _PageState extends State<CalendarPage> {
                               fontFamily: 'Poppins',
                             ),
                           ),
-                          GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const DemandePage()),
-                                );
-                              },
-                              child: const Icon(CupertinoIcons.plus_app,
-                                  size: 32)),
+                          // child: const Icon(CupertinoIcons.plus_app,size: 32)),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const DemandePage()),
+                              );
+                            },
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(24, 66, 164, 245),
+                                border: Border.all(
+                                    color: Colors.blue.shade400, width: 2.0),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Icon(
+                                    CupertinoIcons.plus,
+                                    size: 28,
+                                    color: Colors.blue.shade400,
+                                  ),
+                                  Text(
+                                    'Ajouter',
+                                    style:
+                                        TextStyle(color: Colors.blue.shade400),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -339,12 +293,6 @@ class _PageState extends State<CalendarPage> {
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceAround,
                                               children: [
-                                                SizedBox(
-                                                    height:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .height *
-                                                            0.012),
                                                 const Text('Reste',
                                                     style: TextStyle(
                                                         fontWeight:
@@ -1081,643 +1029,109 @@ class _PageState extends State<CalendarPage> {
                     SizedBox(
                         height: MediaQuery.of(context).size.height * 0.022),
                     Container(
-                      // height: 300,
-                      height: MediaQuery.of(context).size.height * 0.37,
+                      height: MediaQuery.of(context).size.height * 0.375,
                       color: Colors.grey.shade100,
-                      child: ListView.builder(
-                        itemCount: 5,
-                        itemBuilder: (BuildContext context, int index) {
-                          switch (_selectedButtonIndex) {
-                            case 0:
-                              return FutureBuilder(
-                                  future: RemoteService().getDemandeList(),
+                      child: _selectedButtonIndex == 0
+                          ? FutureBuilder(
+                              future: RemoteService().getDemandeList(),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot snapshot) {
+                                if (snapshot.hasData) {
+                                  List<DemandeAbscence>? demandes =
+                                      snapshot.data;
+                                  return ListView.builder(
+                                      itemCount: demandes!.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return DemandeCard(
+                                          DemandeType:
+                                              "${demandes[0].motifAbsence}",
+                                          date:
+                                              "${DateFormat('d MMM, yyyy').format(demandes[0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[0].dateFin)}",
+                                          dureeabscence:
+                                              demandes[0].dureAbsence?.toInt(),
+                                          Telephone:
+                                              "${demandes[0].telAbsence}",
+                                          ValidationRH:
+                                              "${demandes[0].validationRh}",
+                                          ValidationChef1:
+                                              "${demandes[0].validationChef1}",
+                                          ValidationChef2:
+                                              "${demandes[0].validationChef2}",
+                                        );
+                                      });
+                                }
+                                return DemandeCard(
+                                  DemandeType: "",
+                                  date: "",
+                                  dureeabscence: 0,
+                                  Telephone: "",
+                                  ValidationRH: "",
+                                  ValidationChef1: "",
+                                  ValidationChef2: "",
+                                );
+                              })
+                          : _selectedButtonIndex == 1
+                              ? FutureBuilder(
+                                  future: RemoteService().getDemandeApproved(),
                                   builder: (BuildContext context,
                                       AsyncSnapshot snapshot) {
                                     if (snapshot.hasData) {
-                                      List<DemandeAbscence>? demandes =
+                                      List<DemandeApprovedList>? demandes =
                                           snapshot.data;
-                                      return DemandeCard(
-                                        DemandeType:
-                                            "${demandes![1].motifAbsence}",
-                                        date:
-                                            "${demandes[1].dateDebut} ${demandes[1].dateFin}",
-                                        dureeabscence:
-                                            demandes[1].dureAbsence?.toInt(),
-                                        Telephone: "${demandes[1].telAbsence}",
-                                        ValidationRH:
-                                            "${demandes[1].validationRh}",
-                                        ValidationChef1:
-                                            "${demandes[1].validationChef1}",
-                                        ValidationChef2:
-                                            "${demandes[1].validationChef2}",
-                                      );
-                                      // return Column(
-                                      //   children: [
-                                      //     GestureDetector(
-                                      //       onTap: () {
-                                      //         // Navigator.push(
-                                      //         //   context,
-                                      //         //   MaterialPageRoute(
-                                      //         //       builder: (context) => Popup()),
-                                      //         // );
-                                      //       },
-                                      //       child: Container(
-                                      //         margin:
-                                      //             const EdgeInsets.symmetric(
-                                      //                 horizontal: 10),
-                                      //         decoration: BoxDecoration(
-                                      //           color: const Color.fromARGB(
-                                      //               200, 255, 255, 255),
-                                      //           borderRadius:
-                                      //               BorderRadius.circular(15),
-                                      //         ),
-                                      //         child: SizedBox(
-                                      //           child: ListTile(
-                                      //             onTap: () {
-                                      //               Navigator.push(
-                                      //                   context,
-                                      //                   MaterialPageRoute(
-                                      //                       builder: ((context) =>
-                                      //                           const Demandedetails())));
-                                      //             },
-                                      //             title: Column(
-                                      //               children: [
-                                      //                 Row(
-                                      //                   mainAxisAlignment:
-                                      //                       MainAxisAlignment
-                                      //                           .spaceBetween,
-                                      //                   children: [
-                                      //                     Column(
-                                      //                       crossAxisAlignment:
-                                      //                           CrossAxisAlignment
-                                      //                               .start,
-                                      //                       children: [
-                                      //                         Text(
-                                      //                           '${demandes![1].motifAbsence}',
-                                      //                           style: const TextStyle(
-                                      //                               color: Colors
-                                      //                                   .black,
-                                      //                               fontFamily:
-                                      //                                   "Poppins"),
-                                      //                         ),
-                                      //                         Text(
-                                      //                           // '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
-                                      //                           '${demandes![1].dateDebut} - ${demandes[1].dateFin}',
-                                      //                           // '${demandes![1].address}',
-                                      //                           style: const TextStyle(
-                                      //                               fontWeight:
-                                      //                                   FontWeight
-                                      //                                       .w500,
-                                      //                               fontFamily:
-                                      //                                   "Poppins",
-                                      //                               fontSize:
-                                      //                                   12),
-                                      //                         )
-                                      //                       ],
-                                      //                     ),
-                                      //                     Container(
-                                      //                       decoration: BoxDecoration(
-                                      //                           color: const Color
-                                      //                                   .fromARGB(
-                                      //                               24,
-                                      //                               255,
-                                      //                               168,
-                                      //                               38),
-                                      //                           borderRadius:
-                                      //                               BorderRadius
-                                      //                                   .circular(
-                                      //                                       5)),
-                                      //                       padding:
-                                      //                           const EdgeInsets
-                                      //                               .all(4),
-                                      //                       child: Text(
-                                      //                         'En cours',
-                                      //                         style: TextStyle(
-                                      //                             fontSize: 12,
-                                      //                             color: Colors
-                                      //                                 .orange
-                                      //                                 .shade400,
-                                      //                             fontFamily:
-                                      //                                 "Poppins"),
-                                      //                       ),
-                                      //                     )
-                                      //                   ],
-                                      //                 ),
-                                      //                 SizedBox(
-                                      //                     height: MediaQuery.of(
-                                      //                                 context)
-                                      //                             .size
-                                      //                             .height *
-                                      //                         0.012),
-                                      //                 Divider(
-                                      //                   color: Colors
-                                      //                       .grey.shade300,
-                                      //                   thickness: 1,
-                                      //                 ),
-                                      //                 SizedBox(
-                                      //                     height: MediaQuery.of(
-                                      //                                 context)
-                                      //                             .size
-                                      //                             .height *
-                                      //                         0.012),
-                                      //                 Row(
-                                      //                   mainAxisAlignment:
-                                      //                       MainAxisAlignment
-                                      //                           .spaceAround,
-                                      //                   children: [
-                                      //                     Column(
-                                      //                       crossAxisAlignment:
-                                      //                           CrossAxisAlignment
-                                      //                               .start,
-                                      //                       mainAxisAlignment:
-                                      //                           MainAxisAlignment
-                                      //                               .spaceBetween,
-                                      //                       children: [
-                                      //                         const Text(
-                                      //                           'Durée d\'abscence',
-                                      //                           style: TextStyle(
-                                      //                               fontSize:
-                                      //                                   10,
-                                      //                               fontFamily:
-                                      //                                   "Poppins"),
-                                      //                         ),
-                                      //                         Text(
-                                      //                           '${demandes[1].dureAbsence?.toInt()} Jours',
-                                      //                           style: const TextStyle(
-                                      //                               fontWeight:
-                                      //                                   FontWeight
-                                      //                                       .w500,
-                                      //                               fontSize:
-                                      //                                   14,
-                                      //                               fontFamily:
-                                      //                                   "Poppins"),
-                                      //                         ),
-                                      //                       ],
-                                      //                     ),
-                                      //                     Column(
-                                      //                       crossAxisAlignment:
-                                      //                           CrossAxisAlignment
-                                      //                               .start,
-                                      //                       mainAxisAlignment:
-                                      //                           MainAxisAlignment
-                                      //                               .spaceBetween,
-                                      //                       children: [
-                                      //                         const Text(
-                                      //                           'téléphone',
-                                      //                           style: TextStyle(
-                                      //                               fontSize:
-                                      //                                   10,
-                                      //                               fontFamily:
-                                      //                                   "Poppins"),
-                                      //                         ),
-                                      //                         Text(
-                                      //                           '${demandes[1].telAbsence}',
-                                      //                           style: const TextStyle(
-                                      //                               fontWeight:
-                                      //                                   FontWeight
-                                      //                                       .w500,
-                                      //                               fontSize:
-                                      //                                   14,
-                                      //                               fontFamily:
-                                      //                                   "Poppins"),
-                                      //                         ),
-                                      //                       ],
-                                      //                     ),
-                                      //                     Column(
-                                      //                       crossAxisAlignment:
-                                      //                           CrossAxisAlignment
-                                      //                               .start,
-                                      //                       mainAxisAlignment:
-                                      //                           MainAxisAlignment
-                                      //                               .spaceBetween,
-                                      //                       children: [
-                                      //                         const Text(
-                                      //                           'Approuvé par',
-                                      //                           style: TextStyle(
-                                      //                               fontSize:
-                                      //                                   10,
-                                      //                               fontFamily:
-                                      //                                   "Poppins"),
-                                      //                         ),
-                                      //                         Text(
-                                      //                           'RH',
-                                      //                           style: const TextStyle(
-                                      //                               fontWeight:
-                                      //                                   FontWeight
-                                      //                                       .w500,
-                                      //                               fontSize:
-                                      //                                   14,
-                                      //                               fontFamily:
-                                      //                                   "Poppins"),
-                                      //                         ),
-                                      //                       ],
-                                      //                     ),
-                                      //                   ],
-                                      //                 ),
-                                      //               ],
-                                      //             ),
-                                      //           ),
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //     SizedBox(
-                                      //       height: MediaQuery.of(context)
-                                      //               .size
-                                      //               .height *
-                                      //           0.012,
-                                      //     ),
-                                      //   ],
-                                      // );
+                                      return ListView.builder(
+                                          itemCount: demandes!.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return DemandeCard(
+                                              DemandeType:
+                                                  demandes[0].motifAbsence,
+                                              date:
+                                                  "${DateFormat('d MMM, yyyy').format(demandes[0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[0].dateFin)}",
+                                              dureeabscence: demandes[0]
+                                                  .dureAbsence
+                                                  ?.toInt(),
+                                              Telephone: demandes[0].telAbsence,
+                                              ValidationRH:
+                                                  demandes[0].validationRh,
+                                              ValidationChef1:
+                                                  demandes[0].validationChef1,
+                                              ValidationChef2:
+                                                  demandes[0].validationChef2,
+                                            );
+                                          });
                                     }
-                                    return Center();
-                                  });
-                            case 1:
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //       builder: (context) => Popup()),
-                                      // );
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 10),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: SizedBox(
-                                        child: ListTile(
-                                          title: Column(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      const Text(
-                                                        'Demande',
-                                                        style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontFamily:
-                                                                "Poppins",
-                                                            fontSize: 12),
-                                                      )
-                                                    ],
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                        color: const Color
-                                                                .fromARGB(
-                                                            24, 102, 187, 106),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(5)),
-                                                    padding:
-                                                        const EdgeInsets.all(4),
-                                                    child: Text(
-                                                      'Approuvé',
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors
-                                                              .green.shade400,
-                                                          fontFamily:
-                                                              "Poppins"),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.012),
-                                              Divider(
-                                                color: Colors.grey.shade300,
-                                                thickness: 1,
-                                              ),
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.012),
-                                              const Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceAround,
-                                                children: [
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        'Jours d\'application',
-                                                        style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        '9 Jours',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        'Solde de congé',
-                                                        style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        '12',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Column(
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        'Approuvé par',
-                                                        style: TextStyle(
-                                                            fontSize: 10,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                      Text(
-                                                        'RH',
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                            fontSize: 14,
-                                                            fontFamily:
-                                                                "Poppins"),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.012,
-                                  ),
-                                ],
-                              );
-                            case 2:
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const LeaveDetailsPage()),
-                                      );
-                                    },
-                                    child: Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 16,
-                                                right: 16,
-                                                bottom: 4,
-                                                top: 8),
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.account_circle,
-                                                  size: 64,
-                                                  color: Colors.grey.shade400,
-                                                ),
-                                                Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const Text('Nom Prenom',
-                                                        style: TextStyle(
-                                                            fontFamily:
-                                                                'Poppins')),
-                                                    Text(
-                                                      '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
-                                                      style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontFamily: "Poppins",
-                                                          fontSize: 12),
-                                                    )
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 16,
-                                                right: 16,
-                                                bottom: 8,
-                                                top: 4),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                // if (isFirstInkwellVisible)
-                                                if (buttonState.isRejectVisible)
-                                                  InkWell(
-                                                    // onTap: () =>_onFirstInkwellTap(),
-                                                    onTap: () {
-                                                      buttonState
-                                                          .hideAcceptButton();
-                                                    },
-                                                    splashColor:
-                                                        const Color.fromARGB(
-                                                            150, 0, 0, 0),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    child: Container(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 12),
-                                                      decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        // color: const Color
-                                                        //         .fromARGB(
-                                                        //     220, 239, 83, 80),
-                                                        // color: Rejectclr,
-                                                        color: buttonState
-                                                            .Rejectclr,
-                                                      ),
-                                                      child: Center(
-                                                        child: Row(
-                                                          children: [
-                                                            const Icon(
-                                                                CupertinoIcons
-                                                                    .xmark_circle,
-                                                                color: Colors
-                                                                    .white),
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.02,
-                                                            ),
-                                                            Text(
-                                                              // '$Rejectbtn',
-                                                              buttonState
-                                                                  .Rejectbtn,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 16,
-                                                                  fontFamily:
-                                                                      "Poppins"),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                // if (isSecondInkwellVisible)
-                                                if (buttonState.isAcceptVisible)
-                                                  InkWell(
-                                                    // onTap: () =>_onSecondInkwellTap(),
-                                                    onTap: () {
-                                                      buttonState
-                                                          .hideRejectButton();
-                                                    },
-                                                    splashColor:
-                                                        const Color.fromARGB(
-                                                            150, 0, 0, 0),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    child: Container(
-                                                      padding: const EdgeInsets
-                                                              .symmetric(
-                                                          horizontal: 16,
-                                                          vertical: 12),
-                                                      decoration: BoxDecoration(
-                                                        // color: const Color
-                                                        //         .fromARGB(
-                                                        //     220, 102, 187, 106),
-                                                        // color: Acceptclr,
-                                                        color: buttonState
-                                                            .Acceptclr,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                      ),
-                                                      child: Center(
-                                                        child: Row(
-                                                          children: [
-                                                            const Icon(
-                                                                CupertinoIcons
-                                                                    .checkmark_alt_circle,
-                                                                color: Colors
-                                                                    .white),
-                                                            SizedBox(
-                                                              width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width *
-                                                                  0.02,
-                                                            ),
-                                                            Text(
-                                                              // '$Acceptbtn',
-                                                              buttonState
-                                                                  .Acceptbtn,
-                                                              style: const TextStyle(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 16,
-                                                                  fontFamily:
-                                                                      "Poppins"),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.012,
-                                  ),
-                                ],
-                              );
-                          }
-                          return null;
-                        },
-                      ),
+                                    return DemandeCard(
+                                      DemandeType: "",
+                                      date: "",
+                                      dureeabscence: 0,
+                                      Telephone: "",
+                                      ValidationRH: "",
+                                      ValidationChef1: "",
+                                      ValidationChef2: "",
+                                    );
+                                  })
+                              : FutureBuilder(
+                                  future: RemoteService().getPersonnel(1),
+                                  builder: (BuildContext context,
+                                      AsyncSnapshot snapshot) {
+                                    if (snapshot.hasData) {
+                                      Personnel p = snapshot.data;
+                                      return ListView.builder(
+                                          itemCount: 1,
+                                          itemBuilder: (BuildContext context,
+                                              int index) {
+                                            return GroupVacation(
+                                                Name: "${p.nom} ${p.prenom}",
+                                                Photo: p.photo,
+                                                PostDate: p.dateNaissance);
+                                          });
+                                    }
+                                    return GroupVacation(
+                                        Name: "",
+                                        Photo: "",
+                                        PostDate: DateTime.now());
+                                  }),
                     ),
                   ],
                 ),

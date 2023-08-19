@@ -144,30 +144,35 @@ class _HomePageState extends State<HomePage> {
                       //   },
                       // ),
 
-                      Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const MonProfil()));
-                            },
-                            child: Icon(
-                              Icons.account_circle,
-                              color: Colors.grey.shade400,
-                              size: 64,
-                            ),
-                          ),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width * 0.012),
-                          FutureBuilder(
-                              future: RemoteService().getPersonnel(1),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                if (snapshot.hasData) {
-                                  Personnel p = snapshot.data;
-                                  return Column(
+                      FutureBuilder(
+                          future: RemoteService().getPersonnel(1),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.hasData) {
+                              Personnel p = snapshot.data;
+                              return Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MonProfil()));
+                                    },
+                                    child: p.photo == "" ||
+                                            !p.photo.contains('https://')
+                                        ? Icon(
+                                            Icons.account_circle,
+                                            color: Colors.grey.shade400,
+                                            size: 64,
+                                          )
+                                        : Image.network(p.photo),
+                                  ),
+                                  SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.012),
+                                  Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -192,12 +197,16 @@ class _HomePageState extends State<HomePage> {
                                             fontFamily: 'Poppins'),
                                       ),
                                     ],
-                                  );
-                                }
-                                return Center();
-                              }),
-                        ],
-                      ),
+                                  ),
+                                ],
+                              );
+                            }
+                            return Icon(
+                              Icons.account_circle,
+                              color: Colors.grey.shade400,
+                              size: 64,
+                            );
+                          }),
                       InkWell(
                         onTap: () {
                           Navigator.push(

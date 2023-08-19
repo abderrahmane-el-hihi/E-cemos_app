@@ -19,10 +19,10 @@ List<DemandeAbscence> demandeAbscenceFromJson(var str) =>
 //     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class DemandeAbscence {
-  String? dateDebut;
+  DateTime dateDebut;
   double? dureAbsence;
   String? motifAbsence;
-  String? dateFin;
+  DateTime dateFin;
   String? mailAbsence;
   String? validationChef1;
   String? validationChef2;
@@ -30,7 +30,7 @@ class DemandeAbscence {
   int? idPersonnel;
   String? validationRh;
   int? idTypeAbsence;
-  String? dateSaisi;
+  DateTime dateSaisi;
   int? idDemandeAbsence;
   String? dateDernierModification;
 
@@ -53,10 +53,10 @@ class DemandeAbscence {
 
   factory DemandeAbscence.fromJson(Map<String, dynamic> json) =>
       DemandeAbscence(
-        dateDebut: json["dateDebut"],
+        dateDebut: DateTime.parse(json["dateDebut"]),
         dureAbsence: json["dureAbsence"],
         motifAbsence: json["motifAbsence"],
-        dateFin: json["dateFin"],
+        dateFin: DateTime.parse(json["dateFin"]),
         mailAbsence: json["mailAbsence"],
         validationChef1: json["validationChef1"],
         validationChef2: json["validationChef2"],
@@ -64,7 +64,7 @@ class DemandeAbscence {
         idPersonnel: json["idPersonnel"],
         validationRh: json["validationRH"],
         idTypeAbsence: json["idTypeAbsence"],
-        dateSaisi: json["dateSaisi"],
+        dateSaisi: DateTime.parse(json["dateSaisi"]),
         idDemandeAbsence: json["idDemandeAbsence"],
         dateDernierModification: json["dateDernierModification"],
       );
@@ -120,4 +120,88 @@ class DemandeAbscenceDataProvider extends ChangeNotifier {
     _isLoading = false;
     notifyListeners();
   }
+}
+
+List<DemandeApprovedList> demandeApprovedListFromJson(String str) =>
+    List<DemandeApprovedList>.from(
+        json.decode(str).map((x) => DemandeApprovedList.fromJson(x)));
+
+String demandeApprovedListToJson(List<DemandeApprovedList> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
+class DemandeApprovedList {
+  DateTime dateDebut;
+  double? dureAbsence;
+  String? motifAbsence;
+  DateTime dateFin;
+  String? mailAbsence;
+  String? validationChef1;
+  String? validationChef2;
+  String? telAbsence;
+  int? idPersonnel;
+  String? validationRh;
+  int? idTypeAbsence;
+  DateTime dateSaisi;
+  int? idDemandeAbsence;
+  DateTime? dateDernierModification;
+
+  DemandeApprovedList({
+    required this.dateDebut,
+    required this.dureAbsence,
+    required this.motifAbsence,
+    required this.dateFin,
+    required this.mailAbsence,
+    required this.validationChef1,
+    required this.validationChef2,
+    required this.telAbsence,
+    required this.idPersonnel,
+    required this.validationRh,
+    required this.idTypeAbsence,
+    required this.dateSaisi,
+    required this.idDemandeAbsence,
+    required this.dateDernierModification,
+  });
+
+  factory DemandeApprovedList.fromJson(Map<String, dynamic> json) =>
+      DemandeApprovedList(
+        dateDebut: DateTime.parse(json["dateDebut"]),
+        dureAbsence: json["dureAbsence"],
+        motifAbsence: json["motifAbsence"],
+        dateFin: DateTime.parse(json["dateFin"]),
+        mailAbsence: json["mailAbsence"],
+        validationChef1: json["validationChef1"],
+        validationChef2: json["validationChef2"],
+        telAbsence: json["telAbsence"],
+        idPersonnel: json["idPersonnel"],
+        validationRh: json["validationRH"],
+        idTypeAbsence: json["idTypeAbsence"],
+        dateSaisi: DateTime.parse(json["dateSaisi"]),
+        idDemandeAbsence: json["idDemandeAbsence"],
+        dateDernierModification:
+            DateTime.parse(json["dateDernierModification"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "dateDebut":
+            // "${dateDebut?.year.toString().padLeft(4, '0')}-${dateDebut?.month.toString().padLeft(2, '0')}-${dateDebut?.day.toString().padLeft(2, '0')}",
+            dateDebut,
+        "dureAbsence": dureAbsence,
+        "motifAbsence": motifAbsence,
+        "dateFin":
+            // "${dateFin?.year.toString().padLeft(4, '0')}-${dateFin?.month.toString().padLeft(2, '0')}-${dateFin?.day.toString().padLeft(2, '0')}",
+            dateFin,
+        "mailAbsence": mailAbsence,
+        "validationChef1": validationChef1,
+        "validationChef2": validationChef2,
+        "telAbsence": telAbsence,
+        "idPersonnel": idPersonnel,
+        "validationRH": validationRh,
+        "idTypeAbsence": idTypeAbsence,
+        "dateSaisi":
+            // "${dateSaisi?.year.toString().padLeft(4, '0')}-${dateSaisi?.month.toString().padLeft(2, '0')}-${dateSaisi?.day.toString().padLeft(2, '0')}",
+            dateSaisi,
+        "idDemandeAbsence": idDemandeAbsence,
+        "dateDernierModification":
+            "${dateDernierModification?.year.toString().padLeft(4, '0')}-${dateDernierModification?.month.toString().padLeft(2, '0')}-${dateDernierModification?.day.toString().padLeft(2, '0')}",
+      };
 }
