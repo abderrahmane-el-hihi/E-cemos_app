@@ -60,7 +60,6 @@ class _NotifsPageState extends State<NotifsPage> {
                       'Notification',
                       style: TextStyle(
                         fontSize: 20,
-                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -141,15 +140,12 @@ class _NotifsPageState extends State<NotifsPage> {
                                             buttonState.isRejectVisible
                                                 ? 'La demande est rejetee'
                                                 : 'La demande est aprouvee',
-                                            style: const TextStyle(
-                                              fontFamily: 'Poppins',
-                                            ),
+                                            style: const TextStyle(),
                                           ),
                                           Text(
                                             DateFormat('d MMM yyyy')
                                                 .format(DateTime.now()),
                                             style: const TextStyle(
-                                                fontFamily: 'Poppins',
                                                 fontSize: 12,
                                                 color: Colors.grey),
                                           ),

@@ -203,7 +203,7 @@ class _DemandeCardState extends State<DemandeCard> {
 class GroupVacation extends StatefulWidget {
   String? Name;
   String Photo;
-  DateTime PostDate;
+  DateTime? PostDate;
 
   GroupVacation({
     super.key,
@@ -256,7 +256,8 @@ class GroupVacationState extends State<GroupVacation> {
                             Text(widget.Name ?? "",
                                 style: const TextStyle(fontFamily: 'Poppins')),
                             Text(
-                              DateFormat('d MMM, yyyy').format(widget.PostDate),
+                              DateFormat('d MMM, yyyy').format(
+                                  widget.PostDate ?? DateTime.timestamp()),
                               style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontFamily: "Poppins",

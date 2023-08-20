@@ -53,7 +53,6 @@ class _PageState extends State<CalendarPage> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
-                              fontFamily: 'Poppins',
                             ),
                           ),
                           // child: const Icon(CupertinoIcons.plus_app,size: 32)),
@@ -98,11 +97,11 @@ class _PageState extends State<CalendarPage> {
                     SizedBox(
                         height: MediaQuery.of(context).size.height * 0.022),
                     FutureBuilder(
-                        future: RemoteService().GetApiData(),
+                        future: RemoteService().getPersonnel(1),
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
+                          if (snapshot.hasData) {
+                            Personnel p = snapshot.data;
                             return Column(
                               children: [
                                 Padding(
@@ -145,225 +144,14 @@ class _PageState extends State<CalendarPage> {
                                               children: [
                                                 const Text('Droit annuel',
                                                     style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                CircularProgressIndicator(
-                                                    color:
-                                                        Colors.blue.shade400),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 102, 187, 106),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.green.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text(
-                                                    'Reste anneé \ndernière',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                    )),
+                                                Text('${p.cardNumber}',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                CircularProgressIndicator(
-                                                  color: Colors.green.shade400,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                SizedBox(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.022),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 38, 197, 218),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.cyan.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text(
-                                                    'Consommation \ncette anneé',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                CircularProgressIndicator(
-                                                  color: Colors.cyan.shade400,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 239, 83, 80),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.red.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text('Reste',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                CircularProgressIndicator(
-                                                  color: Colors.red.shade400,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            );
-                          } else if (snapshot.hasData) {
-                            return Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 66, 164, 245),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.blue.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text('Droit annuel',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                Text('10',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontFamily: 'Poppins',
                                                         fontSize: 16,
                                                         color: Colors
                                                             .blue.shade400)),
@@ -406,15 +194,14 @@ class _PageState extends State<CalendarPage> {
                                                 const Text(
                                                     'Reste anneé \ndernière',
                                                     style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                Text('10',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                    )),
+                                                Text('${p.cardNumber}',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
-                                                        fontFamily: 'Poppins',
                                                         fontSize: 16,
                                                         color: Colors
                                                             .green.shade400)),
@@ -470,15 +257,14 @@ class _PageState extends State<CalendarPage> {
                                                 const Text(
                                                     'Consommation \ncette anneé',
                                                     style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                Text('10',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                    )),
+                                                Text('${p.cardNumber}',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
-                                                        fontFamily: 'Poppins',
                                                         fontSize: 16,
                                                         color: Colors
                                                             .cyan.shade400)),
@@ -520,15 +306,14 @@ class _PageState extends State<CalendarPage> {
                                               children: [
                                                 const Text('Reste',
                                                     style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
-                                                Text('10',
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontSize: 14,
+                                                    )),
+                                                Text('${p.cardNumber}',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
-                                                        fontFamily: 'Poppins',
                                                         fontSize: 16,
                                                         color: Colors
                                                             .red.shade400)),
@@ -584,10 +369,9 @@ class _PageState extends State<CalendarPage> {
                                             children: [
                                               Text('Droit annuel',
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                      fontFamily: 'Poppins')),
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14,
+                                                  )),
                                             ],
                                           ),
                                         ],
@@ -625,10 +409,9 @@ class _PageState extends State<CalendarPage> {
                                             children: [
                                               Text('Reste anneé \ndernière',
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                      fontFamily: 'Poppins')),
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14,
+                                                  )),
                                             ],
                                           ),
                                         ],
@@ -679,10 +462,9 @@ class _PageState extends State<CalendarPage> {
                                             children: [
                                               Text('Consommation \ncette anneé',
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                      fontFamily: 'Poppins')),
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14,
+                                                  )),
                                             ],
                                           ),
                                         ],
@@ -725,10 +507,9 @@ class _PageState extends State<CalendarPage> {
                                                       0.012),
                                               const Text('Reste',
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                      fontFamily: 'Poppins')),
+                                                    fontWeight: FontWeight.w500,
+                                                    fontSize: 14,
+                                                  )),
                                             ],
                                           ),
                                         ],
@@ -781,7 +562,7 @@ class _PageState extends State<CalendarPage> {
                     //                           style: TextStyle(
                     //                               fontWeight: FontWeight.w500,
                     //                               fontSize: 14,
-                    //                               fontFamily: 'Poppins')),
+                    //                               )),
                     //                       Text(userdata.userdata!.name),
                     //                     ],
                     //                   ),
@@ -819,7 +600,7 @@ class _PageState extends State<CalendarPage> {
                     //                           style: TextStyle(
                     //                               fontWeight: FontWeight.w500,
                     //                               fontSize: 14,
-                    //                               fontFamily: 'Poppins')),
+                    //                               )),
                     //                       Text(userdata.userdata!.name),
                     //                     ],
                     //                   ),
@@ -869,7 +650,7 @@ class _PageState extends State<CalendarPage> {
                     //                           style: TextStyle(
                     //                               fontWeight: FontWeight.w500,
                     //                               fontSize: 14,
-                    //                               fontFamily: 'Poppins')),
+                    //                               )),
                     //                       Text(userdata.userdata!.name),
                     //                     ],
                     //                   ),
@@ -912,7 +693,7 @@ class _PageState extends State<CalendarPage> {
                     //                           style: TextStyle(
                     //                               fontWeight: FontWeight.w500,
                     //                               fontSize: 14,
-                    //                               fontFamily: 'Poppins')),
+                    //                               )),
                     //                       Text(userdata.userdata!.name),
                     //                     ],
                     //                   ),
@@ -957,17 +738,17 @@ class _PageState extends State<CalendarPage> {
                     //     children: [
                     //       Text('prochain',
                     //           style: TextStyle(
-                    //             fontFamily: 'Poppins',
+                    //
                     //             fontSize: 12,
                     //           )),
                     //       Text('passé',
                     //           style: TextStyle(
-                    //             fontFamily: 'Poppins',
+                    //
                     //             fontSize: 12,
                     //           )),
                     //       Text('Congé \nd\'équipe',
                     //           style: TextStyle(
-                    //             fontFamily: 'Poppins',
+                    //
                     //             fontSize: 12,
                     //           ))
                     //     ],
@@ -1014,7 +795,6 @@ class _PageState extends State<CalendarPage> {
                                     child: Text(
                                       OptionsList[index],
                                       style: TextStyle(
-                                          fontFamily: 'Poppins',
                                           fontSize: 12,
                                           color: isSelected[index]
                                               ? Colors.white
@@ -1045,19 +825,20 @@ class _PageState extends State<CalendarPage> {
                                           (BuildContext context, int index) {
                                         return DemandeCard(
                                           DemandeType:
-                                              "${demandes[0].motifAbsence}",
+                                              "${demandes[index].motifAbsence}",
                                           date:
-                                              "${DateFormat('d MMM, yyyy').format(demandes[0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[0].dateFin)}",
-                                          dureeabscence:
-                                              demandes[0].dureAbsence?.toInt(),
+                                              "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
+                                          dureeabscence: demandes[index]
+                                              .dureAbsence
+                                              ?.toInt(),
                                           Telephone:
-                                              "${demandes[0].telAbsence}",
+                                              "${demandes[index].telAbsence}",
                                           ValidationRH:
-                                              "${demandes[0].validationRh}",
+                                              "${demandes[index].validationRh}",
                                           ValidationChef1:
-                                              "${demandes[0].validationChef1}",
+                                              "${demandes[index].validationChef1}",
                                           ValidationChef2:
-                                              "${demandes[0].validationChef2}",
+                                              "${demandes[index].validationChef2}",
                                         );
                                       });
                                 }
@@ -1085,19 +866,20 @@ class _PageState extends State<CalendarPage> {
                                               int index) {
                                             return DemandeCard(
                                               DemandeType:
-                                                  demandes[0].motifAbsence,
+                                                  demandes[index].motifAbsence,
                                               date:
-                                                  "${DateFormat('d MMM, yyyy').format(demandes[0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[0].dateFin)}",
-                                              dureeabscence: demandes[0]
+                                                  "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
+                                              dureeabscence: demandes[index]
                                                   .dureAbsence
                                                   ?.toInt(),
-                                              Telephone: demandes[0].telAbsence,
+                                              Telephone:
+                                                  demandes[index].telAbsence,
                                               ValidationRH:
-                                                  demandes[0].validationRh,
-                                              ValidationChef1:
-                                                  demandes[0].validationChef1,
-                                              ValidationChef2:
-                                                  demandes[0].validationChef2,
+                                                  demandes[index].validationRh,
+                                              ValidationChef1: demandes[index]
+                                                  .validationChef1,
+                                              ValidationChef2: demandes[index]
+                                                  .validationChef2,
                                             );
                                           });
                                     }
@@ -1112,19 +894,21 @@ class _PageState extends State<CalendarPage> {
                                     );
                                   })
                               : FutureBuilder(
-                                  future: RemoteService().getPersonnel(1),
+                                  future: RemoteService().getAllPersonnel(),
                                   builder: (BuildContext context,
                                       AsyncSnapshot snapshot) {
                                     if (snapshot.hasData) {
-                                      Personnel p = snapshot.data;
+                                      List<Personnel> p = snapshot.data;
                                       return ListView.builder(
                                           itemCount: 1,
                                           itemBuilder: (BuildContext context,
                                               int index) {
                                             return GroupVacation(
-                                                Name: "${p.nom} ${p.prenom}",
-                                                Photo: p.photo,
-                                                PostDate: p.dateNaissance);
+                                                Name:
+                                                    "${p[index].nom} ${p[index].prenom}",
+                                                Photo: p[index].photo,
+                                                PostDate:
+                                                    p[index].dateNaissance);
                                           });
                                     }
                                     return GroupVacation(
@@ -1144,27 +928,6 @@ class _PageState extends State<CalendarPage> {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // showCupertinoDialog(
 //     context: context,
 //     builder: (BuildContext context) {
@@ -1172,14 +935,14 @@ class _PageState extends State<CalendarPage> {
 //         // title: Text(
 //         //   'Congé appliqué \navec succès',
 //         //   style: TextStyle(
-//         //     fontFamily: 'Poppins',
+//         //
 //         //     fontSize: 14,
 //         //   ),
 //         // ),
 //         title: Text(
 //           'Demande de Congé',
 //           style: TextStyle(
-//             fontFamily: 'Poppins',
+//
 //             fontSize: 16,
 //           ),
 //         ),
@@ -1192,14 +955,14 @@ class _PageState extends State<CalendarPage> {
 //                   Text(
 //                     'Appliquée le:',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   ),
 //                   Text(
 //                     '${DateFormat('MMM d, yyyy').format(DateTime.now())}',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   )
@@ -1210,14 +973,14 @@ class _PageState extends State<CalendarPage> {
 //                   Text(
 //                     'Jours d\'applications:',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   ),
 //                   Text(
 //                     '5',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   )
@@ -1228,14 +991,14 @@ class _PageState extends State<CalendarPage> {
 //                   Text(
 //                     'Solde de Congé:',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   ),
 //                   Text(
 //                     '16',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   )
@@ -1246,14 +1009,14 @@ class _PageState extends State<CalendarPage> {
 //                   Text(
 //                     'Approuvé par:',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   ),
 //                   Text(
 //                     'RH',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   )
@@ -1264,7 +1027,7 @@ class _PageState extends State<CalendarPage> {
 //                   Text(
 //                     'Etat:',
 //                     style: TextStyle(
-//                       fontFamily: "Poppins",
+//                       ,
 //                       // fontSize: 12,
 //                     ),
 //                   ),
@@ -1285,8 +1048,7 @@ class _PageState extends State<CalendarPage> {
 //                           fontSize: 12,
 //                           color: Colors
 //                               .green.shade400,
-//                           fontFamily:
-//                               "Poppins"),
+//                           ),
 //                     ),
 //                   ),
 //                 ],
@@ -1298,7 +1060,7 @@ class _PageState extends State<CalendarPage> {
 //         //     child: Text(
 //         //       'D\'accord',
 //         //       style: TextStyle(
-//         //         fontFamily: 'Poppins',
+//         //
 //         //         fontSize: 14,
 //         //       ),
 //         //     ),
@@ -1309,11 +1071,6 @@ class _PageState extends State<CalendarPage> {
 //         // ],
 //       );
 //     });
-
-
-
-
-
 
 ///////// filtrage icon and showmodalbottomsheet
 // SizedBox(
@@ -1345,7 +1102,7 @@ class _PageState extends State<CalendarPage> {
 //                                   //                   child: Text(
 //                                   //                     'Les filtres',
 //                                   //                     style: TextStyle(
-//                                   //                       fontFamily: "Poppins",
+//                                   //                       ,
 //                                   //                       fontSize: 16,
 //                                   //                     ),
 //                                   //                   ),
@@ -1552,7 +1309,7 @@ class _PageState extends State<CalendarPage> {
 //                                   //         title: Text(
 //                                   //           'Les filtres',
 //                                   //           style:
-//                                   //               TextStyle(fontFamily: "Poppins"),
+//                                   //               TextStyle(),
 //                                   //         ),
 //                                   //         actions: <Widget>[
 //                                   //           CupertinoActionSheetAction(
@@ -1656,19 +1413,3 @@ class _PageState extends State<CalendarPage> {
 //                                 },
 //                                 child:
 //                                     Icon(CupertinoIcons.list_bullet, size: 28)),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

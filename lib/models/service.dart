@@ -47,6 +47,16 @@ class RemoteService {
     }
   }
 
+  Future getAllPersonnel() async {
+    var client = http.Client();
+    var uri = Uri.parse('http://192.168.1.102:8800/api/CemosRH/Personnelles/');
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var json = response.body;
+      return allpersonnelFromJson(json);
+    }
+  }
+
   //methode to check mail/pass
   // Future<bool> checkCredentials(String email, String password) async {
   //   final String apiUrl = 'api url'; // Replace with your API URL.

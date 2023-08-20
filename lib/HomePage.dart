@@ -83,14 +83,14 @@ class _HomePageState extends State<HomePage> {
                       //                 style: const TextStyle(
                       //                     fontSize: 18,
                       //                     fontWeight: FontWeight.w500,
-                      //                     fontFamily: 'Poppins'),
+                      //                     ),
                       //               ),
                       //               Text(
                       //                 users[2]!.company.name,
                       //                 style: const TextStyle(
                       //                     fontSize: 14,
                       //                     fontWeight: FontWeight.w400,
-                      //                     fontFamily: 'Poppins'),
+                      //                     ),
                       //               ),
                       //             ],
                       //           ),
@@ -126,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                       //                   style: TextStyle(
                       //                       fontSize: 18,
                       //                       fontWeight: FontWeight.w500,
-                      //                       fontFamily: 'Poppins'),
+                      //                       ),
                       //                 ),
                       //               ],
                       //             ),
@@ -135,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                       //               style: TextStyle(
                       //                   fontSize: 14,
                       //                   fontWeight: FontWeight.w400,
-                      //                   fontFamily: 'Poppins'),
+                      //                   ),
                       //             ),
                       //           ],
                       //         ),
@@ -183,18 +183,18 @@ class _HomePageState extends State<HomePage> {
                                           Text(
                                             '${p.nom} ${p.prenom}',
                                             style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500,
-                                                fontFamily: 'Poppins'),
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ],
                                       ),
                                       Text(
                                         'Service IT',
                                         style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            fontFamily: 'Poppins'),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -240,9 +240,7 @@ class _HomePageState extends State<HomePage> {
                         date_util.DateUtils.months[currentDateTime.month - 1] +
                             ' ' +
                             currentDateTime.year.toString(),
-                        style: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.green.shade400),
+                        style: TextStyle(color: Colors.green.shade400),
                       ),
                     ],
                   ),
@@ -285,7 +283,6 @@ class _HomePageState extends State<HomePage> {
                                   date_util.DateUtils.weekdays[
                                       currentMonthList[index].weekday - 1],
                                   style: TextStyle(
-                                    fontFamily: 'Poppins',
                                     color: isCurrentDay
                                         ? Colors.blue.shade400
                                         : Colors.black,
@@ -294,7 +291,6 @@ class _HomePageState extends State<HomePage> {
                                 Text(
                                   currentMonthList[index].day.toString(),
                                   style: TextStyle(
-                                    fontFamily: 'Poppins',
                                     color: isCurrentDay
                                         ? Colors.blue.shade400
                                         : Colors.black,
@@ -316,8 +312,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         'Présence d\'aujourd\'hui',
-                        style: TextStyle(
-                            fontFamily: 'Poppins', color: Color(0xFF66BB6A)),
+                        style: TextStyle(color: Color(0xFF66BB6A)),
                       ),
                     ],
                   ),
@@ -379,19 +374,17 @@ class _HomePageState extends State<HomePage> {
                                                     0.01),
                                             const Text('Date d\'entrée',
                                                 style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily: 'Poppins')),
+                                                  fontSize: 12,
+                                                )),
                                           ],
                                         ),
                                         Text('10:00',
                                             style: const TextStyle(
                                                 fontSize: 18,
-                                                fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w500)),
                                         const Text('A temps',
                                             style: TextStyle(
                                               fontSize: 12,
-                                              fontFamily: 'Poppins',
                                             )),
                                         SizedBox(
                                             height: MediaQuery.of(context)
@@ -444,19 +437,17 @@ class _HomePageState extends State<HomePage> {
                                                     0.01),
                                             const Text('Date sortie',
                                                 style: TextStyle(
-                                                    fontSize: 12,
-                                                    fontFamily: 'Poppins')),
+                                                  fontSize: 12,
+                                                )),
                                           ],
                                         ),
                                         Text('18:00',
                                             style: const TextStyle(
                                                 fontSize: 18,
-                                                fontFamily: 'Poppins',
                                                 fontWeight: FontWeight.w500)),
                                         const Text('A temps',
                                             style: TextStyle(
                                               fontSize: 12,
-                                              fontFamily: 'Poppins',
                                             )),
                                         SizedBox(
                                             height: MediaQuery.of(context)
@@ -514,14 +505,13 @@ class _HomePageState extends State<HomePage> {
                                                 0.03),
                                         const Text('Total jours \ntravaillées',
                                             style: TextStyle(
-                                                fontSize: 14,
-                                                fontFamily: 'Poppins')),
+                                              fontSize: 14,
+                                            )),
                                       ],
                                     ),
                                     Text('23',
                                         style: const TextStyle(
                                             fontSize: 18,
-                                            fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w500)),
                                   ],
                                 ),
@@ -578,19 +568,17 @@ class _HomePageState extends State<HomePage> {
                                                   0.01),
                                           const Text('Date d\'entrée',
                                               style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily: 'Poppins')),
+                                                fontSize: 12,
+                                              )),
                                         ],
                                       ),
                                       const Text('No Data',
                                           style: TextStyle(
                                               fontSize: 14,
-                                              fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500)),
                                       const Text('',
                                           style: TextStyle(
                                             fontSize: 12,
-                                            fontFamily: 'Poppins',
                                           )),
                                       SizedBox(
                                           height: MediaQuery.of(context)
@@ -641,19 +629,17 @@ class _HomePageState extends State<HomePage> {
                                                   0.01),
                                           const Text('Date sortie',
                                               style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontFamily: 'Poppins')),
+                                                fontSize: 12,
+                                              )),
                                         ],
                                       ),
                                       const Text('No Data',
                                           style: TextStyle(
                                               fontSize: 14,
-                                              fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500)),
                                       const Text('',
                                           style: TextStyle(
                                             fontSize: 12,
-                                            fontFamily: 'Poppins',
                                           )),
                                       SizedBox(
                                           height: MediaQuery.of(context)
@@ -709,14 +695,13 @@ class _HomePageState extends State<HomePage> {
                                               0.03),
                                       const Text('Total jours \ntravaillées',
                                           style: TextStyle(
-                                              fontSize: 14,
-                                              fontFamily: 'Poppins')),
+                                            fontSize: 14,
+                                          )),
                                     ],
                                   ),
                                   const Text('No Data',
                                       style: TextStyle(
                                           fontSize: 14,
-                                          fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500)),
                                 ],
                               ),
@@ -733,9 +718,7 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text('Votre activite',
                           style: TextStyle(
-                              fontSize: 16,
-                              fontFamily: 'Poppins',
-                              color: Colors.green.shade400)),
+                              fontSize: 16, color: Colors.green.shade400)),
                       GestureDetector(
                         onTap: () {
                           showCupertinoModalPopup(
@@ -744,7 +727,6 @@ class _HomePageState extends State<HomePage> {
                               return CupertinoActionSheet(
                                 title: const Text(
                                   'vos activites',
-                                  style: TextStyle(fontFamily: "Poppins"),
                                 ),
                                 actions: <Widget>[
                                   CupertinoActionSheetAction(
@@ -786,13 +768,12 @@ class _HomePageState extends State<HomePage> {
                                               children: [
                                                 const Text('Date d\'entrée',
                                                     style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
+                                                      fontSize: 14,
+                                                    )),
                                                 Text(
                                                     '${DateFormat('MMM d, yyyy').format(DateTime.now())} ',
                                                     style: const TextStyle(
                                                         fontSize: 14,
-                                                        fontFamily: 'Poppins',
                                                         color: Colors.grey)),
                                               ],
                                             ),
@@ -813,7 +794,6 @@ class _HomePageState extends State<HomePage> {
                                               'A temps',
                                               style: TextStyle(
                                                   fontSize: 14,
-                                                  fontFamily: 'Poppins',
                                                   color: Colors.grey),
                                             ),
                                           ],
@@ -859,13 +839,12 @@ class _HomePageState extends State<HomePage> {
                                               children: [
                                                 const Text('Date sortie',
                                                     style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
+                                                      fontSize: 14,
+                                                    )),
                                                 Text(
                                                     '${DateFormat('MMM d, yyyy').format(DateTime.now())} ',
                                                     style: const TextStyle(
                                                         fontSize: 14,
-                                                        fontFamily: 'Poppins',
                                                         color: Colors.grey)),
                                               ],
                                             ),
@@ -886,7 +865,6 @@ class _HomePageState extends State<HomePage> {
                                               'A temps',
                                               style: TextStyle(
                                                   fontSize: 14,
-                                                  fontFamily: 'Poppins',
                                                   color: Colors.grey),
                                             ),
                                           ],
@@ -931,13 +909,12 @@ class _HomePageState extends State<HomePage> {
                                               children: [
                                                 const Text('Date d\'entrée',
                                                     style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
+                                                      fontSize: 14,
+                                                    )),
                                                 Text(
                                                     '${DateFormat('MMM d, yyyy').format(DateTime.now())} ',
                                                     style: const TextStyle(
                                                         fontSize: 14,
-                                                        fontFamily: 'Poppins',
                                                         color: Colors.grey)),
                                               ],
                                             ),
@@ -960,7 +937,6 @@ class _HomePageState extends State<HomePage> {
                                               'A temps',
                                               style: TextStyle(
                                                   fontSize: 14,
-                                                  fontFamily: 'Poppins',
                                                   color: Colors.grey),
                                             ),
                                           ],
@@ -1007,13 +983,12 @@ class _HomePageState extends State<HomePage> {
                                               children: [
                                                 const Text('Date sortie',
                                                     style: TextStyle(
-                                                        fontSize: 14,
-                                                        fontFamily: 'Poppins')),
+                                                      fontSize: 14,
+                                                    )),
                                                 Text(
                                                     '${DateFormat('MMM d, yyyy').format(DateTime.now())} ',
                                                     style: const TextStyle(
                                                         fontSize: 14,
-                                                        fontFamily: 'Poppins',
                                                         color: Colors.grey)),
                                               ],
                                             ),
@@ -1034,7 +1009,6 @@ class _HomePageState extends State<HomePage> {
                                               'A temps',
                                               style: TextStyle(
                                                   fontSize: 14,
-                                                  fontFamily: 'Poppins',
                                                   color: Colors.grey),
                                             ),
                                           ],
@@ -1052,7 +1026,7 @@ class _HomePageState extends State<HomePage> {
                         //     style: TextStyle(
                         //         color: Colors.blue.shade400,
                         //         fontSize: 12,
-                        //         fontFamily: 'Poppins')),
+                        //         )),
                         child: Container(
                           decoration: BoxDecoration(
                               color: const Color.fromARGB(24, 66, 164, 245),
@@ -1061,9 +1035,9 @@ class _HomePageState extends State<HomePage> {
                           child: Text(
                             'Voir Tous',
                             style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.blue.shade400,
-                                fontFamily: "Poppins"),
+                              fontSize: 14,
+                              color: Colors.blue.shade400,
+                            ),
                           ),
                         ),
                       ),
@@ -1111,13 +1085,12 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   const Text('Date d\'entrée',
                                       style: TextStyle(
-                                          fontSize: 14, fontFamily: 'Poppins')),
+                                        fontSize: 14,
+                                      )),
                                   Text(
                                       '${DateFormat('MMM d, yyyy').format(DateTime.now())} ',
                                       style: const TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'Poppins',
-                                          color: Colors.grey)),
+                                          fontSize: 14, color: Colors.grey)),
                                 ],
                               ),
                             ],
@@ -1133,10 +1106,8 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Text(
                                 'A temps',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    color: Colors.grey),
+                                style:
+                                    TextStyle(fontSize: 14, color: Colors.grey),
                               ),
                             ],
                           ),
@@ -1188,13 +1159,12 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text('Date d\'entrée',
                                       style: TextStyle(
-                                          fontSize: 14, fontFamily: 'Poppins')),
+                                        fontSize: 14,
+                                      )),
                                   Text(
                                       '${DateFormat('MMM d, yyyy').format(DateTime.now())} ',
                                       style: TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'Poppins',
-                                          color: Colors.grey)),
+                                          fontSize: 14, color: Colors.grey)),
                                 ],
                               ),
                             ],
@@ -1209,10 +1179,8 @@ class _HomePageState extends State<HomePage> {
                               ),
                               Text(
                                 'A temps',
-                                style: TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'Poppins',
-                                    color: Colors.grey),
+                                style:
+                                    TextStyle(fontSize: 14, color: Colors.grey),
                               ),
                             ],
                           ),

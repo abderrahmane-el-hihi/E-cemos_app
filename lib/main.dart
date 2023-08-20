@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        fontFamily: "Poppins",
         // colorSchemeSeed: Color.fromRGBO(131, 172, 64, 1),
         colorSchemeSeed: Colors.green.shade400,
         useMaterial3: true,

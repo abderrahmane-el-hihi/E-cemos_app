@@ -19,7 +19,6 @@ class GNavBar extends StatelessWidget {
       hoverColor: Colors.grey[100]!,
       activeColor: Colors.green.shade400,
       textStyle: TextStyle(
-        fontFamily: 'Poppins',
         color: Colors.green.shade400,
         fontSize: 12,
       ),

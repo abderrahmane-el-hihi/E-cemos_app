@@ -41,7 +41,6 @@ class _SettingsPageState extends State<SettingsPage> {
                         'Paramètres',
                         style: TextStyle(
                           fontSize: 20,
-                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                         ),
                       ),

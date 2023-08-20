@@ -50,7 +50,6 @@ class _MonProfilState extends State<MonProfil> {
                         'Mon profile',
                         style: TextStyle(
                           fontSize: 20,
-                          fontFamily: 'Poppins',
                           fontWeight: FontWeight.w400,
                         ),
                       ),
@@ -75,14 +74,12 @@ class _MonProfilState extends State<MonProfil> {
                                 children: [
                                   Text(
                                     'Nom Prenom',
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.grey.shade400),
+                                    style:
+                                        TextStyle(color: Colors.grey.shade400),
                                   ),
                                   Text(
                                     '${p.nom} ${p.prenom}',
-                                    style: const TextStyle(
-                                        fontFamily: 'Poppins', fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ],
                               ),
@@ -109,14 +106,12 @@ class _MonProfilState extends State<MonProfil> {
                                 children: [
                                   Text(
                                     'Email',
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.grey.shade400),
+                                    style:
+                                        TextStyle(color: Colors.grey.shade400),
                                   ),
                                   Text(
                                     p.email,
-                                    style: const TextStyle(
-                                        fontFamily: 'Poppins', fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ],
                               ),
@@ -143,14 +138,12 @@ class _MonProfilState extends State<MonProfil> {
                                 children: [
                                   Text(
                                     'Telephone',
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.grey.shade400),
+                                    style:
+                                        TextStyle(color: Colors.grey.shade400),
                                   ),
                                   Text(
                                     p.telephonePersonnel,
-                                    style: const TextStyle(
-                                        fontFamily: 'Poppins', fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ],
                               ),
@@ -177,14 +170,12 @@ class _MonProfilState extends State<MonProfil> {
                                 children: [
                                   Text(
                                     'Adresse',
-                                    style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.grey.shade400),
+                                    style:
+                                        TextStyle(color: Colors.grey.shade400),
                                   ),
                                   Text(
                                     'address',
-                                    style: const TextStyle(
-                                        fontFamily: 'Poppins', fontSize: 18),
+                                    style: const TextStyle(fontSize: 18),
                                   ),
                                 ],
                               ),

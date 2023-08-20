@@ -31,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
     //         content: Text(
     //           'Les Données entrées sont invalides',
     //           style: TextStyle(
-    //             fontFamily: 'Poppins',
+    //
     //           ),
     //         ),
     //         actions: [
@@ -81,7 +81,6 @@ class _LoginPageState extends State<LoginPage> {
                       style: TextStyle(
                           color: Colors.grey[700],
                           fontSize: 16,
-                          fontFamily: "Poppins",
                           fontWeight: FontWeight.w500),
                     ),
                   ),
@@ -107,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                           label: const Text(
                             'E-mail',
                             style: TextStyle(
-                              fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
                             ),
                           )),
@@ -124,7 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: InputDecoration(
                         label: const Text(
                           'mot de passe',
-                          style: TextStyle(fontFamily: 'Poppins'),
                         ),
                         suffixIcon: GestureDetector(
                           onTap: () {
@@ -152,7 +149,6 @@ class _LoginPageState extends State<LoginPage> {
                         fillColor: Colors.transparent,
                         filled: true,
                         hintStyle: const TextStyle(
-                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.w400,
                             color: Color.fromRGBO(179, 179, 179, 1)),
                       ),

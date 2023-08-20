@@ -42,8 +42,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           Text(
                             p.nom + ' ' + p.prenom,
-                            style: const TextStyle(
-                                fontFamily: 'Poppins', fontSize: 22),
+                            style: const TextStyle(fontSize: 22),
                           ),
                           Text(
                             'Service IT',
@@ -206,9 +205,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         children: [
                           Text(
                             'Se déconnecter',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.red.shade400),
+                            style: TextStyle(color: Colors.red.shade400),
                           ),
                         ],
                       ),

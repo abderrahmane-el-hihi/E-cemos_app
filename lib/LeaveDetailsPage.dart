@@ -50,7 +50,6 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                             'Détails du congé',
                             style: TextStyle(
                               fontSize: 20,
-                              fontFamily: 'Poppins',
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -67,14 +66,11 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                         children: [
                           Text(
                             'Titre',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.grey.shade400),
+                            style: TextStyle(color: Colors.grey.shade400),
                           ),
                           const Text(
                             'Titre',
-                            style:
-                                TextStyle(fontFamily: 'Poppins', fontSize: 18),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -96,14 +92,11 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                         children: [
                           Text(
                             'Type du congé',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.grey.shade400),
+                            style: TextStyle(color: Colors.grey.shade400),
                           ),
                           const Text(
                             'Type du congé',
-                            style:
-                                TextStyle(fontFamily: 'Poppins', fontSize: 18),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -125,14 +118,11 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                         children: [
                           Text(
                             'Date',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.grey.shade400),
+                            style: TextStyle(color: Colors.grey.shade400),
                           ),
                           Text(
                             '${DateFormat('d MMM yyyy').format(DateTime.now())} - ${DateFormat('d MMM yyyy').format(DateTime.now())}',
-                            style: const TextStyle(
-                                fontFamily: 'Poppins', fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -154,14 +144,11 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                         children: [
                           Text(
                             'Appliqué le',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.grey.shade400),
+                            style: TextStyle(color: Colors.grey.shade400),
                           ),
                           Text(
                             DateFormat('d MMM yyyy').format(DateTime.now()),
-                            style: const TextStyle(
-                                fontFamily: 'Poppins', fontSize: 18),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -182,14 +169,11 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                         children: [
                           Text(
                             'Telephone',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.grey.shade400),
+                            style: TextStyle(color: Colors.grey.shade400),
                           ),
                           const Text(
                             '0666666666',
-                            style:
-                                TextStyle(fontFamily: 'Poppins', fontSize: 18),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -210,14 +194,11 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                         children: [
                           Text(
                             'Fichiers joints',
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: Colors.grey.shade400),
+                            style: TextStyle(color: Colors.grey.shade400),
                           ),
                           const Text(
                             'Fichier',
-                            style:
-                                TextStyle(fontFamily: 'Poppins', fontSize: 18),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
@@ -239,7 +220,6 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                         content: const Text(
                                           'La demande rejeter\navec succès',
                                           style: TextStyle(
-                                            fontFamily: 'Poppins',
                                             fontSize: 16,
                                           ),
                                         ),
@@ -248,7 +228,6 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                             child: const Text(
                                               'D\'accord',
                                               style: TextStyle(
-                                                fontFamily: 'Poppins',
                                                 fontSize: 14,
                                               ),
                                             ),
@@ -289,9 +268,9 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                         // 'Rejeter',
                                         buttonState.Rejectbtn,
                                         style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: "Poppins"),
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -312,7 +291,6 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                         content: const Text(
                                           'La demande accepter\navec succès',
                                           style: TextStyle(
-                                            fontFamily: 'Poppins',
                                             fontSize: 16,
                                           ),
                                         ),
@@ -321,7 +299,6 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                             child: const Text(
                                               'D\'accord',
                                               style: TextStyle(
-                                                fontFamily: 'Poppins',
                                                 fontSize: 14,
                                               ),
                                             ),
@@ -363,9 +340,9 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                         // 'Accepter',
                                         buttonState.Acceptbtn,
                                         style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                            fontFamily: "Poppins"),
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -420,7 +397,6 @@ class _DemandedetailsState extends State<Demandedetails> {
                   'Demande',
                   style: TextStyle(
                     fontSize: 20,
-                    fontFamily: 'Poppins',
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -446,9 +422,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                               Text(
                                 'Date de conge',
                                 style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16,
-                                    color: Colors.grey.shade400),
+                                    fontSize: 16, color: Colors.grey.shade400),
                               ),
                               SizedBox(
                                 height:
@@ -456,8 +430,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                               ),
                               Text(
                                 'De: ${demandes[1].dateDebut} \njusqu\'a: ${demandes[1].dateFin}',
-                                style: const TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
@@ -481,9 +454,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                               Text(
                                 'Duree d\'abscence',
                                 style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16,
-                                    color: Colors.grey.shade400),
+                                    fontSize: 16, color: Colors.grey.shade400),
                               ),
                               SizedBox(
                                 height:
@@ -491,8 +462,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                               ),
                               Text(
                                 '${demandes[1].dureAbsence?.toInt()} jours',
-                                style: const TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
@@ -516,9 +486,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                               Text(
                                 'Telephone',
                                 style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16,
-                                    color: Colors.grey.shade400),
+                                    fontSize: 16, color: Colors.grey.shade400),
                               ),
                               SizedBox(
                                 height:
@@ -526,8 +494,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                               ),
                               Text(
                                 '${demandes[1].telAbsence}',
-                                style: const TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 16),
+                                style: const TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
@@ -548,9 +515,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                           child: Text(
                             'Validation',
                             style: TextStyle(
-                                fontFamily: 'Poppins',
-                                fontSize: 16,
-                                color: Colors.grey.shade400),
+                                fontSize: 16, color: Colors.grey.shade400),
                           ),
                         ),
                         SizedBox(
@@ -562,8 +527,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                             children: [
                               const Text(
                                 'Par chef: ',
-                                style: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 16),
+                                style: TextStyle(fontSize: 16),
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -574,9 +538,9 @@ class _DemandedetailsState extends State<Demandedetails> {
                                 child: Text(
                                   'En cours',
                                   style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.orange.shade400,
-                                      fontFamily: "Poppins"),
+                                    fontSize: 12,
+                                    color: Colors.orange.shade400,
+                                  ),
                                 ),
                               ),
                             ],
@@ -592,8 +556,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                             children: [
                               const Text(
                                 'Par RH: ',
-                                style: TextStyle(
-                                    fontFamily: 'Poppins', fontSize: 16),
+                                style: TextStyle(fontSize: 16),
                               ),
                               Container(
                                 decoration: BoxDecoration(
@@ -604,9 +567,9 @@ class _DemandedetailsState extends State<Demandedetails> {
                                 child: Text(
                                   'En cours',
                                   style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.orange.shade400,
-                                      fontFamily: "Poppins"),
+                                    fontSize: 12,
+                                    color: Colors.orange.shade400,
+                                  ),
                                 ),
                               ),
                             ],

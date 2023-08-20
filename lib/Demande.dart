@@ -82,7 +82,6 @@ class _DemandePageState extends State<DemandePage> {
                       'Demande',
                       style: TextStyle(
                         fontSize: 22,
-                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -96,7 +95,6 @@ class _DemandePageState extends State<DemandePage> {
                   decoration: InputDecoration(
                     label: const Text(
                       'Date depart',
-                      style: TextStyle(fontFamily: 'Poppins'),
                     ),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -135,7 +133,7 @@ class _DemandePageState extends State<DemandePage> {
                   decoration: InputDecoration(
                     label: const Text(
                       'Date retour',
-                      style: TextStyle(fontFamily: 'Poppins'),
+                      style: TextStyle(),
                     ),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -221,7 +219,6 @@ class _DemandePageState extends State<DemandePage> {
                     label: const Text(
                       'Commentaire',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
                     ),
@@ -236,7 +233,6 @@ class _DemandePageState extends State<DemandePage> {
                     fillColor: Colors.transparent,
                     filled: true,
                     hintStyle: const TextStyle(
-                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                         color: Color.fromRGBO(179, 179, 179, 1)),
                   ),
@@ -269,9 +265,9 @@ class _DemandePageState extends State<DemandePage> {
                       child: Text(
                         'Attacher fichier',
                         style: TextStyle(
-                            color: Colors.blue.shade400,
-                            fontSize: 16,
-                            fontFamily: "Poppins"),
+                          color: Colors.blue.shade400,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ),
@@ -289,7 +285,6 @@ class _DemandePageState extends State<DemandePage> {
                               content: const Text(
                                 'Congé appliqué \navec succès',
                                 style: TextStyle(
-                                  fontFamily: 'Poppins',
                                   fontSize: 16,
                                 ),
                               ),
@@ -298,7 +293,6 @@ class _DemandePageState extends State<DemandePage> {
                                   child: const Text(
                                     'D\'accord',
                                     style: TextStyle(
-                                      fontFamily: 'Poppins',
                                       fontSize: 14,
                                     ),
                                   ),
@@ -322,7 +316,6 @@ class _DemandePageState extends State<DemandePage> {
                             content: const Text(
                               'Les données sont invalides',
                               style: TextStyle(
-                                fontFamily: 'Poppins',
                                 fontSize: 16,
                               ),
                             ),
@@ -331,7 +324,6 @@ class _DemandePageState extends State<DemandePage> {
                                 child: const Text(
                                   'D\'accord',
                                   style: TextStyle(
-                                    fontFamily: 'Poppins',
                                     fontSize: 14,
                                   ),
                                 ),
