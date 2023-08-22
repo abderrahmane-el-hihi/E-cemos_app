@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:open_file/open_file.dart';
 import '../components/button.dart';
 import 'SwitchPages.dart';
 import 'package:http/http.dart' as http;
@@ -14,6 +15,7 @@ class DemandePage extends StatefulWidget {
   State<DemandePage> createState() => _DemandePageState();
 }
 
+String? text;
 // final Date_d_controller = TextEditingController();
 // final Date_r_controller = TextEditingController();
 final type_conge_controller = TextEditingController();
@@ -24,33 +26,6 @@ DateTime selectedDateD = DateTime.now();
 DateTime selectedDateR = DateTime.now();
 
 class _DemandePageState extends State<DemandePage> {
-  List DemandesList = [];
-  String Demande = 'Choisire une demande';
-
-  ///////////////test fill dropdown menu from api
-  // String Url = 'https://jsonplaceholder.typicode.com/users';
-  // Future<String> GetDemandeList() async {
-  //   await http.post(Uri.parse(Url)).then((response) {
-  //     var data = json.decode(response.body);
-  //     setState(() {
-  //       DemandesList = data['name'];
-  //     });
-  //   });
-  //   return 'no data';
-  // }
-  // String url = 'https://jsonplaceholder.typicode.com/users';
-  // Future<List<Users>?> getDemandeList() async {
-  //   final response = await http.get(Uri.parse(url));
-  //   if (response.statusCode == 200) {
-  //     var data = json.decode(response.body);
-  //     return data as List<Users>;
-  //   } else {
-  //     throw Exception('Failed to load data from API');
-  //   }
-  // }
-
-  ///
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -168,46 +143,6 @@ class _DemandePageState extends State<DemandePage> {
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
               DropdownM(),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
-              // FutureBuilder(
-              //     future: RemoteService().GetApiData(),
-              //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-              //       List<Users>? users = snapshot.data;
-              //       return DropdownButtonHideUnderline(
-              //         child: ButtonTheme(
-              //           alignedDropdown: true,
-              //           child: DropdownButton<String>(
-              //             value: Demande,
-              //             // iconSize: 30,
-              //             // icon: (null),
-              //             style: const TextStyle(
-              //               color: Colors.black54,
-              //               fontSize: 16,
-              //             ),
-              //             hint: const Text('Select Demande'),
-              //             onChanged: (String? newValue) {
-              //               setState(() {
-              //                 Demande = newValue!;
-              //                 print(Demande);
-              //               });
-              //             },
-              //             // items: users?.map((item) {
-              //             //       return DropdownMenuItem(
-              //             //         value: item.id.toString(),
-              //             //         child: Text(item.name),
-              //             //       );
-              //             //     }).toList() ??
-              //             //     [],
-              //             items: [
-              //               DropdownMenuItem(
-              //                 value: users.toString(),
-              //                 child: Text(users.toString()),
-              //               ),
-              //             ],
-              //           ),
-              //         ),
-              //       );
-              //     }),
-              // SizedBox(height: MediaQuery.of(context).size.height * 0.042),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextField(
@@ -244,16 +179,18 @@ class _DemandePageState extends State<DemandePage> {
                   onTap: () async {
                     FilePickerResult? result =
                         await FilePicker.platform.pickFiles();
-
                     if (result != null) {
                       PlatformFile file = result.files.first;
-                      // Do something with the selected file
+                      if (file.extension == "jpg" || file.extension == "pdf") {
+                        // OpenFile.open(file.path!);
+                      }
                     }
+                    return;
                   },
                   splashColor: const Color.fromARGB(24, 66, 164, 245),
                   borderRadius: BorderRadius.circular(15),
                   child: Container(
-                    padding: EdgeInsets.all(15),
+                    padding: const EdgeInsets.all(15),
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(24, 66, 164, 245),
                       border:
