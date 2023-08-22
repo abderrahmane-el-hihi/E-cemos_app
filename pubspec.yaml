@@ -43,8 +43,9 @@ dependencies:
   http: ^1.1.0
   network_info_plus: ^4.0.1
   device_info_plus: ^9.0.2
-  flutter_cache_manager: ^3.3.1
   jwt_decode: ^0.3.1
+  shared_preferences: ^2.2.0
+  open_file: ^3.3.2
 
 dev_dependencies:
   flutter_test:

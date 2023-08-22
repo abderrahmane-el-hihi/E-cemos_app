@@ -41,9 +41,9 @@ class _L_ButtonState extends State<L_Button> {
                 Text(
                   _isPressed ? widget.text : widget.text,
                   style: TextStyle(
-                      color: Colors.green.shade400,
-                      fontSize: 16,
-                      fontFamily: "Poppins"),
+                    color: Colors.green.shade400,
+                    fontSize: 16,
+                  ),
                 ),
               ],
             ),
@@ -78,50 +78,50 @@ class _DropdownMState extends State<DropdownM> {
           // label: demande.label,
           child: Text(
             demande.label,
-            style: const TextStyle(fontFamily: 'Poppins'),
           ),
         ),
       );
     }
-    return DropdownButtonFormField<DemandeType>(
+    return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: InputDecoration(
-        label: const Text(
-          'Choisir la demande',
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.w400,
+      child: DropdownButtonFormField<DemandeType>(
+        borderRadius: BorderRadius.circular(15),
+        elevation: 1,
+        dropdownColor: Colors.grey.shade100,
+        decoration: InputDecoration(
+          label: const Text(
+            'Choisir la demande',
+            style: TextStyle(
+              fontFamily: 'Poppins',
+            ),
           ),
-        ),
-        enabledBorder: OutlineInputBorder(
+          enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide:
+                  const BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
+          focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide:
-                const BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
-          borderSide: BorderSide(color: Colors.green.shade400),
+            borderSide: BorderSide(color: Colors.green.shade400),
+          ),
+          fillColor: Colors.transparent,
+          filled: true,
         ),
-        fillColor: Colors.transparent,
-        filled: true,
+        value: selectedDemande,
+        onChanged: (DemandeType? Demande) {
+          setState(() {
+            selectedDemande = Demande;
+          });
+        },
+        items: demandeEntries,
       ),
-      value: selectedDemande,
-      onChanged: (DemandeType? Demande) {
-        setState(() {
-          selectedDemande = Demande;
-        });
-      },
-      items: demandeEntries,
     );
   }
 }
 
 enum DemandeType {
-  //'' valeur de type de demande
-  D1('Demande de conge 1', ''),
-  D2('Demande de conge 2', ''),
-  D3('Demande de conge 3', ''),
-  D4('Demande de conge 4', ''),
-  D5('Demande de conge 5', '');
+  D1('Congé', ''),
+  D2('Des heures supplémentaires', ''),
+  D3('Sttéstation', '');
 
   const DemandeType(this.label, this.demandetypeval);
   final String label;

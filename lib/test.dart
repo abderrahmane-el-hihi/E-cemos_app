@@ -126,6 +126,7 @@ class _twidgetState extends State<twidget> {
                   if (snapshot.hasData) {
                     List<DemandeAbscence>? demandes = snapshot.data;
                     return DemandeCard(
+                      data: [],
                       DemandeType: "${demandes![1].motifAbsence}",
                       date: "${demandes[2].dateDebut} ${demandes[2].dateFin}",
                       dureeabscence: demandes[1].dureAbsence?.toInt(),

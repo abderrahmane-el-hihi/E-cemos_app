@@ -7,7 +7,7 @@
     
 
     <application
-        android:label="E-cemos"
+        android:label="Libre RH"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-Personnel personnelFromJson(String str) => Personnel.fromJson(json.decode(str));
+Personnel personnelFromJson(var str) => Personnel.fromJson(json.decode(str));
 List<Personnel> allpersonnelFromJson(String str) =>
     List<Personnel>.from(json.decode(str).map((x) => Personnel.fromJson(x)));
 String allpersonnelToJson(List<Personnel> data) =>

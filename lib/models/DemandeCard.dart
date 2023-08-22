@@ -15,6 +15,7 @@ class DemandeCard extends StatefulWidget {
   String? ValidationRH;
   String? ValidationChef1;
   String? ValidationChef2;
+  List? data;
   DemandeCard({
     super.key,
     required this.DemandeType,
@@ -25,6 +26,7 @@ class DemandeCard extends StatefulWidget {
     required this.ValidationRH,
     required this.ValidationChef1,
     required this.ValidationChef2,
+    required this.data,
   });
 
   @override
@@ -153,21 +155,21 @@ class _DemandeCardState extends State<DemandeCard> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             'Téléphone',
                             style:
                                 TextStyle(fontSize: 10, fontFamily: "Poppins"),
                           ),
                           Text(
                             '${widget.Telephone}',
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
                                 fontFamily: "Poppins"),
                           ),
                         ],
                       ),
-                      Column(
+                      const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -187,6 +189,36 @@ class _DemandeCardState extends State<DemandeCard> {
                       ),
                     ],
                   ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.01,
+                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     MaterialPageRoute(
+                  //         builder: (context) => Demandedetails(
+                  //               data: widget.data,
+                  //             ));
+                  //   },
+                  //   borderRadius: BorderRadius.circular(8),
+                  //   child: Container(
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(8),
+                  //         color: const Color.fromARGB(24, 102, 187, 106),
+                  //         border: Border.all(color: Colors.green.shade400)),
+                  //     padding: const EdgeInsets.symmetric(vertical: 8),
+                  //     width: MediaQuery.of(context).size.width * 0.5,
+                  //     child: Row(
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: [
+                  //         const Text("Voir Details"),
+                  //         SizedBox(
+                  //           width: MediaQuery.of(context).size.width * 0.02,
+                  //         ),
+                  //         const Icon(CupertinoIcons.arrow_right),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

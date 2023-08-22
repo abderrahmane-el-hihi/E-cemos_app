@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             size: 128,
                           ),
                           Text(
-                            p.nom + ' ' + p.prenom,
+                            '${p.nom} ${p.prenom}',
                             style: const TextStyle(fontSize: 22),
                           ),
                           Text(
@@ -204,7 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Se déconnecter',
+                            'Se Déconnecter',
                             style: TextStyle(color: Colors.red.shade400),
                           ),
                         ],

@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/DemandeAbscence.dart';
 import '../models/Personnel.dart';
 import 'package:http/http.dart' as http;
@@ -13,11 +13,24 @@ class RemoteService {
     var client = http.Client();
     var uri =
         Uri.parse('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('cachedData');
+    if (cachedData != null) {
+      final response = await client.get(uri);
+      final demandeList = demandeAbscenceFromJson(cachedData);
+      if (response.statusCode == 200) {
+        final fetchedData = response.body;
+
+        if (fetchedData != cachedData) {
+          await prefs.setString('cachedData', fetchedData);
+        }
+      }
+      return demandeList;
+    }
     final response = await client.get(uri);
     if (response.statusCode == 200) {
       final data = response.body;
-      // var file = await DefaultCacheManager().getSingleFile('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
-      // print(file);
+      await prefs.setString('cachedData', data);
       return demandeAbscenceFromJson(data);
     }
   }
@@ -29,8 +42,7 @@ class RemoteService {
     final response = await client.get(uri);
     if (response.statusCode == 200) {
       final data = response.body;
-      // var file = await DefaultCacheManager().getSingleFile('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
-      // print(file);
+
       return demandeApprovedListFromJson(data);
     }
   }
@@ -40,9 +52,16 @@ class RemoteService {
     var client = http.Client();
     var uri =
         Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/$id');
+    // final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // final cachedData = prefs.getString('cachedData');
+    // if (cachedData != null) {
+    //   final data = cachedData;
+    //   return personnelFromJson(data);
+    // }
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
+      // await prefs.setString('cachedData', json);
       return personnelFromJson(json);
     }
   }

@@ -9,7 +9,9 @@ import '../services/service.dart';
 import 'SwitchPages.dart';
 
 class LeaveDetailsPage extends StatefulWidget {
-  const LeaveDetailsPage({super.key});
+  const LeaveDetailsPage({
+    super.key,
+  });
 
   @override
   State<LeaveDetailsPage> createState() => _LeaveDetailsPageState();
@@ -364,8 +366,8 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
 }
 
 class Demandedetails extends StatefulWidget {
-  final List<dynamic> data;
-  const Demandedetails({super.key, required this.data});
+  final List? data;
+  Demandedetails({super.key, required this.data});
 
   @override
   State<Demandedetails> createState() => _DemandedetailsState();
@@ -374,6 +376,8 @@ class Demandedetails extends StatefulWidget {
 class _DemandedetailsState extends State<Demandedetails> {
   @override
   Widget build(BuildContext context) {
+    int index = 0;
+    final item = widget.data![index];
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(

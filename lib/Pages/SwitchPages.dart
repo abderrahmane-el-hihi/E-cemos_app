@@ -35,13 +35,13 @@ class GNavBar extends StatelessWidget {
       tabs: [
         GButton(
           borderRadius: BorderRadius.circular(15),
-          icon: CupertinoIcons.calendar,
-          text: 'Calendrier',
+          icon: Icons.home_rounded,
+          text: 'Accueil',
         ),
         GButton(
           borderRadius: BorderRadius.circular(15),
-          icon: Icons.home_rounded,
-          text: 'Accueil',
+          icon: CupertinoIcons.calendar,
+          text: 'Calendrier',
         ),
         GButton(
           borderRadius: BorderRadius.circular(15),
@@ -71,8 +71,8 @@ class _SwitchPAgesState extends State<SwitchPages> {
   }
 
   List<Widget> pages = [
-    const CalendarPage(),
     const HomePage(),
+    const CalendarPage(),
     const ProfilePage()
   ];
 
