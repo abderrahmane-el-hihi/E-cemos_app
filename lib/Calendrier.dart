@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'Demande.dart';
+import 'LeaveDetailsPage.dart';
 import 'components/button.dart';
 import 'models/DemandeAbscence.dart';
 import 'models/DemandeCard.dart';
@@ -521,244 +522,13 @@ class _PageState extends State<CalendarPage> {
                             ],
                           );
                         }),
-                    //////////////////// using provider to provide data across the app
-                    // Consumer<UserDataProvider>(
-                    //     builder: (context, userdata, child) {
-                    //   return Column(
-                    //     children: [
-                    //       Padding(
-                    //         padding: const EdgeInsets.symmetric(horizontal: 16),
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //           children: [
-                    //             Container(
-                    //               width:
-                    //                   MediaQuery.of(context).size.width * 0.43,
-                    //               height: MediaQuery.of(context).size.height *
-                    //                   0.135,
-                    //               decoration: BoxDecoration(
-                    //                   color: const Color.fromARGB(
-                    //                       24, 66, 164, 245),
-                    //                   borderRadius: BorderRadius.circular(15),
-                    //                   border: Border.all(
-                    //                     width: 1,
-                    //                     color: Colors.blue.shade400,
-                    //                   )),
-                    //               child: Row(
-                    //                 mainAxisAlignment: MainAxisAlignment.start,
-                    //                 children: [
-                    //                   SizedBox(
-                    //                       width: MediaQuery.of(context)
-                    //                               .size
-                    //                               .width *
-                    //                           0.022),
-                    //                   Column(
-                    //                     crossAxisAlignment:
-                    //                         CrossAxisAlignment.start,
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.spaceAround,
-                    //                     children: [
-                    //                       const Text('Droit annuel',
-                    //                           style: TextStyle(
-                    //                               fontWeight: FontWeight.w500,
-                    //                               fontSize: 14,
-                    //                               )),
-                    //                       Text(userdata.userdata!.name),
-                    //                     ],
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //             Container(
-                    //               width:
-                    //                   MediaQuery.of(context).size.width * 0.43,
-                    //               height: MediaQuery.of(context).size.height *
-                    //                   0.135,
-                    //               decoration: BoxDecoration(
-                    //                   color: const Color.fromARGB(
-                    //                       24, 102, 187, 106),
-                    //                   borderRadius: BorderRadius.circular(15),
-                    //                   border: Border.all(
-                    //                     width: 1,
-                    //                     color: Colors.green.shade400,
-                    //                   )),
-                    //               child: Row(
-                    //                 mainAxisAlignment: MainAxisAlignment.start,
-                    //                 children: [
-                    //                   SizedBox(
-                    //                       width: MediaQuery.of(context)
-                    //                               .size
-                    //                               .width *
-                    //                           0.022),
-                    //                   Column(
-                    //                     crossAxisAlignment:
-                    //                         CrossAxisAlignment.start,
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.spaceAround,
-                    //                     children: [
-                    //                       const Text('Reste anneé \ndernière',
-                    //                           style: TextStyle(
-                    //                               fontWeight: FontWeight.w500,
-                    //                               fontSize: 14,
-                    //                               )),
-                    //                       Text(userdata.userdata!.name),
-                    //                     ],
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //       SizedBox(
-                    //           height:
-                    //               MediaQuery.of(context).size.height * 0.022),
-                    //       Padding(
-                    //         padding: const EdgeInsets.symmetric(horizontal: 16),
-                    //         child: Row(
-                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    //           children: [
-                    //             Container(
-                    //               width:
-                    //                   MediaQuery.of(context).size.width * 0.43,
-                    //               height: MediaQuery.of(context).size.height *
-                    //                   0.135,
-                    //               decoration: BoxDecoration(
-                    //                   color: const Color.fromARGB(
-                    //                       24, 38, 197, 218),
-                    //                   borderRadius: BorderRadius.circular(15),
-                    //                   border: Border.all(
-                    //                     width: 1,
-                    //                     color: Colors.cyan.shade400,
-                    //                   )),
-                    //               child: Row(
-                    //                 mainAxisAlignment: MainAxisAlignment.start,
-                    //                 children: [
-                    //                   SizedBox(
-                    //                       width: MediaQuery.of(context)
-                    //                               .size
-                    //                               .width *
-                    //                           0.022),
-                    //                   Column(
-                    //                     crossAxisAlignment:
-                    //                         CrossAxisAlignment.start,
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.spaceAround,
-                    //                     children: [
-                    //                       const Text(
-                    //                           'Consommation \ncette anneé',
-                    //                           style: TextStyle(
-                    //                               fontWeight: FontWeight.w500,
-                    //                               fontSize: 14,
-                    //                               )),
-                    //                       Text(userdata.userdata!.name),
-                    //                     ],
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //             Container(
-                    //               width:
-                    //                   MediaQuery.of(context).size.width * 0.43,
-                    //               height: MediaQuery.of(context).size.height *
-                    //                   0.135,
-                    //               decoration: BoxDecoration(
-                    //                   color:
-                    //                       const Color.fromARGB(24, 239, 83, 80),
-                    //                   borderRadius: BorderRadius.circular(15),
-                    //                   border: Border.all(
-                    //                     width: 1,
-                    //                     color: Colors.red.shade400,
-                    //                   )),
-                    //               child: Row(
-                    //                 mainAxisAlignment: MainAxisAlignment.start,
-                    //                 children: [
-                    //                   SizedBox(
-                    //                       width: MediaQuery.of(context)
-                    //                               .size
-                    //                               .width *
-                    //                           0.022),
-                    //                   Column(
-                    //                     crossAxisAlignment:
-                    //                         CrossAxisAlignment.start,
-                    //                     mainAxisAlignment:
-                    //                         MainAxisAlignment.spaceAround,
-                    //                     children: [
-                    //                       SizedBox(
-                    //                           height: MediaQuery.of(context)
-                    //                                   .size
-                    //                                   .height *
-                    //                               0.012),
-                    //                       const Text('Reste',
-                    //                           style: TextStyle(
-                    //                               fontWeight: FontWeight.w500,
-                    //                               fontSize: 14,
-                    //                               )),
-                    //                       Text(userdata.userdata!.name),
-                    //                     ],
-                    //                   ),
-                    //                 ],
-                    //               ),
-                    //             ),
-                    //           ],
-                    //         ),
-                    //       ),
-                    //     ],
-                    //   );
-                    // }),
                     SizedBox(
                         height: MediaQuery.of(context).size.height * 0.022),
-                    // Padding(
-                    //   padding: const EdgeInsets.symmetric(horizontal: 16),
-                    //   child: ToggleButtons(
-
-                    //     splashColor: Colors.grey.shade400,
-
-                    //     direction: Axis.horizontal,
-                    //     onPressed: (int index) {
-                    //       setState(() {
-                    //         _selectedButtonIndex = index;
-                    //         for (int i = 0; i < SelectedButton.length; i++) {
-                    //           SelectedButton[i] = i == index;
-                    //         }
-                    //       });
-                    //     },
-                    //     borderRadius:
-                    //         const BorderRadius.all(Radius.circular(8)),
-                    //     // selectedBorderColor: Colors.red[700],
-                    //     selectedColor: Colors.white,
-                    //     fillColor: const Color.fromARGB(222, 66, 164, 245),
-                    //     color: Colors.grey,
-                    //     constraints: BoxConstraints(
-                    //       minHeight: 50,
-                    //       // minWidth: 110,
-                    //       minWidth: MediaQuery.of(context).size.width * 0.3,
-                    //     ),
-                    //     isSelected: SelectedButton,
-                    //     children: [
-                    //       Text('prochain',
-                    //           style: TextStyle(
-                    //
-                    //             fontSize: 12,
-                    //           )),
-                    //       Text('passé',
-                    //           style: TextStyle(
-                    //
-                    //             fontSize: 12,
-                    //           )),
-                    //       Text('Congé \nd\'équipe',
-                    //           style: TextStyle(
-                    //
-                    //             fontSize: 12,
-                    //           ))
-                    //     ],
-                    //   ),
-                    // ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Ink(
                         width: MediaQuery.of(context).size.width * 1,
-                        height: MediaQuery.of(context).size.height * 0.068,
+                        height: MediaQuery.of(context).size.height * 0.066,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8),
@@ -823,22 +593,29 @@ class _PageState extends State<CalendarPage> {
                                       itemCount: demandes!.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
-                                        return DemandeCard(
-                                          DemandeType:
-                                              "${demandes[index].motifAbsence}",
-                                          date:
-                                              "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
-                                          dureeabscence: demandes[index]
-                                              .dureAbsence
-                                              ?.toInt(),
-                                          Telephone:
-                                              "${demandes[index].telAbsence}",
-                                          ValidationRH:
-                                              "${demandes[index].validationRh}",
-                                          ValidationChef1:
-                                              "${demandes[index].validationChef1}",
-                                          ValidationChef2:
-                                              "${demandes[index].validationChef2}",
+                                        return GestureDetector(
+                                          onTap: () {
+                                            MaterialPageRoute(
+                                                builder: ((context) =>
+                                                    const Demandedetails()));
+                                          },
+                                          child: DemandeCard(
+                                            DemandeType:
+                                                "${demandes[index].motifAbsence}",
+                                            date:
+                                                "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
+                                            dureeabscence: demandes[index]
+                                                .dureAbsence
+                                                ?.toInt(),
+                                            Telephone:
+                                                "${demandes[index].telAbsence}",
+                                            ValidationRH:
+                                                "${demandes[index].validationRh}",
+                                            ValidationChef1:
+                                                "${demandes[index].validationChef1}",
+                                            ValidationChef2:
+                                                "${demandes[index].validationChef2}",
+                                          ),
                                         );
                                       });
                                 }
@@ -894,21 +671,26 @@ class _PageState extends State<CalendarPage> {
                                     );
                                   })
                               : FutureBuilder(
-                                  future: RemoteService().getAllPersonnel(),
+                                  future: RemoteService().getPersonnel(1),
                                   builder: (BuildContext context,
                                       AsyncSnapshot snapshot) {
                                     if (snapshot.hasData) {
-                                      List<Personnel> p = snapshot.data;
+                                      Personnel p = snapshot.data;
                                       return ListView.builder(
                                           itemCount: 1,
                                           itemBuilder: (BuildContext context,
                                               int index) {
-                                            return GroupVacation(
-                                                Name:
-                                                    "${p[index].nom} ${p[index].prenom}",
-                                                Photo: p[index].photo,
-                                                PostDate:
-                                                    p[index].dateNaissance);
+                                            return GestureDetector(
+                                              onTap: () {
+                                                MaterialPageRoute(
+                                                    builder: ((context) =>
+                                                        const LeaveDetailsPage()));
+                                              },
+                                              child: GroupVacation(
+                                                  Name: "${p.nom} ${p.prenom}",
+                                                  Photo: p.photo,
+                                                  PostDate: p.dateNaissance),
+                                            );
                                           });
                                     }
                                     return GroupVacation(

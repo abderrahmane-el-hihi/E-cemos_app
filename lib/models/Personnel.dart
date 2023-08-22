@@ -12,7 +12,7 @@ String personnelToJson(Personnel data) => json.encode(data.toJson());
 
 class Personnel {
   String? motDePasse;
-  DateTime? dateAffiliation;
+  DateTime dateAffiliation;
   double? salaireMensuel;
   dynamic salaireHoraire;
   String photo;
@@ -28,7 +28,7 @@ class Personnel {
   String genre;
   String cin;
   int idPersonnelles;
-  DateTime? dateNaissance;
+  DateTime dateNaissance;
   String matricule;
   String lieuNaissance;
   String emailPersonnel;
@@ -98,8 +98,7 @@ class Personnel {
 
   Map<String, dynamic> toJson() => {
         "motDePasse": motDePasse,
-        "dateAffiliation":
-            "${dateAffiliation?.year.toString().padLeft(4, '0')}-${dateAffiliation?.month.toString().padLeft(2, '0')}-${dateAffiliation?.day.toString().padLeft(2, '0')}",
+        // "dateAffiliation":"${dateAffiliation.year.toString().padLeft(4, '0')}-${dateAffiliation.month.toString().padLeft(2, '0')}-${dateAffiliation.day.toString().padLeft(2, '0')}" ,
         "salaireMensuel": salaireMensuel,
         "salaireHoraire": salaireHoraire,
         "photo": photo,
@@ -116,7 +115,7 @@ class Personnel {
         "cin": cin,
         "idPersonnelles": idPersonnelles,
         "dateNaissance":
-            "${dateNaissance?.year.toString().padLeft(4, '0')}-${dateNaissance?.month.toString().padLeft(2, '0')}-${dateNaissance?.day.toString().padLeft(2, '0')}",
+            "${dateNaissance.year.toString().padLeft(4, '0')}-${dateNaissance.month.toString().padLeft(2, '0')}-${dateNaissance.day.toString().padLeft(2, '0')}",
         "matricule": matricule,
         "lieuNaissance": lieuNaissance,
         "emailPersonnel": emailPersonnel,
@@ -140,7 +139,7 @@ class personnelDataProvider extends ChangeNotifier {
 
     try {
       final response = await http.get(
-          Uri.parse('http://192.168.1.102:8800/api/CemosRH/Personnelles/1'));
+          Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/1'));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         _Personnel = personnelFromJson(jsonData);

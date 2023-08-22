@@ -141,7 +141,7 @@ class _DemandeCardState extends State<DemandeCard> {
                                 TextStyle(fontSize: 10, fontFamily: "Poppins"),
                           ),
                           Text(
-                            '${widget.dureeabscence}',
+                            '${widget.dureeabscence} Jours',
                             style: const TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
