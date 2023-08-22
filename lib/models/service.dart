@@ -12,11 +12,11 @@ class RemoteService {
   Future<List<DemandeAbscence>?> getDemandeList() async {
     var client = http.Client();
     var uri =
-        Uri.parse('http://192.168.1.102:8800/api/CemosRH/DemanceAbsence/');
+        Uri.parse('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
     final response = await client.get(uri);
     if (response.statusCode == 200) {
       final data = response.body;
-      // var file = await DefaultCacheManager().getSingleFile('http://192.168.1.102:8800/api/CemosRH/DemanceAbsence/');
+      // var file = await DefaultCacheManager().getSingleFile('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
       // print(file);
       return demandeAbscenceFromJson(data);
     }
@@ -25,11 +25,11 @@ class RemoteService {
   Future<List<DemandeApprovedList>?> getDemandeApproved() async {
     var client = http.Client();
     var uri = Uri.parse(
-        'http://192.168.1.102:8800/api/CemosRH/DemanceAbsence/Approved/1');
+        'http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/Approved/1');
     final response = await client.get(uri);
     if (response.statusCode == 200) {
       final data = response.body;
-      // var file = await DefaultCacheManager().getSingleFile('http://192.168.1.102:8800/api/CemosRH/DemanceAbsence/');
+      // var file = await DefaultCacheManager().getSingleFile('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
       // print(file);
       return demandeApprovedListFromJson(data);
     }
@@ -39,7 +39,7 @@ class RemoteService {
   Future getPersonnel(int id) async {
     var client = http.Client();
     var uri =
-        Uri.parse('http://192.168.1.102:8800/api/CemosRH/Personnelles/$id');
+        Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/$id');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -49,7 +49,7 @@ class RemoteService {
 
   Future getAllPersonnel() async {
     var client = http.Client();
-    var uri = Uri.parse('http://192.168.1.102:8800/api/CemosRH/Personnelles/');
+    var uri = Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
@@ -83,7 +83,7 @@ class RemoteService {
   //   }
   // }
   Future<String?> checkCredentials(String email, String password) async {
-    const String apiUrl = 'api url'; // Replace with your API URL.
+    const String apiUrl = 'api url';
 
     try {
       final response = await http.post(
@@ -95,14 +95,12 @@ class RemoteService {
       );
 
       if (response.statusCode == 200) {
-        // Credentials are valid, parse the response JSON to get the user's role.
         final data = json.decode(response.body);
         String role = data['role'];
         String nom = data['nom'];
         String prenom = data['prenom'];
         return role;
       } else {
-        // Credentials are invalid, return null or an empty string to indicate failure.
         return null;
       }
     } catch (e) {
