@@ -581,126 +581,96 @@ class _PageState extends State<CalendarPage> {
                     Container(
                       height: MediaQuery.of(context).size.height * 0.375,
                       color: Colors.grey.shade100,
-                      child: _selectedButtonIndex == 0
-                          ? FutureBuilder(
-                              future: RemoteService().getDemandeList(),
-                              builder: (BuildContext context,
-                                  AsyncSnapshot snapshot) {
-                                if (snapshot.hasData) {
-                                  List<DemandeAbscence>? demandes =
-                                      snapshot.data;
+                      child: FutureBuilder(
+                          future: RemoteService().getDemandeApproved(),
+                          builder:
+                              (BuildContext context, AsyncSnapshot snapshot) {
+                            if (snapshot.hasData) {
+                              List<List<DemandeApprovedList>>? demandes =
+                                  snapshot.data;
+                              switch (_selectedButtonIndex) {
+                                case 0:
                                   return ListView.builder(
                                       itemCount: demandes!.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
-                                        //redirict to Demandedetails() Page
                                         return DemandeCard(
                                           data: [
-                                            RemoteService().getDemandeList()
+                                            RemoteService().getDemandeApproved()
                                           ],
                                           DemandeType:
-                                              "${demandes[index].motifAbsence}",
+                                              demandes[0][0].motifAbsence,
                                           date:
-                                              "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
-                                          dureeabscence: demandes[index]
+                                              "${DateFormat('d MMM, yyyy').format(demandes[0][0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[0][0].dateFin)}",
+                                          dureeabscence: demandes[0][0]
                                               .dureAbsence
                                               ?.toInt(),
-                                          Telephone:
-                                              "${demandes[index].telAbsence}",
+                                          Telephone: demandes[0][0].telAbsence,
                                           ValidationRH:
-                                              "${demandes[index].validationRh}",
+                                              demandes[0][0].validationRh,
                                           ValidationChef1:
-                                              "${demandes[index].validationChef1}",
+                                              demandes[0][0].validationChef1,
                                           ValidationChef2:
-                                              "${demandes[index].validationChef2}",
+                                              demandes[0][0].validationChef2,
                                         );
                                       });
-                                }
-                                return DemandeCard(
-                                  data: [],
-                                  DemandeType: "",
-                                  date: "",
-                                  dureeabscence: 0,
-                                  Telephone: "",
-                                  ValidationRH: "",
-                                  ValidationChef1: "",
-                                  ValidationChef2: "",
-                                );
-                              })
-                          : _selectedButtonIndex == 1
-                              ? FutureBuilder(
-                                  future: RemoteService().getDemandeApproved(),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot snapshot) {
-                                    if (snapshot.hasData) {
-                                      List<DemandeApprovedList>? demandes =
-                                          snapshot.data;
-                                      return ListView.builder(
-                                          itemCount: demandes!.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return DemandeCard(
-                                              data: [
-                                                RemoteService()
-                                                    .getDemandeApproved()
-                                              ],
-                                              DemandeType:
-                                                  demandes[index].motifAbsence,
-                                              date:
-                                                  "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
-                                              dureeabscence: demandes[index]
-                                                  .dureAbsence
-                                                  ?.toInt(),
-                                              Telephone:
-                                                  demandes[index].telAbsence,
-                                              ValidationRH:
-                                                  demandes[index].validationRh,
-                                              ValidationChef1: demandes[index]
-                                                  .validationChef1,
-                                              ValidationChef2: demandes[index]
-                                                  .validationChef2,
-                                            );
-                                          });
-                                    }
-                                    return DemandeCard(
-                                      data: [],
-                                      DemandeType: "",
-                                      date: "",
-                                      dureeabscence: 0,
-                                      Telephone: "",
-                                      ValidationRH: "",
-                                      ValidationChef1: "",
-                                      ValidationChef2: "",
-                                    );
-                                  })
-                              : FutureBuilder(
-                                  future: RemoteService().getPersonnel(1),
-                                  builder: (BuildContext context,
-                                      AsyncSnapshot snapshot) {
-                                    if (snapshot.hasData) {
-                                      Personnel p = snapshot.data;
-                                      return ListView.builder(
-                                          itemCount: 1,
-                                          itemBuilder: (BuildContext context,
-                                              int index) {
-                                            return GestureDetector(
-                                              onTap: () {
-                                                MaterialPageRoute(
-                                                    builder: ((context) =>
-                                                        const LeaveDetailsPage()));
-                                              },
-                                              child: GroupVacation(
-                                                  Name: "${p.nom} ${p.prenom}",
-                                                  Photo: p.photo,
-                                                  PostDate: p.dateNaissance),
-                                            );
-                                          });
-                                    }
-                                    return GroupVacation(
-                                        Name: "",
-                                        Photo: "",
-                                        PostDate: DateTime.now());
-                                  }),
+                                case 1:
+                                  return ListView.builder(
+                                      itemCount: demandes!.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return DemandeCard(
+                                          data: [
+                                            RemoteService().getDemandeApproved()
+                                          ],
+                                          DemandeType:
+                                              demandes[1][0].motifAbsence,
+                                          date:
+                                              "${DateFormat('d MMM, yyyy').format(demandes[1][0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[1][0].dateFin)}",
+                                          dureeabscence: demandes[1][0]
+                                              .dureAbsence
+                                              ?.toInt(),
+                                          Telephone: demandes[1][0].telAbsence,
+                                          ValidationRH:
+                                              demandes[1][0].validationRh,
+                                          ValidationChef1:
+                                              demandes[1][0].validationChef1,
+                                          ValidationChef2:
+                                              demandes[1][0].validationChef2,
+                                        );
+                                      });
+                                default:
+
+                                // RemoteService().getPersonnel(demandes![2][0].idPersonnel!.toInt()),
+                                // return ListView.builder(
+                                //     itemCount: demandes!.length,
+                                //     itemBuilder:
+                                //         (BuildContext context, int index) {
+                                //       return GestureDetector(
+                                //         onTap: () {
+                                //           MaterialPageRoute(
+                                //               builder: ((context) =>
+                                //                   const LeaveDetailsPage()));
+                                //         },
+                                //         child: GroupVacation(
+                                //             Name: "${p.nom} ${p.prenom}",
+                                //             Photo: p.photo,
+                                //             PostDate: p.dateNaissance),
+                                //       );
+                                //     });
+                              }
+                            }
+                            return DemandeCard(
+                              data: [],
+                              DemandeType: "",
+                              date: "",
+                              dureeabscence: 0,
+                              Telephone: "",
+                              ValidationRH: "",
+                              ValidationChef1: "",
+                              ValidationChef2: "",
+                            );
+                          }),
                     ),
                   ],
                 ),

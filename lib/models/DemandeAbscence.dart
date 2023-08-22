@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -107,7 +105,7 @@ class DemandeAbscenceDataProvider extends ChangeNotifier {
 
     try {
       final response =
-          await http.get(Uri.parse('http://192.168.11.157:8800/api/CemosRH/'));
+          await http.get(Uri.parse('http://192.168.1.102:8800/api/CemosRH/'));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         _DemandeAbscence =
@@ -122,12 +120,20 @@ class DemandeAbscenceDataProvider extends ChangeNotifier {
   }
 }
 
-List<DemandeApprovedList> demandeApprovedListFromJson(String str) =>
-    List<DemandeApprovedList>.from(
-        json.decode(str).map((x) => DemandeApprovedList.fromJson(x)));
+// List<DemandeApprovedList> demandeApprovedListFromJson(String str) =>
+//     List<DemandeApprovedList>.from(
+//         json.decode(str).map((x) => DemandeApprovedList.fromJson(x)));
 
-String demandeApprovedListToJson(List<DemandeApprovedList> data) =>
-    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+// String demandeApprovedListToJson(List<DemandeApprovedList> data) =>
+//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+List<List<DemandeApprovedList>> demandeApprovedListFromJson(String str) =>
+    List<List<DemandeApprovedList>>.from(json.decode(str).map((x) =>
+        List<DemandeApprovedList>.from(
+            x.map((x) => DemandeApprovedList.fromJson(x)))));
+
+String demandeApprovedListToJson(List<List<DemandeApprovedList>> data) =>
+    json.encode(List<dynamic>.from(
+        data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
 
 class DemandeApprovedList {
   DateTime dateDebut;

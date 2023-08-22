@@ -15,7 +15,9 @@ class DemandePage extends StatefulWidget {
   State<DemandePage> createState() => _DemandePageState();
 }
 
-String? text;
+bool isAttached = false;
+PlatformFile? file;
+FilePickerResult? result;
 // final Date_d_controller = TextEditingController();
 // final Date_r_controller = TextEditingController();
 final type_conge_controller = TextEditingController();
@@ -173,43 +175,112 @@ class _DemandePageState extends State<DemandePage> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 48),
-                child: InkWell(
-                  onTap: () async {
-                    FilePickerResult? result =
-                        await FilePicker.platform.pickFiles();
-                    if (result != null) {
-                      PlatformFile file = result.files.first;
-                      if (file.extension == "jpg" || file.extension == "pdf") {
-                        // OpenFile.open(file.path!);
-                      }
-                    }
-                    return;
-                  },
-                  splashColor: const Color.fromARGB(24, 66, 164, 245),
-                  borderRadius: BorderRadius.circular(15),
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(24, 66, 164, 245),
-                      border:
-                          Border.all(color: Colors.blue.shade400, width: 2.0),
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Attacher fichier',
-                        style: TextStyle(
-                          color: Colors.blue.shade400,
-                          fontSize: 16,
+              Container(child: Text("Le fichier attechee:  ${file!.name}")),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.021),
+              isAttached == false
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 48),
+                      child: InkWell(
+                        onTap: () async {
+                          result = await FilePicker.platform.pickFiles();
+                          if (result != null) {
+                            file = result!.files.first;
+                            if (file!.extension == "jpg" ||
+                                file!.extension == "pdf") {
+                              setState(() {
+                                isAttached = true;
+                              });
+                            }
+                          }
+                          return;
+                        },
+                        splashColor: const Color.fromARGB(24, 66, 164, 245),
+                        borderRadius: BorderRadius.circular(15),
+                        child: Container(
+                          padding: const EdgeInsets.all(15),
+                          decoration: BoxDecoration(
+                            color: const Color.fromARGB(24, 66, 164, 245),
+                            border: Border.all(
+                                color: Colors.blue.shade400, width: 2.0),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'Attacher fichier',
+                              style: TextStyle(
+                                color: Colors.blue.shade400,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 48),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              result = await FilePicker.platform.pickFiles();
+                              if (result != null) {
+                                file = result!.files.first;
+                                if (file!.extension == "jpg" ||
+                                    file!.extension == "pdf") {}
+                              }
+                              return;
+                            },
+                            splashColor: const Color.fromARGB(24, 66, 164, 245),
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(24, 66, 164, 245),
+                                border: Border.all(
+                                    color: Colors.blue.shade400, width: 2.0),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Modifier',
+                                  style: TextStyle(
+                                    color: Colors.blue.shade400,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () async {
+                              OpenFile.open(file!.path!);
+                            },
+                            splashColor: const Color.fromARGB(24, 66, 164, 245),
+                            borderRadius: BorderRadius.circular(15),
+                            child: Container(
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                color: const Color.fromARGB(24, 66, 164, 245),
+                                border: Border.all(
+                                    color: Colors.blue.shade400, width: 2.0),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Consulter',
+                                  style: TextStyle(
+                                    color: Colors.blue.shade400,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ),
-              ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.042),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               L_Button(
                   onTap: () {
                     if (selectedDateR.isAfter(selectedDateD) ||
