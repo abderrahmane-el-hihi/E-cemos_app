@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'DemandeAbscence.dart';
-import 'Personnel.dart';
+import '../models/DemandeAbscence.dart';
+import '../models/Personnel.dart';
 import 'package:http/http.dart' as http;
 
 class RemoteService {

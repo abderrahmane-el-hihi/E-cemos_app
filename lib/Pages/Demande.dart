@@ -1,11 +1,10 @@
 import 'dart:convert';
-import 'package:cemos_app/SwitchPages.dart';
-import 'package:cemos_app/models/service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'components/button.dart';
+import '../components/button.dart';
+import 'SwitchPages.dart';
 import 'package:http/http.dart' as http;
 
 class DemandePage extends StatefulWidget {

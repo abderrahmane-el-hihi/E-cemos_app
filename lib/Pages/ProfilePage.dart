@@ -1,11 +1,11 @@
-import 'package:cemos_app/LoginPage.dart';
-import 'package:cemos_app/SettingsPage.dart';
 import 'package:cemos_app/models/Personnel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../services/service.dart';
+import 'LoginPage.dart';
 import 'MonProfil.dart';
-import 'models/service.dart';
+import 'SettingsPage.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});

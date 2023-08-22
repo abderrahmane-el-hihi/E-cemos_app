@@ -1,12 +1,12 @@
-import 'package:cemos_app/SwitchPages.dart';
 import 'package:cemos_app/models/DemandeAbscence.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import 'components/button.dart';
-import 'models/service.dart';
+import '../components/button.dart';
+import '../services/service.dart';
+import 'SwitchPages.dart';
 
 class LeaveDetailsPage extends StatefulWidget {
   const LeaveDetailsPage({super.key});
@@ -364,7 +364,8 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
 }
 
 class Demandedetails extends StatefulWidget {
-  const Demandedetails({super.key});
+  final List<dynamic> data;
+  const Demandedetails({super.key, required this.data});
 
   @override
   State<Demandedetails> createState() => _DemandedetailsState();

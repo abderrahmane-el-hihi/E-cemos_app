@@ -1,14 +1,13 @@
-import 'package:cemos_app/MonProfil.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../models/Personnel.dart';
+import '../services/service.dart';
+import 'MonProfil.dart';
 import 'NotifsPage.dart';
-import 'models/Personnel.dart';
 
-import 'models/service.dart';
-
-import 'utils/date_utils.dart' as date_util;
+import '/utils/date_utils.dart' as date_util;
 import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {

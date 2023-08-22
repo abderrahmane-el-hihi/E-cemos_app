@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../components/button.dart';
+import '../models/DemandeAbscence.dart';
+import '../models/DemandeCard.dart';
+import '../models/Personnel.dart';
+import '../services/service.dart';
 import 'Demande.dart';
 import 'LeaveDetailsPage.dart';
-import 'components/button.dart';
-import 'models/DemandeAbscence.dart';
-import 'models/DemandeCard.dart';
-import 'models/Personnel.dart';
-import 'models/service.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -593,29 +593,23 @@ class _PageState extends State<CalendarPage> {
                                       itemCount: demandes!.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
-                                        return GestureDetector(
-                                          onTap: () {
-                                            MaterialPageRoute(
-                                                builder: ((context) =>
-                                                    const Demandedetails()));
-                                          },
-                                          child: DemandeCard(
-                                            DemandeType:
-                                                "${demandes[index].motifAbsence}",
-                                            date:
-                                                "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
-                                            dureeabscence: demandes[index]
-                                                .dureAbsence
-                                                ?.toInt(),
-                                            Telephone:
-                                                "${demandes[index].telAbsence}",
-                                            ValidationRH:
-                                                "${demandes[index].validationRh}",
-                                            ValidationChef1:
-                                                "${demandes[index].validationChef1}",
-                                            ValidationChef2:
-                                                "${demandes[index].validationChef2}",
-                                          ),
+                                        //redirict to Demandedetails() Page
+                                        return DemandeCard(
+                                          DemandeType:
+                                              "${demandes[index].motifAbsence}",
+                                          date:
+                                              "${DateFormat('d MMM, yyyy').format(demandes[index].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[index].dateFin)}",
+                                          dureeabscence: demandes[index]
+                                              .dureAbsence
+                                              ?.toInt(),
+                                          Telephone:
+                                              "${demandes[index].telAbsence}",
+                                          ValidationRH:
+                                              "${demandes[index].validationRh}",
+                                          ValidationChef1:
+                                              "${demandes[index].validationChef1}",
+                                          ValidationChef2:
+                                              "${demandes[index].validationChef2}",
                                         );
                                       });
                                 }

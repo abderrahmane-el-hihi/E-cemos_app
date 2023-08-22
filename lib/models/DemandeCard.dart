@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../LeaveDetailsPage.dart';
+import '../Pages/LeaveDetailsPage.dart';
 import '../components/button.dart';
 
 class DemandeCard extends StatefulWidget {

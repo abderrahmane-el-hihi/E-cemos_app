@@ -2,7 +2,7 @@ import 'package:cemos_app/models/Personnel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'models/service.dart';
+import '../services/service.dart';
 
 class MonProfil extends StatefulWidget {
   const MonProfil({super.key});

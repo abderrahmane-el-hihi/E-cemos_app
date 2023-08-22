@@ -2,9 +2,9 @@ import 'package:cemos_app/test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'LoginPage.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'Pages/LoginPage.dart';
 import 'components/button.dart';
 import 'models/Personnel.dart';
 

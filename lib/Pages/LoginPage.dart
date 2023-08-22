@@ -1,10 +1,10 @@
-import 'package:cemos_app/SwitchPages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'components/button.dart';
-import 'models/service.dart';
+import '../components/button.dart';
+import '../services/service.dart';
+import 'SwitchPages.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
