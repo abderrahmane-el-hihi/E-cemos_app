@@ -98,11 +98,10 @@ class _PageState extends State<CalendarPage> {
                     SizedBox(
                         height: MediaQuery.of(context).size.height * 0.022),
                     FutureBuilder(
-                        future: RemoteService().getPersonnel(1),
+                        future: RemoteService().getCongeSolde(),
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot) {
                           if (snapshot.hasData) {
-                            Personnel p = snapshot.data;
                             return Column(
                               children: [
                                 Padding(
@@ -149,7 +148,9 @@ class _PageState extends State<CalendarPage> {
                                                           FontWeight.w500,
                                                       fontSize: 14,
                                                     )),
-                                                Text('${p.cardNumber}',
+                                                Text(
+                                                    snapshot.data[
+                                                        'vacation_balance'],
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -199,7 +200,9 @@ class _PageState extends State<CalendarPage> {
                                                           FontWeight.w500,
                                                       fontSize: 14,
                                                     )),
-                                                Text('${p.cardNumber}',
+                                                Text(
+                                                    snapshot.data[
+                                                        'remaining_last_year'],
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -262,7 +265,9 @@ class _PageState extends State<CalendarPage> {
                                                           FontWeight.w500,
                                                       fontSize: 14,
                                                     )),
-                                                Text('${p.cardNumber}',
+                                                Text(
+                                                    snapshot.data[
+                                                        'consumed_this_year'],
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -311,7 +316,9 @@ class _PageState extends State<CalendarPage> {
                                                           FontWeight.w500,
                                                       fontSize: 14,
                                                     )),
-                                                Text('${p.cardNumber}',
+                                                Text(
+                                                    snapshot.data[
+                                                        'remaining_this_year'],
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.w500,
@@ -590,28 +597,31 @@ class _PageState extends State<CalendarPage> {
                                   snapshot.data;
                               switch (_selectedButtonIndex) {
                                 case 0:
+                                  int idList = 0;
                                   return ListView.builder(
                                       itemCount: demandes!.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         return DemandeCard(
-                                          data: [
-                                            RemoteService().getDemandeApproved()
-                                          ],
+                                          idList: idList,
+                                          id: 0,
+                                          data: RemoteService()
+                                              .getDemandeApproved(),
                                           DemandeType:
-                                              demandes[0][0].motifAbsence,
+                                              demandes[idList][0].motifAbsence,
                                           date:
-                                              "${DateFormat('d MMM, yyyy').format(demandes[0][0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[0][0].dateFin)}",
-                                          dureeabscence: demandes[0][0]
+                                              "${DateFormat('d MMM, yyyy').format(demandes[idList][0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[idList][0].dateFin)}",
+                                          dureeabscence: demandes[idList][0]
                                               .dureAbsence
                                               ?.toInt(),
-                                          Telephone: demandes[0][0].telAbsence,
+                                          Telephone:
+                                              demandes[idList][0].telAbsence,
                                           ValidationRH:
-                                              demandes[0][0].validationRh,
-                                          ValidationChef1:
-                                              demandes[0][0].validationChef1,
-                                          ValidationChef2:
-                                              demandes[0][0].validationChef2,
+                                              demandes[idList][0].validationRh,
+                                          ValidationChef1: demandes[idList][0]
+                                              .validationChef1,
+                                          ValidationChef2: demandes[idList][0]
+                                              .validationChef2,
                                         );
                                       });
                                 case 1:
@@ -619,49 +629,60 @@ class _PageState extends State<CalendarPage> {
                                       itemCount: demandes!.length,
                                       itemBuilder:
                                           (BuildContext context, int index) {
+                                        int idList = 1;
                                         return DemandeCard(
-                                          data: [
-                                            RemoteService().getDemandeApproved()
-                                          ],
+                                          idList: idList,
+                                          id: 1,
+                                          data: RemoteService()
+                                              .getDemandeApproved(),
                                           DemandeType:
-                                              demandes[1][0].motifAbsence,
+                                              demandes[idList][0].motifAbsence,
                                           date:
-                                              "${DateFormat('d MMM, yyyy').format(demandes[1][0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[1][0].dateFin)}",
-                                          dureeabscence: demandes[1][0]
+                                              "${DateFormat('d MMM, yyyy').format(demandes[idList][0].dateDebut)} - ${DateFormat('d MMM, yyyy').format(demandes[idList][0].dateFin)}",
+                                          dureeabscence: demandes[idList][0]
                                               .dureAbsence
                                               ?.toInt(),
-                                          Telephone: demandes[1][0].telAbsence,
+                                          Telephone:
+                                              demandes[idList][0].telAbsence,
                                           ValidationRH:
-                                              demandes[1][0].validationRh,
-                                          ValidationChef1:
-                                              demandes[1][0].validationChef1,
-                                          ValidationChef2:
-                                              demandes[1][0].validationChef2,
+                                              demandes[idList][0].validationRh,
+                                          ValidationChef1: demandes[idList][0]
+                                              .validationChef1,
+                                          ValidationChef2: demandes[idList][0]
+                                              .validationChef2,
                                         );
                                       });
-                                default:
-
-                                // RemoteService().getPersonnel(demandes![2][0].idPersonnel!.toInt()),
-                                // return ListView.builder(
-                                //     itemCount: demandes!.length,
-                                //     itemBuilder:
-                                //         (BuildContext context, int index) {
-                                //       return GestureDetector(
-                                //         onTap: () {
-                                //           MaterialPageRoute(
-                                //               builder: ((context) =>
-                                //                   const LeaveDetailsPage()));
-                                //         },
-                                //         child: GroupVacation(
-                                //             Name: "${p.nom} ${p.prenom}",
-                                //             Photo: p.photo,
-                                //             PostDate: p.dateNaissance),
-                                //       );
-                                //     });
+                                case 2:
+                                  //TODO GroupVacation class
+                                  FutureBuilder(
+                                      future: RemoteService().getPersonnel(
+                                          demandes![2][0].idPersonnel!.toInt()),
+                                      builder: (BuildContext context,
+                                          AsyncSnapshot snapshot) {
+                                        if (snapshot.hasData) {
+                                          Personnel p = snapshot.data;
+                                          return ListView.builder(
+                                              itemCount: demandes.length,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return GroupVacation(
+                                                    data: RemoteService()
+                                                        .getPersonnel(1),
+                                                    id: 1,
+                                                    Name:
+                                                        "${p.nom} ${p.prenom}",
+                                                    Photo: p.photo,
+                                                    PostDate: p.dateNaissance);
+                                              });
+                                        }
+                                        return const Text("No Data");
+                                      });
                               }
                             }
                             return DemandeCard(
-                              data: [],
+                              id: 0,
+                              idList: 0,
                               DemandeType: "",
                               date: "",
                               dureeabscence: 0,

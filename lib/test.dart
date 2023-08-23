@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:network_info_plus/network_info_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'Pages/LeaveDetailsPage.dart';
 import 'models/DemandeAbscence.dart';
 import 'models/DemandeCard.dart';
 import 'models/Personnel.dart';
@@ -104,6 +106,8 @@ class _twidgetState extends State<twidget> {
     }
   }
 
+  final _selectedButtonIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,27 +121,16 @@ class _twidgetState extends State<twidget> {
                   // printIps();
                   // getPublicIP();
                   // LoadData();
-                  GetApiData();
+                  // GetApiData();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LeaveDetailsPage(
+                                data: RemoteService().getPersonnel(1),
+                                id: 1,
+                              )));
                 },
                 child: Text('click')),
-            FutureBuilder(
-                future: RemoteService().getDemandeList(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    List<DemandeAbscence>? demandes = snapshot.data;
-                    return DemandeCard(
-                      data: [],
-                      DemandeType: "${demandes![1].motifAbsence}",
-                      date: "${demandes[2].dateDebut} ${demandes[2].dateFin}",
-                      dureeabscence: demandes[1].dureAbsence?.toInt(),
-                      Telephone: "${demandes[3].telAbsence}",
-                      ValidationRH: "${demandes[1].validationRh}",
-                      ValidationChef1: "${demandes[1].validationChef1}",
-                      ValidationChef2: "${demandes[1].validationChef2}",
-                    );
-                  }
-                  return Center();
-                }),
           ],
         ),
       )),

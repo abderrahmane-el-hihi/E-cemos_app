@@ -15,7 +15,8 @@ class DemandeCard extends StatefulWidget {
   String? ValidationRH;
   String? ValidationChef1;
   String? ValidationChef2;
-  List? data;
+  Future? data;
+  int id, idList;
   DemandeCard({
     super.key,
     required this.DemandeType,
@@ -26,7 +27,9 @@ class DemandeCard extends StatefulWidget {
     required this.ValidationRH,
     required this.ValidationChef1,
     required this.ValidationChef2,
-    required this.data,
+    this.data,
+    required this.id,
+    required this.idList,
   });
 
   @override
@@ -38,188 +41,208 @@ class _DemandeCardState extends State<DemandeCard> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15),
-          ),
-          child: SizedBox(
-            child: ListTile(
-              title: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.DemandeType ?? "",
-                            style: const TextStyle(
-                                color: Colors.black, fontFamily: "Poppins"),
-                          ),
-                          Text(
-                            // '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
-                            widget.date ?? "",
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                fontSize: 12),
-                          )
-                        ],
-                      ),
-                      widget.ValidationRH == null ||
-                              widget.ValidationRH == "Pending" ||
-                              widget.ValidationChef1 == null ||
-                              widget.ValidationChef1 == "Pending" ||
-                              widget.ValidationChef2 == null ||
-                              widget.ValidationChef2 == "Pending"
-                          ? Container(
-                              decoration: BoxDecoration(
-                                  color: const Color.fromARGB(24, 255, 168, 38),
-                                  borderRadius: BorderRadius.circular(5)),
-                              padding: const EdgeInsets.all(4),
-                              child: Text(
-                                'En cours',
-                                style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.orange.shade400,
-                                    fontFamily: "Poppins"),
-                              ),
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Demandedetails(
+                          idList: widget.idList,
+                          data: widget.data,
+                          id: widget.id,
+                        )));
+          },
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: SizedBox(
+              child: ListTile(
+                title: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.DemandeType ?? "",
+                              style: const TextStyle(
+                                  color: Colors.black, fontFamily: "Poppins"),
+                            ),
+                            Text(
+                              // '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
+                              widget.date ?? "",
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "Poppins",
+                                  fontSize: 12),
                             )
-                          : widget.ValidationRH == "Approved" &&
-                                      widget.ValidationChef1 == "Approved" ||
-                                  widget.ValidationRH == "Approved" &&
-                                      widget.ValidationChef1 == "Pending" ||
-                                  widget.ValidationRH == "Pending" &&
-                                      widget.ValidationChef1 == "Approved"
-                              ? Container(
-                                  decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          24, 102, 187, 106),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text(
-                                    'Approuvé',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.green.shade400,
-                                        fontFamily: "Poppins"),
-                                  ),
-                                )
-                              : Container(
-                                  decoration: BoxDecoration(
-                                      color:
-                                          const Color.fromARGB(24, 239, 83, 80),
-                                      borderRadius: BorderRadius.circular(5)),
-                                  padding: const EdgeInsets.all(4),
-                                  child: Text(
-                                    'Refusé',
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.red.shade400,
-                                        fontFamily: "Poppins"),
-                                  ),
-                                )
-                    ],
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.012),
-                  Divider(
-                    color: Colors.grey.shade300,
-                    thickness: 1,
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.012),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Durée d\'abscence',
-                            style:
-                                TextStyle(fontSize: 10, fontFamily: "Poppins"),
-                          ),
-                          Text(
-                            '${widget.dureeabscence} Jours',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                fontFamily: "Poppins"),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Téléphone',
-                            style:
-                                TextStyle(fontSize: 10, fontFamily: "Poppins"),
-                          ),
-                          Text(
-                            '${widget.Telephone}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                fontFamily: "Poppins"),
-                          ),
-                        ],
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Approuvé par',
-                            style:
-                                TextStyle(fontSize: 10, fontFamily: "Poppins"),
-                          ),
-                          Text(
-                            'RH',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                fontFamily: "Poppins"),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.01,
-                  ),
-                  // InkWell(
-                  //   onTap: () {
-                  //     MaterialPageRoute(
-                  //         builder: (context) => Demandedetails(
-                  //               data: widget.data,
-                  //             ));
-                  //   },
-                  //   borderRadius: BorderRadius.circular(8),
-                  //   child: Container(
-                  //     decoration: BoxDecoration(
-                  //         borderRadius: BorderRadius.circular(8),
-                  //         color: const Color.fromARGB(24, 102, 187, 106),
-                  //         border: Border.all(color: Colors.green.shade400)),
-                  //     padding: const EdgeInsets.symmetric(vertical: 8),
-                  //     width: MediaQuery.of(context).size.width * 0.5,
-                  //     child: Row(
-                  //       mainAxisAlignment: MainAxisAlignment.center,
-                  //       children: [
-                  //         const Text("Voir Details"),
-                  //         SizedBox(
-                  //           width: MediaQuery.of(context).size.width * 0.02,
-                  //         ),
-                  //         const Icon(CupertinoIcons.arrow_right),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
-                ],
+                          ],
+                        ),
+                        widget.ValidationRH == null ||
+                                widget.ValidationRH == "Pending" ||
+                                widget.ValidationChef1 == null ||
+                                widget.ValidationChef1 == "Pending" ||
+                                widget.ValidationChef2 == null ||
+                                widget.ValidationChef2 == "Pending"
+                            ? Container(
+                                decoration: BoxDecoration(
+                                    color:
+                                        const Color.fromARGB(24, 255, 168, 38),
+                                    borderRadius: BorderRadius.circular(5)),
+                                padding: const EdgeInsets.all(4),
+                                child: Text(
+                                  'En cours',
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: Colors.orange.shade400,
+                                      fontFamily: "Poppins"),
+                                ),
+                              )
+                            : widget.ValidationRH == "Approved" &&
+                                    widget.ValidationChef1 == "Approved"
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            24, 102, 187, 106),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text(
+                                      'Approuvé',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.green.shade400,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                  )
+                                : Container(
+                                    decoration: BoxDecoration(
+                                        color: const Color.fromARGB(
+                                            24, 239, 83, 80),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    padding: const EdgeInsets.all(4),
+                                    child: Text(
+                                      'Refusé',
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.red.shade400,
+                                          fontFamily: "Poppins"),
+                                    ),
+                                  )
+                      ],
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.012),
+                    Divider(
+                      color: Colors.grey.shade300,
+                      thickness: 1,
+                    ),
+                    SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.012),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Durée d\'abscence',
+                              style: TextStyle(
+                                  fontSize: 10, fontFamily: "Poppins"),
+                            ),
+                            Text(
+                              '${widget.dureeabscence} Jours',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  fontFamily: "Poppins"),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Téléphone',
+                              style: TextStyle(
+                                  fontSize: 10, fontFamily: "Poppins"),
+                            ),
+                            Text(
+                              '${widget.Telephone}',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  fontFamily: "Poppins"),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Approuvé par',
+                              style: TextStyle(
+                                  fontSize: 10, fontFamily: "Poppins"),
+                            ),
+                            widget.ValidationRH == "Pendeing" ||
+                                    widget.ValidationRH == "Pendeing"
+                                ? const Row(
+                                    children: [
+                                      Text(
+                                        '',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            fontFamily: "Poppins"),
+                                      ),
+                                      Text(
+                                        '',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            fontFamily: "Poppins"),
+                                      ),
+                                    ],
+                                  )
+                                : widget.ValidationRH == "Pendeing"
+                                    ? const Row(
+                                        children: [
+                                          Text(
+                                            'Chef',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                fontFamily: "Poppins"),
+                                          ),
+                                        ],
+                                      )
+                                    : const Row(
+                                        children: [
+                                          Text(
+                                            'Chef',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
+                                                fontFamily: "Poppins"),
+                                          ),
+                                        ],
+                                      ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.01,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -236,12 +259,16 @@ class GroupVacation extends StatefulWidget {
   String? Name;
   String Photo;
   DateTime? PostDate;
+  Future? data;
+  int id;
 
   GroupVacation({
     super.key,
     required this.Name,
     required this.Photo,
     required this.PostDate,
+    required this.data,
+    required this.id,
   });
 
   @override
@@ -259,7 +286,10 @@ class GroupVacationState extends State<GroupVacation> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const LeaveDetailsPage()),
+                    builder: (context) => LeaveDetailsPage(
+                          data: widget.data,
+                          id: widget.id,
+                        )),
               );
             },
             child: Container(

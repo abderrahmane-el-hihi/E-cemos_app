@@ -105,7 +105,7 @@ class DemandeAbscenceDataProvider extends ChangeNotifier {
 
     try {
       final response =
-          await http.get(Uri.parse('http://192.168.1.102:8800/api/CemosRH/'));
+          await http.get(Uri.parse('http://192.168.11.157:8800/api/CemosRH/'));
       if (response.statusCode == 200) {
         final jsonData = json.decode(response.body);
         _DemandeAbscence =

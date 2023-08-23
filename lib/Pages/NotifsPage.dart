@@ -84,7 +84,7 @@ class _NotifsPageState extends State<NotifsPage> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const LeaveDetailsPage()));
+                                            LeaveDetailsPage()));
                               },
                               splashColor: Colors.grey.shade200,
                               title: Row(

@@ -175,7 +175,8 @@ class _DemandePageState extends State<DemandePage> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
-              Container(child: Text("Le fichier attechee:  ${file!.name}")),
+              Container(
+                  child: Text("Le fichier attechee:  ${file!.name}" ?? "")),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               isAttached == false
                   ? Padding(
@@ -191,6 +192,33 @@ class _DemandePageState extends State<DemandePage> {
                                 isAttached = true;
                               });
                             }
+                            return showCupertinoDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return CupertinoAlertDialog(
+                                    content: const Text(
+                                      'Le type deoit etre photo ou un PDF',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    actions: [
+                                      CupertinoDialogAction(
+                                        child: const Text(
+                                          'D\'accord',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          setState(() {
+                                            isAttached = false;
+                                          });
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                });
                           }
                           return;
                         },

@@ -5,12 +5,17 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../components/button.dart';
+import '../models/Personnel.dart';
 import '../services/service.dart';
 import 'SwitchPages.dart';
 
 class LeaveDetailsPage extends StatefulWidget {
-  const LeaveDetailsPage({
+  Future? data;
+  int? id;
+  LeaveDetailsPage({
     super.key,
+    this.data,
+    this.id,
   });
 
   @override
@@ -60,23 +65,61 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                     ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.04),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.04),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Titre',
-                            style: TextStyle(color: Colors.grey.shade400),
-                          ),
-                          const Text(
-                            'Titre',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
+                    FutureBuilder(
+                        future: widget.data,
+                        builder:
+                            (BuildContext context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            Personnel p = snapshot.data;
+                            return FutureBuilder(
+                                future: RemoteService().getDemandeApproved(),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot snapshot) {
+                                  if (snapshot.hasData) {
+                                    List<List<DemandeApprovedList>>? demandes =
+                                        snapshot.data;
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 32),
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            'Titre',
+                                            style: TextStyle(
+                                                color: Colors.grey.shade400),
+                                          ),
+                                          Text(
+                                            "${demandes![2][0].motifAbsence}",
+                                            style: TextStyle(fontSize: 18),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                  return Center();
+                                });
+                          }
+                          return Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 32),
+                            width: MediaQuery.of(context).size.width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Titre',
+                                  style: TextStyle(color: Colors.grey.shade400),
+                                ),
+                                const Text(
+                                  '',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.02),
                     const Padding(
                       padding: EdgeInsets.symmetric(horizontal: 32),
@@ -366,8 +409,15 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
 }
 
 class Demandedetails extends StatefulWidget {
-  final List? data;
-  Demandedetails({super.key, required this.data});
+  Future? data;
+  int id, idList;
+
+  Demandedetails({
+    super.key,
+    required this.data,
+    required this.id,
+    required this.idList,
+  });
 
   @override
   State<Demandedetails> createState() => _DemandedetailsState();
@@ -376,8 +426,6 @@ class Demandedetails extends StatefulWidget {
 class _DemandedetailsState extends State<Demandedetails> {
   @override
   Widget build(BuildContext context) {
-    int index = 0;
-    final item = widget.data![index];
     return Scaffold(
       backgroundColor: Colors.grey.shade100,
       body: SafeArea(
@@ -410,10 +458,10 @@ class _DemandedetailsState extends State<Demandedetails> {
           ),
           SizedBox(height: MediaQuery.of(context).size.width * 0.04),
           FutureBuilder(
-              future: RemoteService().getDemandeList(),
+              future: widget.data,
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
-                  List<DemandeAbscence> demandes = snapshot.data;
+                  List<List<DemandeApprovedList>>? demandes = snapshot.data;
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
@@ -434,7 +482,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                                     MediaQuery.of(context).size.height * 0.01,
                               ),
                               Text(
-                                'De: ${demandes[1].dateDebut} \njusqu\'a: ${demandes[1].dateFin}',
+                                'De: ${DateFormat('d MMM, yyyy').format(demandes![widget.idList][widget.id].dateDebut)} \njusqu\'a: ${DateFormat('d MMM, yyyy').format(demandes[widget.idList][widget.id].dateFin)}',
                                 style: const TextStyle(fontSize: 16),
                               ),
                             ],
@@ -466,7 +514,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                                     MediaQuery.of(context).size.height * 0.01,
                               ),
                               Text(
-                                '${demandes[1].dureAbsence?.toInt()} jours',
+                                '${demandes[widget.idList][widget.id].dureAbsence?.toInt()} jours',
                                 style: const TextStyle(fontSize: 16),
                               ),
                             ],
@@ -498,7 +546,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                                     MediaQuery.of(context).size.height * 0.01,
                               ),
                               Text(
-                                '${demandes[1].telAbsence}',
+                                '${demandes[widget.idList][widget.id].telAbsence}',
                                 style: const TextStyle(fontSize: 16),
                               ),
                             ],
@@ -525,61 +573,217 @@ class _DemandedetailsState extends State<Demandedetails> {
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.width * 0.02),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Par chef: ',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(24, 255, 168, 38),
-                                    borderRadius: BorderRadius.circular(5)),
-                                padding: const EdgeInsets.all(4),
-                                child: Text(
-                                  'En cours',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.orange.shade400,
+                        demandes[widget.idList][widget.id].validationChef1 ==
+                                    null ||
+                                demandes[widget.idList][widget.id]
+                                        .validationRh ==
+                                    null
+                            ? Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          'Par chef: ',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: const Color.fromARGB(
+                                                  24, 255, 168, 38),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          padding: const EdgeInsets.all(4),
+                                          child: Text(
+                                            'En cours',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.orange.shade400,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                'Par RH: ',
-                                style: TextStyle(fontSize: 16),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color:
-                                        const Color.fromARGB(24, 255, 168, 38),
-                                    borderRadius: BorderRadius.circular(5)),
-                                padding: const EdgeInsets.all(4),
-                                child: Text(
-                                  'En cours',
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: Colors.orange.shade400,
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.02,
                                   ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          'Par RH: ',
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              color: const Color.fromARGB(
+                                                  24, 255, 168, 38),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          padding: const EdgeInsets.all(4),
+                                          child: Text(
+                                            'En cours',
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              color: Colors.orange.shade400,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : demandes[widget.idList][widget.id]
+                                            .validationChef1 ==
+                                        "Approved" ||
+                                    demandes[widget.idList][widget.id]
+                                            .validationRh ==
+                                        null
+                                ? Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              'Par chef: ',
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      24, 76, 175, 79),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              padding: const EdgeInsets.all(4),
+                                              child: Text(
+                                                'Approvee',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.green.shade400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              'Par RH: ',
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      24, 255, 168, 38),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              padding: const EdgeInsets.all(4),
+                                              child: Text(
+                                                'En cours',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.orange.shade400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              'Par chef: ',
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      24, 255, 168, 38),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              padding: const EdgeInsets.all(4),
+                                              child: Text(
+                                                'En cours',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.orange.shade400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.02,
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              'Par RH: ',
+                                              style: TextStyle(fontSize: 16),
+                                            ),
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: const Color.fromARGB(
+                                                      24, 255, 168, 38),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              padding: const EdgeInsets.all(4),
+                                              child: Text(
+                                                'En cours',
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.orange.shade400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                         SizedBox(
                             height: MediaQuery.of(context).size.width * 0.02),
                         const Padding(

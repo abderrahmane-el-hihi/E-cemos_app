@@ -12,7 +12,7 @@ class RemoteService {
   Future<List<DemandeAbscence>?> getDemandeList() async {
     var client = http.Client();
     var uri =
-        Uri.parse('http://192.168.1.102:8800/api/CemosRH/DemanceAbsence/');
+        Uri.parse('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final cachedData = prefs.getString('cachedData');
     if (cachedData != null) {
@@ -39,7 +39,22 @@ class RemoteService {
   Future<List<List<DemandeApprovedList>>?> getDemandeApproved() async {
     var client = http.Client();
     var uri = Uri.parse(
-        'http://192.168.1.102:8800/api/CemosRH/DemanceAbsence/Validation/1');
+        'http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/Validation/1');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('cachedDemandeApproved');
+    if (cachedData != null) {
+      final response = await client.get(uri);
+      final approvedList = demandeApprovedListFromJson(cachedData);
+
+      if (response.statusCode == 200) {
+        final fetchedData = response.body;
+
+        if (fetchedData != cachedData) {
+          await prefs.setString('cachedDemandeApproved', fetchedData);
+        }
+      }
+      return approvedList;
+    }
     final response = await client.get(uri);
     if (response.statusCode == 200) {
       final data = response.body;
@@ -52,7 +67,7 @@ class RemoteService {
   Future getPersonnel(int id) async {
     var client = http.Client();
     var uri =
-        Uri.parse('http://192.168.1.102:8800/api/CemosRH/Personnelles/$id');
+        Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/$id');
     // final SharedPreferences prefs = await SharedPreferences.getInstance();
     // final cachedData = prefs.getString('cachedData');
     // if (cachedData != null) {
@@ -69,11 +84,38 @@ class RemoteService {
 
   Future getAllPersonnel() async {
     var client = http.Client();
-    var uri = Uri.parse('http://192.168.1.102:8800/api/CemosRH/Personnelles/');
+    var uri = Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/');
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var json = response.body;
       return allpersonnelFromJson(json);
+    }
+  }
+
+  Future getCongeSolde() async {
+    var client = http.Client();
+    var uri = Uri.parse(
+        'http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/Conge/1');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('cachedVacationBalance');
+    if (cachedData != null) {
+      final response = await client.get(uri);
+      final data = json.decode(cachedData);
+
+      if (response.statusCode == 200) {
+        final fetchedData = json.decode(response.body);
+
+        if (fetchedData != cachedData) {
+          await prefs.setString('cachedVacationBalance', fetchedData);
+        }
+      }
+      return data;
+    }
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+      print(jsonData);
+      return jsonData;
     }
   }
 
