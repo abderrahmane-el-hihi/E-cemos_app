@@ -175,8 +175,7 @@ class _DemandePageState extends State<DemandePage> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
-              Container(
-                  child: Text("Le fichier attechee:  ${file!.name}" ?? "")),
+              Container(child: Text("Le fichier attechee:  ${file!.name}")),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               isAttached == false
                   ? Padding(

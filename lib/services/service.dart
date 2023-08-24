@@ -76,9 +76,9 @@ class RemoteService {
     // }
     var response = await client.get(uri);
     if (response.statusCode == 200) {
-      var json = response.body;
-      // await prefs.setString('cachedData', json);
-      return personnelFromJson(json);
+      var data = response.body;
+      // await prefs.setString('cachedData', data);
+      return personnelFromJson(data);
     }
   }
 
@@ -114,7 +114,7 @@ class RemoteService {
     var response = await client.get(uri);
     if (response.statusCode == 200) {
       var jsonData = json.decode(response.body);
-      print(jsonData);
+
       return jsonData;
     }
   }

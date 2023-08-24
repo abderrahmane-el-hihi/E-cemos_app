@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import '../components/MouvementCard.dart';
 import '../models/Personnel.dart';
 import '../services/service.dart';
 import 'MonProfil.dart';
@@ -188,9 +189,9 @@ class _HomePageState extends State<HomePage> {
                                           ),
                                         ],
                                       ),
-                                      Text(
+                                      const Text(
                                         'Service IT',
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -304,8 +305,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 SizedBox(height: MediaQuery.of(context).size.height * 0.012),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -330,131 +331,21 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Container(
+                                  MouvementCard(
+                                    isColumn: true,
+                                    crdTitle: 'Date d\'entrée',
+                                    icon: CupertinoIcons.square_arrow_right,
+                                    time: '10:00',
                                     width: MediaQuery.of(context).size.width *
                                         0.43,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.135,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: Colors.grey.shade300,
-                                        )),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.012),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                    color: const Color.fromARGB(
-                                                        24, 66, 164, 245),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                padding:
-                                                    const EdgeInsets.all(4),
-                                                child: const Icon(CupertinoIcons
-                                                    .square_arrow_right)),
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.01),
-                                            const Text('Date d\'entrée',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                )),
-                                          ],
-                                        ),
-                                        Text('10:00',
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500)),
-                                        const Text('A temps',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.012),
-                                      ],
-                                    ),
                                   ),
-                                  Container(
+                                  MouvementCard(
+                                    isColumn: true,
+                                    crdTitle: 'Date sortie',
+                                    icon: CupertinoIcons.square_arrow_left,
+                                    time: '18:00',
                                     width: MediaQuery.of(context).size.width *
                                         0.43,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.135,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(15),
-                                        border: Border.all(
-                                          width: 1,
-                                          color: Colors.grey.shade300,
-                                        )),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.012),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Container(
-                                                decoration: BoxDecoration(
-                                                    color: const Color.fromARGB(
-                                                        24, 66, 164, 245),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                                padding:
-                                                    const EdgeInsets.all(4),
-                                                child: const Icon(CupertinoIcons
-                                                    .square_arrow_left)),
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.01),
-                                            const Text('Date sortie',
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                )),
-                                          ],
-                                        ),
-                                        Text('18:00',
-                                            style: const TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w500)),
-                                        const Text('A temps',
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                            )),
-                                        SizedBox(
-                                            height: MediaQuery.of(context)
-                                                    .size
-                                                    .height *
-                                                0.012),
-                                      ],
-                                    ),
                                   ),
                                 ],
                               ),
@@ -465,55 +356,14 @@ class _HomePageState extends State<HomePage> {
                             Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 16),
-                              child: Container(
+                              child: MouvementCard(
+                                isColumn: false,
+                                crdTitle: 'Total jours \ntravaillées',
+                                icon: CupertinoIcons.calendar_today,
+                                size: 32,
+                                time: '23 Jours',
+                                fontsize: 14,
                                 width: MediaQuery.of(context).size.width,
-                                // height: 110,
-
-                                height:
-                                    MediaQuery.of(context).size.height * 0.135,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(
-                                      width: 1,
-                                      color: Colors.grey.shade300,
-                                    )),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                color: const Color.fromARGB(
-                                                    24, 66, 164, 245),
-                                                borderRadius:
-                                                    BorderRadius.circular(5)),
-                                            padding: const EdgeInsets.all(4),
-                                            child: const Icon(
-                                              CupertinoIcons.calendar_today,
-                                              size: 32,
-                                            )),
-                                        SizedBox(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.03),
-                                        const Text('Total jours \ntravaillées',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                            )),
-                                      ],
-                                    ),
-                                    Text('23',
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500)),
-                                  ],
-                                ),
                               ),
                             ),
                           ],

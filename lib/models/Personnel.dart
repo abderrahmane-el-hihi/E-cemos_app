@@ -27,7 +27,7 @@ class Personnel {
   String statut;
   String genre;
   String cin;
-  int idPersonnelles;
+  int? idPersonnelles;
   DateTime dateNaissance;
   String matricule;
   String lieuNaissance;

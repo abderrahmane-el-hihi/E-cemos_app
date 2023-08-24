@@ -93,7 +93,8 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                           ),
                                           Text(
                                             "${demandes![2][0].motifAbsence}",
-                                            style: TextStyle(fontSize: 18),
+                                            style:
+                                                const TextStyle(fontSize: 18),
                                           ),
                                         ],
                                       ),

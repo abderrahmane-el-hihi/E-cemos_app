@@ -8,7 +8,7 @@ import 'package:network_info_plus/network_info_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'Pages/LeaveDetailsPage.dart';
 import 'models/DemandeAbscence.dart';
-import 'models/DemandeCard.dart';
+import 'components/DemandeCard.dart';
 import 'models/Personnel.dart';
 
 import 'services/service.dart';

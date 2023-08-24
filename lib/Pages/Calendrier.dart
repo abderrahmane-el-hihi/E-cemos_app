@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../components/GroupVacation.dart';
+import '../components/VacationBalanceCard.dart';
 import '../components/button.dart';
 import '../models/DemandeAbscence.dart';
-import '../models/DemandeCard.dart';
+import '../components/DemandeCard.dart';
 import '../models/Personnel.dart';
 import '../services/service.dart';
 import 'Demande.dart';
-import 'LeaveDetailsPage.dart';
 
 class CalendarPage extends StatefulWidget {
   const CalendarPage({super.key});
@@ -20,7 +21,7 @@ class CalendarPage extends StatefulWidget {
 
 class _PageState extends State<CalendarPage> {
   List<bool> isSelected = [true, false, false];
-  List<String> OptionsList = [
+  List<String> optionsList = [
     'Demandes \nde Congé',
     'Validation',
     'Mon\néquipe',
@@ -111,109 +112,22 @@ class _PageState extends State<CalendarPage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 66, 164, 245),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.blue.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text('Droit annuel',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                    )),
-                                                Text(
-                                                    snapshot.data[
-                                                        'vacation_balance'],
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: Colors
-                                                            .blue.shade400)),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 102, 187, 106),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.green.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text(
-                                                    'Reste anneé \ndernière',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                    )),
-                                                Text(
-                                                    snapshot.data[
-                                                        'remaining_last_year'],
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: Colors
-                                                            .green.shade400)),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      VacationBalanceCard(
+                                          color: Colors.blue.shade400,
+                                          backgroundColor: const Color.fromARGB(
+                                              24, 66, 164, 245),
+                                          data:
+                                              snapshot.data['vacation_balance'],
+                                          vacationBalanceString:
+                                              'Droit annuel'),
+                                      VacationBalanceCard(
+                                          color: Colors.green.shade400,
+                                          backgroundColor: const Color.fromARGB(
+                                              24, 102, 187, 106),
+                                          data: snapshot
+                                              .data['remaining_last_year'],
+                                          vacationBalanceString:
+                                              'Reste anneé \ndernière'),
                                     ],
                                   ),
                                 ),
@@ -227,109 +141,21 @@ class _PageState extends State<CalendarPage> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 38, 197, 218),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.cyan.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text(
-                                                    'Consommation \ncette anneé',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                    )),
-                                                Text(
-                                                    snapshot.data[
-                                                        'consumed_this_year'],
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: Colors
-                                                            .cyan.shade400)),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.43,
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.135,
-                                        decoration: BoxDecoration(
-                                            color: const Color.fromARGB(
-                                                24, 239, 83, 80),
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            border: Border.all(
-                                              width: 1,
-                                              color: Colors.red.shade400,
-                                            )),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.022),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
-                                              children: [
-                                                const Text('Reste',
-                                                    style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontSize: 14,
-                                                    )),
-                                                Text(
-                                                    snapshot.data[
-                                                        'remaining_this_year'],
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontSize: 16,
-                                                        color: Colors
-                                                            .red.shade400)),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ),
+                                      VacationBalanceCard(
+                                          color: Colors.cyan.shade400,
+                                          backgroundColor: const Color.fromARGB(
+                                              24, 38, 197, 218),
+                                          data: snapshot
+                                              .data['consumed_this_year'],
+                                          vacationBalanceString:
+                                              'Consommation \ncette anneé'),
+                                      VacationBalanceCard(
+                                          color: Colors.red.shade400,
+                                          backgroundColor: const Color.fromARGB(
+                                              24, 239, 83, 80),
+                                          data: snapshot
+                                              .data['remaining_this_year'],
+                                          vacationBalanceString: 'Reste'),
                                     ],
                                   ),
                                 ),
@@ -345,86 +171,19 @@ class _PageState extends State<CalendarPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.43,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.135,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              24, 66, 164, 245),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: Colors.blue.shade400,
-                                          )),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.022),
-                                          const Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text('Droit annuel',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                  )),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.43,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.135,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              24, 102, 187, 106),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: Colors.green.shade400,
-                                          )),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.022),
-                                          const Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text('Reste anneé \ndernière',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                  )),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    VacationBalanceCard(
+                                        color: Colors.blue.shade400,
+                                        backgroundColor: const Color.fromARGB(
+                                            24, 66, 164, 245),
+                                        data: '',
+                                        vacationBalanceString: 'Droit annuel'),
+                                    VacationBalanceCard(
+                                        color: Colors.green.shade400,
+                                        backgroundColor: const Color.fromARGB(
+                                            24, 102, 187, 106),
+                                        data: '',
+                                        vacationBalanceString:
+                                            'Reste anneé \ndernière'),
                                   ],
                                 ),
                               ),
@@ -438,91 +197,19 @@ class _PageState extends State<CalendarPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.43,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.135,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              24, 38, 197, 218),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: Colors.cyan.shade400,
-                                          )),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.022),
-                                          const Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Text('Consommation \ncette anneé',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                  )),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.43,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.135,
-                                      decoration: BoxDecoration(
-                                          color: const Color.fromARGB(
-                                              24, 239, 83, 80),
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          border: Border.all(
-                                            width: 1,
-                                            color: Colors.red.shade400,
-                                          )),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.022),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              SizedBox(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.012),
-                                              const Text('Reste',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 14,
-                                                  )),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                    VacationBalanceCard(
+                                        color: Colors.cyan.shade400,
+                                        backgroundColor: const Color.fromARGB(
+                                            24, 38, 197, 218),
+                                        data: '',
+                                        vacationBalanceString:
+                                            'Consommation \ncette anneé'),
+                                    VacationBalanceCard(
+                                        color: Colors.red.shade400,
+                                        backgroundColor: const Color.fromARGB(
+                                            24, 239, 83, 80),
+                                        data: '',
+                                        vacationBalanceString: 'Reste'),
                                   ],
                                 ),
                               ),
@@ -570,7 +257,7 @@ class _PageState extends State<CalendarPage> {
                                   ),
                                   child: Center(
                                     child: Text(
-                                      OptionsList[index],
+                                      optionsList[index],
                                       style: TextStyle(
                                           fontSize: 12,
                                           color: isSelected[index]
@@ -631,6 +318,7 @@ class _PageState extends State<CalendarPage> {
                                           (BuildContext context, int index) {
                                         int idList = 1;
                                         return DemandeCard(
+                                          //
                                           idList: idList,
                                           id: 1,
                                           data: RemoteService()
@@ -654,30 +342,34 @@ class _PageState extends State<CalendarPage> {
                                       });
                                 case 2:
                                   //TODO GroupVacation class
-                                  FutureBuilder(
-                                      future: RemoteService().getPersonnel(
-                                          demandes![2][0].idPersonnel!.toInt()),
-                                      builder: (BuildContext context,
-                                          AsyncSnapshot snapshot) {
-                                        if (snapshot.hasData) {
-                                          Personnel p = snapshot.data;
-                                          return ListView.builder(
-                                              itemCount: demandes.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return GroupVacation(
-                                                    data: RemoteService()
-                                                        .getPersonnel(1),
-                                                    id: 1,
-                                                    Name:
-                                                        "${p.nom} ${p.prenom}",
-                                                    Photo: p.photo,
-                                                    PostDate: p.dateNaissance);
-                                              });
-                                        }
-                                        return const Text("No Data");
-                                      });
+                                  List<dynamic> l = [1, 2];
+                                  for (int idPerso in demandes![2] ?? l) {
+                                    FutureBuilder(
+                                        future: RemoteService()
+                                            .getPersonnel(idPerso),
+                                        builder: (BuildContext context,
+                                            AsyncSnapshot snapshot) {
+                                          if (snapshot.hasData) {
+                                            Personnel p = snapshot.data;
+                                            return ListView.builder(
+                                                itemCount: demandes.length,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return GroupVacation(
+                                                      data: RemoteService()
+                                                          .getPersonnel(1),
+                                                      id: 1,
+                                                      Name:
+                                                          "${p.nom} ${p.prenom}",
+                                                      Photo: p.photo,
+                                                      PostDate:
+                                                          p.dateNaissance);
+                                                });
+                                          }
+                                          return const Text("No Data");
+                                        });
+                                  }
                               }
                             }
                             return DemandeCard(
