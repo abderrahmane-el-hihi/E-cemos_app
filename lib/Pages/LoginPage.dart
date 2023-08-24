@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../components/TextFieldClass.dart';
 import '../components/button.dart';
 import '../services/service.dart';
 import 'SwitchPages.dart';
@@ -87,73 +88,19 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.14),
 
                   //email textfield
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: TextField(
+                  TextFieldClass(
                       controller: emailcontroller,
-                      decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(15),
-                              borderSide: const BorderSide(
-                                  color: Color.fromRGBO(179, 179, 179, 1))),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide:
-                                BorderSide(color: Colors.green.shade400),
-                          ),
-                          fillColor: Colors.transparent,
-                          filled: true,
-                          label: const Text(
-                            'E-mail',
-                            style: TextStyle(
-                              fontWeight: FontWeight.w400,
-                            ),
-                          )),
-                    ),
-                  ),
-
+                      obscureText: false,
+                      title: 'E-mail'),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   //password textfield
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: TextField(
-                      obscureText: isobsecure,
+                  TextFieldClass(
+                      maxLines: 1,
+                      suffIcon: Icons.visibility,
+                      suffIcon2: Icons.visibility_off_rounded,
                       controller: passwcontroller,
-                      decoration: InputDecoration(
-                        label: const Text(
-                          'mot de passe',
-                        ),
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isobsecure = !isobsecure;
-                            });
-                          },
-                          child: Icon(
-                            isobsecure
-                                ? Icons.visibility
-                                : Icons.visibility_off_rounded,
-                            color: isobsecure
-                                ? Colors.green.shade400
-                                : Colors.grey,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                            borderSide: const BorderSide(
-                                color: Color.fromRGBO(179, 179, 179, 1))),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(15),
-                          borderSide: BorderSide(color: Colors.green.shade400),
-                        ),
-                        fillColor: Colors.transparent,
-                        filled: true,
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.w400,
-                            color: Color.fromRGBO(179, 179, 179, 1)),
-                      ),
-                    ),
-                  ),
+                      obscureText: isobsecure,
+                      title: 'mot de passe'),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.01),
 
                   SizedBox(height: MediaQuery.of(context).size.height * 0.1),

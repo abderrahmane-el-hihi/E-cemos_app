@@ -119,6 +119,33 @@ class RemoteService {
     }
   }
 
+  Future getAbscenceType() async {
+    var client = http.Client();
+    var uri =
+        Uri.parse('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final cachedData = prefs.getString('cachedAbscenaveType');
+    if (cachedData != null) {
+      final response = await client.get(uri);
+      final data = json.decode(cachedData);
+
+      if (response.statusCode == 200) {
+        final fetchedData = json.decode(response.body);
+
+        if (fetchedData != cachedData) {
+          await prefs.setString('cachedAbscenaveType', fetchedData);
+        }
+      }
+      return data;
+    }
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var jsonData = json.decode(response.body);
+
+      return jsonData;
+    }
+  }
+
   //methode to check mail/pass
   // Future<bool> checkCredentials(String email, String password) async {
   //   final String apiUrl = 'api url'; // Replace with your API URL.

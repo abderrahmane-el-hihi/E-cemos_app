@@ -672,7 +672,7 @@ class _DemandedetailsState extends State<Demandedetails> {
                                                       BorderRadius.circular(5)),
                                               padding: const EdgeInsets.all(4),
                                               child: Text(
-                                                'Approvee',
+                                                'Approuvée',
                                                 style: TextStyle(
                                                   fontSize: 12,
                                                   color: Colors.green.shade400,

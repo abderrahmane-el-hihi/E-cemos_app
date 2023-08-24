@@ -109,7 +109,6 @@ class _DemandePageState extends State<DemandePage> {
                   decoration: InputDecoration(
                     label: const Text(
                       'Date retour',
-                      style: TextStyle(),
                     ),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15),
@@ -124,7 +123,7 @@ class _DemandePageState extends State<DemandePage> {
                         final DateTime? picked = await showDatePicker(
                           context: context,
                           initialDate: DateTime.now(),
-                          firstDate: DateTime(1900),
+                          firstDate: DateTime(2000),
                           lastDate: DateTime(2100),
                         );
                         if (picked != null && picked != selectedDateR) {
@@ -175,7 +174,7 @@ class _DemandePageState extends State<DemandePage> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
-              Container(child: Text("Le fichier attechee:  ${file!.name}")),
+              // Container(child: Text("Le fichier attechee:  ${file!.name}")),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               isAttached == false
                   ? Padding(
@@ -190,34 +189,36 @@ class _DemandePageState extends State<DemandePage> {
                               setState(() {
                                 isAttached = true;
                               });
-                            }
-                            return showCupertinoDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return CupertinoAlertDialog(
-                                    content: const Text(
-                                      'Le type deoit etre photo ou un PDF',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    actions: [
-                                      CupertinoDialogAction(
-                                        child: const Text(
-                                          'D\'accord',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                          ),
+                            } else {
+                              return showCupertinoDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return CupertinoAlertDialog(
+                                      content: const Text(
+                                        'Le type doit etre photo ou un PDF',
+                                        style: TextStyle(
+                                          fontSize: 16,
                                         ),
-                                        onPressed: () {
-                                          setState(() {
-                                            isAttached = false;
-                                          });
-                                        },
                                       ),
-                                    ],
-                                  );
-                                });
+                                      actions: [
+                                        CupertinoDialogAction(
+                                          child: const Text(
+                                            'D\'accord',
+                                            style: TextStyle(
+                                              fontSize: 14,
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              isAttached = false;
+                                              Navigator.pop(context);
+                                            });
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  });
+                            }
                           }
                           return;
                         },

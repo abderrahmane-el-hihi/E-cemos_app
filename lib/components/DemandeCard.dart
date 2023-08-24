@@ -67,15 +67,14 @@ class _DemandeCardState extends State<DemandeCard> {
                             Text(
                               widget.DemandeType ?? "",
                               style: const TextStyle(
-                                  color: Colors.black, fontFamily: "Poppins"),
+                                color: Colors.black,
+                              ),
                             ),
                             Text(
                               // '${DateFormat('MMM d, yyyy').format(DateTime.now())} - ${DateFormat('MMM d, yyyy').format(DateTime.now())}',
                               widget.date ?? "",
                               style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "Poppins",
-                                  fontSize: 12),
+                                  fontWeight: FontWeight.w500, fontSize: 12),
                             )
                           ],
                         ),
@@ -94,9 +93,9 @@ class _DemandeCardState extends State<DemandeCard> {
                                 child: Text(
                                   'En cours',
                                   style: TextStyle(
-                                      fontSize: 12,
-                                      color: Colors.orange.shade400,
-                                      fontFamily: "Poppins"),
+                                    fontSize: 12,
+                                    color: Colors.orange.shade400,
+                                  ),
                                 ),
                               )
                             : widget.ValidationRH == "Approved" &&
@@ -108,11 +107,11 @@ class _DemandeCardState extends State<DemandeCard> {
                                         borderRadius: BorderRadius.circular(5)),
                                     padding: const EdgeInsets.all(4),
                                     child: Text(
-                                      'Approuvé',
+                                      'Approuvée',
                                       style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.green.shade400,
-                                          fontFamily: "Poppins"),
+                                        fontSize: 12,
+                                        color: Colors.green.shade400,
+                                      ),
                                     ),
                                   )
                                 : Container(
@@ -122,11 +121,11 @@ class _DemandeCardState extends State<DemandeCard> {
                                         borderRadius: BorderRadius.circular(5)),
                                     padding: const EdgeInsets.all(4),
                                     child: Text(
-                                      'Refusé',
+                                      'Refusée',
                                       style: TextStyle(
-                                          fontSize: 12,
-                                          color: Colors.red.shade400,
-                                          fontFamily: "Poppins"),
+                                        fontSize: 12,
+                                        color: Colors.red.shade400,
+                                      ),
                                     ),
                                   )
                       ],
@@ -149,14 +148,15 @@ class _DemandeCardState extends State<DemandeCard> {
                             const Text(
                               'Durée d\'abscence',
                               style: TextStyle(
-                                  fontSize: 10, fontFamily: "Poppins"),
+                                fontSize: 10,
+                              ),
                             ),
                             Text(
                               '${widget.dureeabscence} Jours',
                               style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  fontFamily: "Poppins"),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                              ),
                             ),
                           ],
                         ),
@@ -167,14 +167,15 @@ class _DemandeCardState extends State<DemandeCard> {
                             const Text(
                               'Téléphone',
                               style: TextStyle(
-                                  fontSize: 10, fontFamily: "Poppins"),
+                                fontSize: 10,
+                              ),
                             ),
                             Text(
                               '${widget.Telephone}',
                               style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  fontFamily: "Poppins"),
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                              ),
                             ),
                           ],
                         ),
@@ -185,48 +186,43 @@ class _DemandeCardState extends State<DemandeCard> {
                             const Text(
                               'Approuvé par',
                               style: TextStyle(
-                                  fontSize: 10, fontFamily: "Poppins"),
+                                fontSize: 10,
+                              ),
                             ),
-                            widget.ValidationRH == "Pendeing" ||
+                            widget.ValidationRH == "Approved" &&
                                     widget.ValidationRH == "Pendeing"
                                 ? const Row(
                                     children: [
                                       Text(
-                                        '',
+                                        'RH',
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14,
-                                            fontFamily: "Poppins"),
-                                      ),
-                                      Text(
-                                        '',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 14,
-                                            fontFamily: "Poppins"),
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14,
+                                        ),
                                       ),
                                     ],
                                   )
-                                : widget.ValidationRH == "Pendeing"
+                                : widget.ValidationRH == "Pendeing" &&
+                                        widget.ValidationChef1 == "Approved"
                                     ? const Row(
                                         children: [
                                           Text(
                                             'Chef',
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 14,
-                                                fontFamily: "Poppins"),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14,
+                                            ),
                                           ),
                                         ],
                                       )
                                     : const Row(
                                         children: [
                                           Text(
-                                            'Chef',
+                                            'En attente',
                                             style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 14,
-                                                fontFamily: "Poppins"),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14,
+                                            ),
                                           ),
                                         ],
                                       ),
