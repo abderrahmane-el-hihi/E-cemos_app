@@ -87,83 +87,9 @@ class _NotifsPageState extends State<NotifsPage> {
                                             LeaveDetailsPage()));
                               },
                               splashColor: Colors.grey.shade200,
-                              title: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      if (buttonState.isRejectVisible)
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                  24, 239, 83, 80),
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          padding: const EdgeInsets.all(8),
-                                          child: Icon(
-                                            CupertinoIcons.xmark,
-                                            color: Colors.red.shade400,
-                                          ),
-                                        )
-                                      else if (buttonState.isAcceptVisible)
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: const Color.fromARGB(
-                                                  24, 66, 164, 245),
-                                              borderRadius:
-                                                  BorderRadius.circular(8)),
-                                          padding: const EdgeInsets.all(8),
-                                          child: Icon(
-                                            CupertinoIcons.checkmark_alt,
-                                            color: Colors.blue.shade400,
-                                          ),
-                                        )
-                                      else
-                                        Icon(
-                                          Icons.account_circle_rounded,
-                                          color: Colors.grey.shade400,
-                                          size: 42,
-                                        ),
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.04,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            buttonState.isRejectVisible
-                                                ? 'La demande est rejetee'
-                                                : 'La demande est aprouvee',
-                                            style: const TextStyle(),
-                                          ),
-                                          Text(
-                                            DateFormat('d MMM yyyy')
-                                                .format(DateTime.now()),
-                                            style: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.grey),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.01,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.02,
-                                    decoration: BoxDecoration(
-                                        color: isClicked
-                                            ? Colors.grey.shade100
-                                            : Colors.blue.shade400,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                  ),
-                                ],
+                              title: NotifBody(
+                                isClicked: isClicked,
+                                x: 1,
                               )),
                           Padding(
                             padding: const EdgeInsets.symmetric(
@@ -186,6 +112,94 @@ class _NotifsPageState extends State<NotifsPage> {
           );
         }),
       )),
+    );
+  }
+}
+
+class NotifShape extends StatelessWidget {
+  Color? color;
+  Color? backgroundClr;
+  IconData? iconData;
+  NotifShape(
+      {super.key,
+      required this.color,
+      required this.backgroundClr,
+      required this.iconData});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: backgroundClr, borderRadius: BorderRadius.circular(8)),
+      padding: const EdgeInsets.all(8),
+      child: Icon(
+        iconData,
+        color: color,
+      ),
+    );
+  }
+}
+
+class NotifBody extends StatelessWidget {
+  int? x = 1;
+  bool? isClicked = false;
+  NotifBody({
+    super.key,
+    this.x,
+    this.isClicked,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            if (x == 1)
+              NotifShape(
+                color: Colors.red.shade400,
+                backgroundClr: const Color.fromARGB(24, 239, 83, 80),
+                iconData: CupertinoIcons.xmark,
+              )
+            else if (x == 2)
+              NotifShape(
+                color: Colors.blue.shade400,
+                backgroundClr: const Color.fromARGB(24, 66, 164, 245),
+                iconData: CupertinoIcons.checkmark_alt,
+              )
+            else
+              Icon(
+                Icons.account_circle_rounded,
+                color: Colors.grey.shade400,
+                size: 42,
+              ),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.04,
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  x == 1 ? 'La demande est rejetee' : 'La demande est aprouvee',
+                  style: const TextStyle(),
+                ),
+                Text(
+                  DateFormat('d MMM yyyy').format(DateTime.now()),
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ],
+            ),
+          ],
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.01,
+          width: MediaQuery.of(context).size.width * 0.02,
+          decoration: BoxDecoration(
+              color: isClicked! ? Colors.grey.shade100 : Colors.blue.shade400,
+              borderRadius: BorderRadius.circular(10)),
+        ),
+      ],
     );
   }
 }

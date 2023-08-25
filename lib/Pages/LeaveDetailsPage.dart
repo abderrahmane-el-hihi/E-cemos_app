@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-
+import '../components/BoxDetails.dart';
 import '../components/button.dart';
 import '../models/Personnel.dart';
 import '../services/service.dart';
@@ -86,169 +86,58 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Titre',
-                                            style: TextStyle(
-                                                color: Colors.grey.shade400),
-                                          ),
-                                          Text(
-                                            "${demandes![2][0].motifAbsence}",
-                                            style:
-                                                const TextStyle(fontSize: 18),
-                                          ),
+                                          box(
+                                              title: 'Titre',
+                                              text:
+                                                  "${demandes![2][0].motifAbsence}"),
+                                          box(
+                                              title: 'Type du congé',
+                                              text:
+                                                  "${demandes[2][0].motifAbsence}"),
+                                          box(
+                                              title: 'Date',
+                                              text:
+                                                  "${DateFormat('d MMM yyyy').format(demandes[2][0].dateDebut)} - ${DateFormat('d MMM yyyy').format(demandes[2][0].dateFin)}"),
+                                          box(
+                                              title: 'Appliqué le',
+                                              text:
+                                                  "${DateFormat('d MMM yyyy').format(demandes[2][0].dateDebut)}"),
+                                          box(
+                                              title: 'Telephone',
+                                              text:
+                                                  "${demandes[2][0].telAbsence}"),
+                                          box(
+                                              title: 'Fichiers joints',
+                                              text: "Fichier"),
                                         ],
                                       ),
                                     );
                                   }
-                                  return Center();
+                                  return Column(
+                                    children: [
+                                      box(title: 'Titre', text: ""),
+                                      box(title: 'Type du congé', text: ""),
+                                      box(title: 'Date', text: ""),
+                                      box(title: 'Appliqué le', text: ""),
+                                      box(title: 'Telephone', text: ""),
+                                      box(
+                                          title: 'Fichiers joints',
+                                          text: "Fichier"),
+                                    ],
+                                  );
                                 });
                           }
-                          return Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 32),
-                            width: MediaQuery.of(context).size.width,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Titre',
-                                  style: TextStyle(color: Colors.grey.shade400),
-                                ),
-                                const Text(
-                                  '',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ],
-                            ),
+                          return Column(
+                            children: [
+                              box(title: 'Titre', text: ""),
+                              box(title: 'Type du congé', text: ""),
+                              box(title: 'Date', text: ""),
+                              box(title: 'Appliqué le', text: ""),
+                              box(title: 'Telephone', text: ""),
+                              box(title: 'Fichiers joints', text: "Fichier"),
+                            ],
                           );
                         }),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32),
-                      child: Divider(
-                        color: Colors.grey,
-                        thickness: 0.5,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Type du congé',
-                            style: TextStyle(color: Colors.grey.shade400),
-                          ),
-                          const Text(
-                            'Type du congé',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32),
-                      child: Divider(
-                        color: Colors.grey,
-                        thickness: 0.5,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Date',
-                            style: TextStyle(color: Colors.grey.shade400),
-                          ),
-                          Text(
-                            '${DateFormat('d MMM yyyy').format(DateTime.now())} - ${DateFormat('d MMM yyyy').format(DateTime.now())}',
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32),
-                      child: Divider(
-                        color: Colors.grey,
-                        thickness: 0.5,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Appliqué le',
-                            style: TextStyle(color: Colors.grey.shade400),
-                          ),
-                          Text(
-                            DateFormat('d MMM yyyy').format(DateTime.now()),
-                            style: const TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32),
-                      child: Divider(
-                        color: Colors.grey,
-                        thickness: 0.5,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Telephone',
-                            style: TextStyle(color: Colors.grey.shade400),
-                          ),
-                          const Text(
-                            '0666666666',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 32),
-                      child: Divider(
-                        color: Colors.grey,
-                        thickness: 0.5,
-                      ),
-                    ),
-                    SizedBox(height: MediaQuery.of(context).size.width * 0.02),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Fichiers joints',
-                            style: TextStyle(color: Colors.grey.shade400),
-                          ),
-                          const Text(
-                            'Fichier',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ],
-                      ),
-                    ),
                     SizedBox(height: MediaQuery.of(context).size.width * 0.35),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -408,6 +297,8 @@ class _LeaveDetailsPageState extends State<LeaveDetailsPage> {
     );
   }
 }
+
+//details
 
 class Demandedetails extends StatefulWidget {
   Future? data;

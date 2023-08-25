@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 import '../components/GroupVacation.dart';
 import '../components/VacationBalanceCard.dart';
 import '../components/button.dart';
@@ -197,19 +200,46 @@ class _PageState extends State<CalendarPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    VacationBalanceCard(
-                                        color: Colors.cyan.shade400,
-                                        backgroundColor: const Color.fromARGB(
-                                            24, 38, 197, 218),
-                                        data: '',
-                                        vacationBalanceString:
-                                            'Consommation \ncette année'),
-                                    VacationBalanceCard(
-                                        color: Colors.red.shade400,
-                                        backgroundColor: const Color.fromARGB(
-                                            24, 239, 83, 80),
-                                        data: '',
-                                        vacationBalanceString: 'Reste'),
+                                    // VacationBalanceCard(
+                                    //     color: Colors.cyan.shade400,
+                                    //     backgroundColor: const Color.fromARGB(
+                                    //         24, 38, 197, 218),
+                                    //     data: '',
+                                    //     vacationBalanceString:
+                                    //         'Consommation \ncette année'),
+
+                                    Shimmer(
+                                        gradient: LinearGradient(colors: [
+                                          Colors.grey.shade500,
+                                          Colors.grey.shade300,
+                                          Colors.grey.shade100
+                                        ]),
+                                        child: VacationBalanceCard(
+                                          color: Colors.blue.shade400,
+                                          backgroundColor: const Color.fromARGB(
+                                              24, 66, 164, 245),
+                                          data: '',
+                                          vacationBalanceString: '',
+                                        )),
+                                    // VacationBalanceCard(
+                                    //     color: Colors.red.shade400,
+                                    //     backgroundColor: const Color.fromARGB(
+                                    //         24, 239, 83, 80),
+                                    //     data: '',
+                                    //     vacationBalanceString: 'Reste'),
+                                    Shimmer(
+                                        gradient: LinearGradient(colors: [
+                                          Colors.grey.shade500,
+                                          Colors.grey.shade300,
+                                          Colors.grey.shade100
+                                        ]),
+                                        child: VacationBalanceCard(
+                                          color: Colors.blue.shade400,
+                                          backgroundColor: const Color.fromARGB(
+                                              24, 66, 164, 245),
+                                          data: '',
+                                          vacationBalanceString: '',
+                                        ))
                                   ],
                                 ),
                               ),

@@ -17,18 +17,30 @@ class _demandetypeDropState extends State<demandetypeDrop> {
   AbsenceDemandeType? selectedItem;
   List<AbsenceDemandeType?> dropdownItems = [];
 
-  fct() {
-    Future<List<AbsenceDemandeType?>> dItems =
-        RemoteService().getAbscenceDemandeType();
-    setState(() {
-      dropdownItems = dItems as List<AbsenceDemandeType?>;
-    });
+  Future<void> getAbscenceDemandeType() async {
+    var client = http.Client();
+    var uri = Uri.parse('http://192.168.11.157:8800/api/CemosRH/TypeAbsence/');
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var data = response.body;
+      final d = json.decode(data);
+      List<AbsenceDemandeType?> dItems = [];
+      for (var item in d) {
+        dItems.add(AbsenceDemandeType(
+            idTypeAbsence: item['idTypeAbsence'],
+            descriptionAbsence: item['descriptionAbsence'],
+            commentaire: item['commentaire'],
+            statut: item['statut']));
+      }
+      setState(() {
+        dropdownItems = dItems;
+      });
+    }
   }
 
   @override
   void initState() {
-    fct();
-
+    getAbscenceDemandeType();
     super.initState();
   }
 

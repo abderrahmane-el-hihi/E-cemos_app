@@ -46,6 +46,7 @@ dependencies:
   jwt_decode: ^0.3.1
   shared_preferences: ^2.2.0
   open_file: ^3.3.2
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:

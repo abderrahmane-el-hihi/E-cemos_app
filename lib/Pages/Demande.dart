@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import '../components/DropDown.dart';
 import '../components/TextFieldClass.dart';
 import '../components/button.dart';
 import 'SwitchPages.dart';
-import 'package:http/http.dart' as http;
 
 class DemandePage extends StatefulWidget {
   const DemandePage({super.key});
@@ -18,16 +16,17 @@ class DemandePage extends StatefulWidget {
 }
 
 bool isAttached = false;
+bool isChecked = false;
 PlatformFile? file;
 FilePickerResult? result;
-// final Date_d_controller = TextEditingController();
-// final Date_r_controller = TextEditingController();
+// var selectedDateD = TextEditingController();
+// var selectedDateR = TextEditingController();
 final type_conge_controller = TextEditingController();
 final emailcontroller = TextEditingController();
 final telecontroller = TextEditingController();
 final commentcontroller = TextEditingController();
-DateTime selectedDateD = DateTime.now();
-DateTime selectedDateR = DateTime.now();
+DateTime? selectedDateD = DateTime.now();
+DateTime? selectedDateR = DateTime.now();
 
 class _DemandePageState extends State<DemandePage> {
   @override
@@ -143,7 +142,7 @@ class _DemandePageState extends State<DemandePage> {
                   ),
                   controller: TextEditingController(
                       // text: DateFormat('MM/dd/yyyy').format(selectedDateD),
-                      text: DateFormat('d MMM yyyy').format(selectedDateD)),
+                      text: DateFormat('d MMM yyyy').format(selectedDateD!)),
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.022),
@@ -181,11 +180,62 @@ class _DemandePageState extends State<DemandePage> {
                   ),
                   controller: TextEditingController(
                     // text: DateFormat('MM/dd/yyyy').format(selectedDateR),
-                    text: DateFormat('d MMM yyyy').format(selectedDateR),
+                    text: DateFormat('d MMM yyyy')
+                        .format(selectedDateR as DateTime),
                   ),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.022),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Checkbox(
+                      activeColor: Colors.green.shade400,
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                        if (isChecked) {
+                          showCupertinoDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return CupertinoAlertDialog(
+                                content: const Text(
+                                  'Premiere demi jour',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                actions: [
+                                  CupertinoDialogAction(
+                                    child: const Text(
+                                      'D\'accord',
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
+                    const Text(
+                      'Demi Jour',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                    ),
+                  ],
+                ),
+              ),
+
               demandetypeDrop(),
               SizedBox(height: MediaQuery.of(context).size.height * 0.022),
               TextFieldClass(
@@ -204,7 +254,7 @@ class _DemandePageState extends State<DemandePage> {
                 controller: telecontroller,
                 obscureText: false,
                 title: 'Commentaire',
-                maxLines: 3,
+                maxLines: 2,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.022),
               // Container(child: Text("Le fichier attechee:  ${file!.name}")),
@@ -295,10 +345,7 @@ class _DemandePageState extends State<DemandePage> {
               L_Button(
                   paddsize: 15,
                   onTap: () {
-                    if (selectedDateR.isAfter(selectedDateD) ||
-                        selectedDateR.isAtSameMomentAs(selectedDateR) ||
-                        telecontroller.text == '' ||
-                        emailcontroller.text == '') {
+                    if (selectedDateR!.isAfter(selectedDateD!)) {
                       showCupertinoDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -319,7 +366,6 @@ class _DemandePageState extends State<DemandePage> {
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
-                                  type_conge_controller.clear();
                                 },
                               ),
                             ],
