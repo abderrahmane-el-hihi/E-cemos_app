@@ -108,7 +108,7 @@ class _DemandePageState extends State<DemandePage> {
                   ],
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.042),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.012),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextFormField(
@@ -146,7 +146,7 @@ class _DemandePageState extends State<DemandePage> {
                       text: DateFormat('d MMM yyyy').format(selectedDateD)),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.042),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.022),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: TextFormField(
@@ -185,18 +185,29 @@ class _DemandePageState extends State<DemandePage> {
                   ),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.042),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.022),
               demandetypeDrop(),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.042),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.022),
+              TextFieldClass(
+                controller: emailcontroller,
+                obscureText: false,
+                title: 'E-mail',
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.022),
               TextFieldClass(
                 controller: commentcontroller,
+                obscureText: false,
+                title: 'Telephone',
+              ),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.022),
+              TextFieldClass(
+                controller: telecontroller,
                 obscureText: false,
                 title: 'Commentaire',
                 maxLines: 3,
               ),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.042),
+              SizedBox(height: MediaQuery.of(context).size.height * 0.022),
               // Container(child: Text("Le fichier attechee:  ${file!.name}")),
-              SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               isAttached == false
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 48),
@@ -282,10 +293,12 @@ class _DemandePageState extends State<DemandePage> {
                     ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.021),
               L_Button(
+                  paddsize: 15,
                   onTap: () {
                     if (selectedDateR.isAfter(selectedDateD) ||
                         selectedDateR.isAtSameMomentAs(selectedDateR) ||
-                        type_conge_controller == '') {
+                        telecontroller.text == '' ||
+                        emailcontroller.text == '') {
                       showCupertinoDialog(
                         context: context,
                         builder: (BuildContext context) {
@@ -307,8 +320,6 @@ class _DemandePageState extends State<DemandePage> {
                                 onPressed: () {
                                   Navigator.pop(context);
                                   type_conge_controller.clear();
-                                  emailcontroller.clear();
-                                  telecontroller.clear();
                                 },
                               ),
                             ],

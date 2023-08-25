@@ -7,12 +7,13 @@ import '../models/AbsenceDemande.dart';
 
 class L_Button extends StatefulWidget {
   final Function() onTap;
-
+  double paddsize;
   final String text;
-  const L_Button({
+  L_Button({
     super.key,
     required this.onTap,
     required this.text,
+    required this.paddsize,
   });
 
   @override
@@ -30,7 +31,7 @@ class _L_ButtonState extends State<L_Button> {
         borderRadius: BorderRadius.circular(15),
         onTap: widget.onTap,
         child: Container(
-          padding: const EdgeInsets.all(25),
+          padding: EdgeInsets.all(widget.paddsize),
           // margin: EdgeInsets.symmetric(horizontal: 25),
           decoration: BoxDecoration(
             color: const Color.fromARGB(24, 102, 187, 106),

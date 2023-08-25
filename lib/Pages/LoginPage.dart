@@ -106,6 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(height: MediaQuery.of(context).size.height * 0.1),
                   //signin buton
                   L_Button(
+                    paddsize: 25,
                     onTap: LogIn,
                     text: 'Se connecter',
                   ),

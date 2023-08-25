@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:cemos_app/services/service.dart';
 import 'package:flutter/material.dart';
 import '../models/AbsenceDemande.dart';
@@ -13,14 +15,20 @@ class demandetypeDrop extends StatefulWidget {
 
 class _demandetypeDropState extends State<demandetypeDrop> {
   AbsenceDemandeType? selectedItem;
-  List<AbsenceDemandeType> dropdownItems = [];
+  List<AbsenceDemandeType?> dropdownItems = [];
+
   fct() {
-    RemoteService().getAbscenceDemandeType();
+    Future<List<AbsenceDemandeType?>> dItems =
+        RemoteService().getAbscenceDemandeType();
+    setState(() {
+      dropdownItems = dItems as List<AbsenceDemandeType?>;
+    });
   }
 
   @override
   void initState() {
     fct();
+
     super.initState();
   }
 
@@ -53,7 +61,7 @@ class _demandetypeDropState extends State<demandetypeDrop> {
         items: dropdownItems.map((item) {
           return DropdownMenuItem<AbsenceDemandeType>(
             value: item,
-            child: Text(item.descriptionAbsence),
+            child: Text(item!.descriptionAbsence),
           );
         }).toList(),
         onChanged: (selected) {

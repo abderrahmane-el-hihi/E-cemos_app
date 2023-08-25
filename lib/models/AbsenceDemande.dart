@@ -9,7 +9,7 @@ String absenceDemandeTypeToJson(List<AbsenceDemandeType> data) =>
 
 class AbsenceDemandeType {
   int idTypeAbsence;
-  Statut statut;
+  String statut;
   String descriptionAbsence;
   String commentaire;
 
@@ -23,7 +23,7 @@ class AbsenceDemandeType {
   factory AbsenceDemandeType.fromJson(Map<String, dynamic> json) =>
       AbsenceDemandeType(
         idTypeAbsence: json["idTypeAbsence"],
-        statut: statutValues.map[json["statut"]]!,
+        statut: json["statut"],
         descriptionAbsence: json["descriptionAbsence"],
         commentaire: json["commentaire"],
       );
