@@ -1,6 +1,9 @@
+import 'package:cemos_app/services/service.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+
+import '../models/AbsenceDemande.dart';
 
 class L_Button extends StatefulWidget {
   final Function() onTap;
@@ -53,92 +56,6 @@ class _L_ButtonState extends State<L_Button> {
     );
   }
 }
-
-class DropdownM extends StatefulWidget {
-  DropdownM({
-    super.key,
-  });
-
-  @override
-  State<DropdownM> createState() => _DropdownMState();
-}
-
-class _DropdownMState extends State<DropdownM> {
-  final TextEditingController demandeController = TextEditingController();
-  DemandeType? selectedDemande;
-  @override
-  Widget build(BuildContext context) {
-    final List<DropdownMenuItem<DemandeType>> demandeEntries =
-        <DropdownMenuItem<DemandeType>>[];
-
-    for (final DemandeType demande in DemandeType.values) {
-      demandeEntries.add(
-        DropdownMenuItem<DemandeType>(
-          value: demande,
-          // label: demande.label,
-          child: Text(
-            demande.label,
-          ),
-        ),
-      );
-    }
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: DropdownButtonFormField<DemandeType>(
-        borderRadius: BorderRadius.circular(15),
-        elevation: 1,
-        dropdownColor: Colors.grey.shade100,
-        decoration: InputDecoration(
-          label: const Text(
-            'Choisir la demande',
-            style: TextStyle(
-              fontFamily: 'Poppins',
-            ),
-          ),
-          enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide:
-                  const BorderSide(color: Color.fromRGBO(179, 179, 179, 1))),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Colors.green.shade400),
-          ),
-          fillColor: Colors.transparent,
-          filled: true,
-        ),
-        value: selectedDemande,
-        onChanged: (DemandeType? Demande) {
-          setState(() {
-            selectedDemande = Demande;
-          });
-        },
-        items: demandeEntries,
-      ),
-    );
-  }
-}
-
-enum DemandeType {
-  D1('Congé', ''),
-  D2('Des heures supplémentaires', ''),
-  D3('Sttéstation', '');
-
-  const DemandeType(this.label, this.demandetypeval);
-  final String label;
-  final demandetypeval;
-}
-
-// return DropdownMenu<DemandeType>(
-//   initialSelection: DemandeType.D1,
-//   controller: demandeController,
-//   label: const Text('Type de demande'),
-//   dropdownMenuEntries: demandeEntries,
-//   onSelected: (DemandeType? Demande) {
-//     setState(() {
-//       selectedDemande = Demande;
-//     });
-//   },
-// );
 
 class ButtonStateModel extends ChangeNotifier {
   bool isFirstInkwellVisible = true;

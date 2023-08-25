@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/AbsenceDemande.dart';
 import '../models/DemandeAbscence.dart';
 import '../models/Personnel.dart';
 import 'package:http/http.dart' as http;
@@ -82,6 +83,7 @@ class RemoteService {
     }
   }
 
+  //get alll personnel
   Future getAllPersonnel() async {
     var client = http.Client();
     var uri = Uri.parse('http://192.168.11.157:8800/api/CemosRH/Personnelles/');
@@ -92,6 +94,7 @@ class RemoteService {
     }
   }
 
+  // get vacation balance
   Future getCongeSolde() async {
     var client = http.Client();
     var uri = Uri.parse(
@@ -119,7 +122,8 @@ class RemoteService {
     }
   }
 
-  Future getAbscenceType() async {
+  //get demande absence
+  Future getAbscence() async {
     var client = http.Client();
     var uri =
         Uri.parse('http://192.168.11.157:8800/api/CemosRH/DemanceAbsence/');
@@ -143,6 +147,17 @@ class RemoteService {
       var jsonData = json.decode(response.body);
 
       return jsonData;
+    }
+  }
+
+  Future<List<AbsenceDemandeType>?> getAbscenceDemandeType() async {
+    var client = http.Client();
+    var uri = Uri.parse('http://192.168.11.157:8800/api/CemosRH/TypeAbsence/');
+    var response = await client.get(uri);
+    if (response.statusCode == 200) {
+      var data = response.body;
+      print(json.decode(data));
+      return absenceDemandeTypeFromJson(data);
     }
   }
 

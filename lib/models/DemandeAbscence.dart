@@ -120,12 +120,6 @@ class DemandeAbscenceDataProvider extends ChangeNotifier {
   }
 }
 
-// List<DemandeApprovedList> demandeApprovedListFromJson(String str) =>
-//     List<DemandeApprovedList>.from(
-//         json.decode(str).map((x) => DemandeApprovedList.fromJson(x)));
-
-// String demandeApprovedListToJson(List<DemandeApprovedList> data) =>
-//     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 List<List<DemandeApprovedList>> demandeApprovedListFromJson(String str) =>
     List<List<DemandeApprovedList>>.from(json.decode(str).map((x) =>
         List<DemandeApprovedList>.from(
@@ -149,7 +143,7 @@ class DemandeApprovedList {
   int? idTypeAbsence;
   DateTime dateSaisi;
   int? idDemandeAbsence;
-  DateTime? dateDernierModification;
+  // DateTime? dateDernierModification;
 
   DemandeApprovedList({
     required this.dateDebut,
@@ -165,7 +159,7 @@ class DemandeApprovedList {
     required this.idTypeAbsence,
     required this.dateSaisi,
     required this.idDemandeAbsence,
-    required this.dateDernierModification,
+    // this.dateDernierModification,
   });
 
   factory DemandeApprovedList.fromJson(Map<String, dynamic> json) =>
@@ -183,8 +177,8 @@ class DemandeApprovedList {
         idTypeAbsence: json["idTypeAbsence"],
         dateSaisi: DateTime.parse(json["dateSaisi"]),
         idDemandeAbsence: json["idDemandeAbsence"],
-        dateDernierModification:
-            DateTime.parse(json["dateDernierModification"]),
+        // dateDernierModification:
+        //     DateTime.parse(json["dateDernierModification"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -207,7 +201,8 @@ class DemandeApprovedList {
             // "${dateSaisi?.year.toString().padLeft(4, '0')}-${dateSaisi?.month.toString().padLeft(2, '0')}-${dateSaisi?.day.toString().padLeft(2, '0')}",
             dateSaisi,
         "idDemandeAbsence": idDemandeAbsence,
-        "dateDernierModification":
-            "${dateDernierModification?.year.toString().padLeft(4, '0')}-${dateDernierModification?.month.toString().padLeft(2, '0')}-${dateDernierModification?.day.toString().padLeft(2, '0')}",
+        // "dateDernierModification":
+        //     // "${dateDernierModification?.year.toString().padLeft(4, '0')}-${dateDernierModification?.month.toString().padLeft(2, '0')}-${dateDernierModification?.day.toString().padLeft(2, '0')}",
+        //     dateDernierModification,
       };
 }

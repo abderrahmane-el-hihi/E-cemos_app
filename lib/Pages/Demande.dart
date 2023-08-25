@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:open_file/open_file.dart';
+import '../components/DropDown.dart';
+import '../components/TextFieldClass.dart';
 import '../components/button.dart';
 import 'SwitchPages.dart';
 import 'package:http/http.dart' as http;
@@ -30,6 +32,48 @@ DateTime selectedDateR = DateTime.now();
 class _DemandePageState extends State<DemandePage> {
   @override
   Widget build(BuildContext context) {
+    checkFile() async {
+      result = await FilePicker.platform.pickFiles();
+      if (result != null) {
+        file = result!.files.first;
+        if (file!.extension == "jpg" || file!.extension == "pdf") {
+          setState(() {
+            isAttached = true;
+          });
+        } else {
+          showCupertinoDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return CupertinoAlertDialog(
+                  content: const Text(
+                    'Le fichier doit être une photo ou un PDF',
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                  actions: [
+                    CupertinoDialogAction(
+                      child: const Text(
+                        'D\'accord',
+                        style: TextStyle(
+                          fontSize: 14,
+                        ),
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          isAttached = false;
+                          Navigator.pop(context);
+                        });
+                      },
+                    ),
+                  ],
+                );
+              });
+        }
+      }
+      return;
+    }
+
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
@@ -142,36 +186,13 @@ class _DemandePageState extends State<DemandePage> {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
-              DropdownM(),
+              demandetypeDrop(),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: TextField(
-                  maxLines: 3,
-                  controller: commentcontroller,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    label: const Text(
-                      'Commentaire',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15),
-                        borderSide: const BorderSide(
-                            color: Color.fromRGBO(179, 179, 179, 1))),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: BorderSide(color: Colors.green.shade400),
-                    ),
-                    fillColor: Colors.transparent,
-                    filled: true,
-                    hintStyle: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: Color.fromRGBO(179, 179, 179, 1)),
-                  ),
-                ),
+              TextFieldClass(
+                controller: commentcontroller,
+                obscureText: false,
+                title: 'Commentaire',
+                maxLines: 3,
               ),
               SizedBox(height: MediaQuery.of(context).size.height * 0.042),
               // Container(child: Text("Le fichier attechee:  ${file!.name}")),
@@ -180,48 +201,7 @@ class _DemandePageState extends State<DemandePage> {
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 48),
                       child: InkWell(
-                        onTap: () async {
-                          result = await FilePicker.platform.pickFiles();
-                          if (result != null) {
-                            file = result!.files.first;
-                            if (file!.extension == "jpg" ||
-                                file!.extension == "pdf") {
-                              setState(() {
-                                isAttached = true;
-                              });
-                            } else {
-                              return showCupertinoDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return CupertinoAlertDialog(
-                                      content: const Text(
-                                        'Le type doit etre photo ou un PDF',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      actions: [
-                                        CupertinoDialogAction(
-                                          child: const Text(
-                                            'D\'accord',
-                                            style: TextStyle(
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              isAttached = false;
-                                              Navigator.pop(context);
-                                            });
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  });
-                            }
-                          }
-                          return;
-                        },
+                        onTap: checkFile,
                         splashColor: const Color.fromARGB(24, 66, 164, 245),
                         borderRadius: BorderRadius.circular(15),
                         child: Container(
@@ -250,15 +230,7 @@ class _DemandePageState extends State<DemandePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           InkWell(
-                            onTap: () async {
-                              result = await FilePicker.platform.pickFiles();
-                              if (result != null) {
-                                file = result!.files.first;
-                                if (file!.extension == "jpg" ||
-                                    file!.extension == "pdf") {}
-                              }
-                              return;
-                            },
+                            onTap: checkFile,
                             splashColor: const Color.fromARGB(24, 66, 164, 245),
                             borderRadius: BorderRadius.circular(15),
                             child: Container(
@@ -312,7 +284,38 @@ class _DemandePageState extends State<DemandePage> {
               L_Button(
                   onTap: () {
                     if (selectedDateR.isAfter(selectedDateD) ||
-                        selectedDateR.isAtSameMomentAs(selectedDateR)) {
+                        selectedDateR.isAtSameMomentAs(selectedDateR) ||
+                        type_conge_controller == '') {
+                      showCupertinoDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return CupertinoAlertDialog(
+                            content: const Text(
+                              'Les données sont invalides',
+                              style: TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                            actions: [
+                              CupertinoDialogAction(
+                                child: const Text(
+                                  'D\'accord',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  type_conge_controller.clear();
+                                  emailcontroller.clear();
+                                  telecontroller.clear();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    } else {
                       showCupertinoDialog(
                           context: context,
                           builder: (BuildContext context) {
@@ -343,37 +346,6 @@ class _DemandePageState extends State<DemandePage> {
                               ],
                             );
                           });
-                    } else {
-                      showCupertinoDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return CupertinoAlertDialog(
-                            content: const Text(
-                              'Les données sont invalides',
-                              style: TextStyle(
-                                fontSize: 16,
-                              ),
-                            ),
-                            actions: [
-                              CupertinoDialogAction(
-                                child: const Text(
-                                  'D\'accord',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  type_conge_controller.clear();
-                                  emailcontroller.clear();
-                                  telecontroller.clear();
-                                  commentcontroller.clear();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
                     }
                   },
                   text: 'Demander un congé'),

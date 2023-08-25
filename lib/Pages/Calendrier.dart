@@ -127,7 +127,7 @@ class _PageState extends State<CalendarPage> {
                                           data: snapshot
                                               .data['remaining_last_year'],
                                           vacationBalanceString:
-                                              'Reste anneé \ndernière'),
+                                              'Reste année \ndernière'),
                                     ],
                                   ),
                                 ),
@@ -148,7 +148,7 @@ class _PageState extends State<CalendarPage> {
                                           data: snapshot
                                               .data['consumed_this_year'],
                                           vacationBalanceString:
-                                              'Consommation \ncette anneé'),
+                                              'Consommation \ncette année'),
                                       VacationBalanceCard(
                                           color: Colors.red.shade400,
                                           backgroundColor: const Color.fromARGB(
@@ -183,7 +183,7 @@ class _PageState extends State<CalendarPage> {
                                             24, 102, 187, 106),
                                         data: '',
                                         vacationBalanceString:
-                                            'Reste anneé \ndernière'),
+                                            'Reste année \ndernière'),
                                   ],
                                 ),
                               ),
@@ -203,7 +203,7 @@ class _PageState extends State<CalendarPage> {
                                             24, 38, 197, 218),
                                         data: '',
                                         vacationBalanceString:
-                                            'Consommation \ncette anneé'),
+                                            'Consommation \ncette année'),
                                     VacationBalanceCard(
                                         color: Colors.red.shade400,
                                         backgroundColor: const Color.fromARGB(

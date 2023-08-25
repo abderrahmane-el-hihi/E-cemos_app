@@ -122,18 +122,84 @@ class _twidgetState extends State<twidget> {
                   // getPublicIP();
                   // LoadData();
                   // GetApiData();
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => LeaveDetailsPage(
-                                data: RemoteService().getPersonnel(1),
-                                id: 1,
-                              )));
                 },
                 child: Text('click')),
           ],
         ),
       )),
+    );
+  }
+}
+
+class DropdownItem {
+  final int id;
+  final String displayText;
+
+  DropdownItem({required this.id, required this.displayText});
+}
+
+class MyFormPage extends StatefulWidget {
+  @override
+  _MyFormPageState createState() => _MyFormPageState();
+}
+
+class _MyFormPageState extends State<MyFormPage> {
+  List<DropdownItem> dropdownItems = [
+    DropdownItem(id: 1, displayText: 'Item 1'),
+    DropdownItem(id: 2, displayText: 'Item 2'),
+    DropdownItem(id: 3, displayText: 'Item 3'),
+  ];
+
+  int? selectedItemId;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('My Form Page'),
+      ),
+      body: Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: 200.0), // Set a maximum height
+          child: DropdownButtonFormField<DropdownItem>(
+            borderRadius: BorderRadius.circular(15),
+            elevation: 1,
+            dropdownColor: Colors.grey.shade100,
+            decoration: InputDecoration(
+              label: const Text(
+                'Choisir la demande',
+                style: TextStyle(
+                  fontFamily: 'Poppins',
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(15),
+                  borderSide: const BorderSide(
+                      color: Color.fromRGBO(179, 179, 179, 1))),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15),
+                borderSide: BorderSide(color: Colors.green.shade400),
+              ),
+              fillColor: Colors.transparent,
+              filled: true,
+            ),
+            value: selectedItemId != null
+                ? dropdownItems.firstWhere((item) => item.id == selectedItemId)
+                : null,
+            items: dropdownItems.map((item) {
+              return DropdownMenuItem<DropdownItem>(
+                value: item,
+                child: Text(item.displayText),
+              );
+            }).toList(),
+            onChanged: (selectedItem) {
+              setState(() {
+                selectedItemId = selectedItem != null ? selectedItem.id : null;
+              });
+            },
+          ),
+        ),
+      ),
     );
   }
 }
