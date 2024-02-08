@@ -19,38 +19,37 @@ class _LoginPageState extends State<LoginPage> {
   final passwcontroller = TextEditingController();
 
   void LogIn() async {
-    String? validation = await RemoteService()
+    // String? validation = await RemoteService().checkCredentials(emailcontroller.text, passwcontroller.text);
+    bool validation = await RemoteService()
         .checkCredentials(emailcontroller.text, passwcontroller.text);
-    // if (validation == '?') {
-    //   Navigator.push(
-    //       context, MaterialPageRoute(builder: (context) => SwitchPages()));
-    // } else {
-    //   showCupertinoDialog(
-    //     context: context,
-    //     builder: (context) {
-    //       return CupertinoAlertDialog(
-    //         content: Text(
-    //           'Les Données entrées sont invalides',
-    //           style: TextStyle(
-    //
-    //           ),
-    //         ),
-    //         actions: [
-    //           TextButton(
-    //             onPressed: () {
-    //               emailcontroller.clear();
-    //               passwcontroller.clear();
-    //               Navigator.pop(context);
-    //             },
-    //             child: Text('D\'accord'),
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    // }
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const SwitchPages()));
+    if (validation) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => SwitchPages()));
+    } else {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) {
+          return CupertinoAlertDialog(
+            content: Text(
+              'Les Données entrées sont invalides',
+              style: TextStyle(),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  emailcontroller.clear();
+                  passwcontroller.clear();
+                  Navigator.pop(context);
+                },
+                child: Text('D\'accord'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => const SwitchPages()));
   }
 
   bool isobsecure = true;

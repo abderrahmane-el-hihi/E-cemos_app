@@ -1,5 +1,8 @@
 import 'dart:convert';
+import 'dart:js_interop';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import '../main.dart';
 import '../models/AbsenceDemande.dart';
 import '../models/DemandeAbscence.dart';
 import '../models/Personnel.dart';
@@ -206,30 +209,20 @@ class RemoteService {
   //     return false;
   //   }
   // }
-  Future<String?> checkCredentials(String email, String password) async {
-    const String apiUrl = 'api url';
+  Future<bool> checkCredentials(String email, String password) async {
+    //
 
-    try {
-      final response = await http.post(
-        Uri.parse(apiUrl),
-        body: {
-          'email': email,
-          'password': password,
-        },
-      );
-
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        String role = data['role'];
-        String nom = data['nom'];
-        String prenom = data['prenom'];
-        return role;
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print(e);
-      return null;
+    final AuthResponse res = await supabase.auth.signInWithPassword(
+      email: email,
+      password: password,
+    );
+    print(res.toString());
+    if (1 == 1) {
+      return true;
+    } else {
+      return false;
     }
+    // final Session? session = res.session;
+    // final User? user = res.user;
   }
 }
